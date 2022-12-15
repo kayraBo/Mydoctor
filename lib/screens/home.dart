@@ -16,25 +16,40 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: Center(
+      child: ListView(
+        children: <Widget>[
+          Container(
+              height: 200,
+              width: 397,
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              //color: Colors.amber,
+              child: const Text(
+                'Добре дошли в Mydoctor',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35),
+              )),
+          Container(
+              alignment: Alignment.center,
+              //color: Colors.green,
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+              child: buttonWidget(
+                  context, 'Изход', const Color(0xFF2862B7), Colors.white, () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignIn()),
+                  );
+                }).catchError((error, stackTrace) {
+                  print("Error: ${error.toString()}");
+                });
+              })),
+        ],
+      ),
       //crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Container(
-            alignment: Alignment.center,
-            //color: Colors.green,
-            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-            child: buttonWidget(
-                context, 'Изход', const Color(0xFF2862B7), Colors.white, () {
-              FirebaseAuth.instance.signOut().then((value) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignIn()),
-                );
-              }).catchError((error, stackTrace) {
-                print("Error: ${error.toString()}");
-              });
-            })),
-      ],
     ));
   }
 }
