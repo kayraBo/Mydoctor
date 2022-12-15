@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "485944454363",
+    "project_id": "mydoctor-16925",
+    "storage_bucket": "mydoctor-16925.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485944454363:android:a65e150b99cca2da1c30fe",
+        "android_client_info": {
+          "package_name": "com.example.test_flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485944454363-o7r8fr5quvmbeijp3a7e4u0mv6dqa39p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZK7_dU1vc5gjAx9uKIczK5x85D9k6MT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485944454363-o7r8fr5quvmbeijp3a7e4u0mv6dqa39p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "485944454363-2n0c99ck09t7cer7bbiktiq05i9hmrk9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.testFlutterApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
