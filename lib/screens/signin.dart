@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/screens/chooseprofile.dart';
+import 'package:test_flutter_app/screens/choose_profile.dart';
 import 'package:test_flutter_app/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

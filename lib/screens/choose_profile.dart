@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/screens/signupdoctor.dart';
-import 'package:test_flutter_app/screens/signupuser.dart';
+import 'package:test_flutter_app/screens/signup_doctor.dart';
+import 'package:test_flutter_app/screens/signup_user.dart';
 
 import '../widgets/widgets.dart';
 
