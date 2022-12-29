@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test_flutter_app/screens/signin.dart';
 
 import '../widgets/widgets.dart';
+import 'medical_speciality.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -41,6 +42,23 @@ class _HomeState extends State<Home> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const SignIn()),
+                  );
+                }).catchError((error, stackTrace) {
+                  print("Error: ${error.toString()}");
+                });
+              })),
+          Container(
+              alignment: Alignment.center,
+              //color: Colors.green,
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+              child: buttonWidget(
+                  context, 'Категории', const Color(0xFF2862B7), Colors.white,
+                  () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MedicalSpeciality()),
                   );
                 }).catchError((error, stackTrace) {
                   print("Error: ${error.toString()}");

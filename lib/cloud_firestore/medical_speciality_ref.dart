@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../model/medical_speciality_model.dart';
 
 Future<List<MedicalSpecialityModel>> getSpecialities() async {
