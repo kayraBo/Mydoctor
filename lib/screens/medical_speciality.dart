@@ -47,7 +47,7 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
             );
           } else {
             var specialities = snapshot.data as List<MedicalSpecialityModel>;
-            if (specialities == null || specialities.isEmpty) {
+            if (specialities.isEmpty) {
               return const Center(
                 child: Text('Cannot load specialites'),
               );
@@ -64,7 +64,7 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                           ),
                           tileColor: const Color(0xFF2862B7),
                           title: Text(
-                            '${specialities[index].medicalSpeciality}',
+                            specialities[index].medicalSpeciality,
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
