@@ -15,13 +15,22 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             body: Center(
-                child: Column(
+                child: SingleChildScrollView(
+                    child: Column(
           children: <Widget>[
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 125, 100, 40),
@@ -34,14 +43,11 @@ class _SignInState extends State<SignIn> {
                       fontSize: 35),
                 )),
             Container(
-              //alignment: Alignment.center,
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: textFieldWidget('Имейл', false, emailController),
             ),
             Container(
-              //alignment: Alignment.center,
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              //color: Colors.red,
               child: textFieldWidget('Парола', true, passwordController),
             ),
             Container(
@@ -66,7 +72,6 @@ class _SignInState extends State<SignIn> {
             ),
             Container(
                 alignment: Alignment.center,
-                //color: Colors.green,
                 padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                 child: buttonWidget(
                     context, 'Вход', const Color(0xFF2862B7), Colors.white, () {
@@ -115,13 +120,10 @@ class _SignInState extends State<SignIn> {
               ],
             ),
             Container(
-              //color: Colors.yellow,
               padding: const EdgeInsets.fromLTRB(5, 40, 20, 0),
               child: pictureWidget("assets/images/Doctors.png"),
             ),
           ],
-        )
-                //crossAxisAlignment: CrossAxisAlignment.end,
-                )));
+        )))));
   }
 }

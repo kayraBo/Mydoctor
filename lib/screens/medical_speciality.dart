@@ -14,7 +14,8 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: ListView(
+      child:
+          displayMedicalSpecialities(), /*ListView(
         children: <Widget>[
           Container(
               height: 200,
@@ -29,11 +30,9 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                     fontWeight: FontWeight.bold,
                     fontSize: 35),
               )),
-          Container(
-            child: displayMedicalSpecialities(),
-          )
+          displayMedicalSpecialities(),
         ],
-      ),
+      ),*/
     ));
   }
 
@@ -62,13 +61,13 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          tileColor: const Color(0xFF2862B7),
+                          tileColor: const Color(0xFFE4EFFF),
                           title: Text(
                             specialities[index].medicalSpeciality,
                             style: const TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20),
                           ),
                         ),
                       );

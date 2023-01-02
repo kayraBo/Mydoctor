@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/widgets.dart';
@@ -11,15 +12,97 @@ class SignUpDoctor extends StatefulWidget {
 }
 
 class _SignUpDoctorState extends State<SignUpDoctor> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController surnameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController phoneNumController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-  TextEditingController hospitalController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _phoneNumController = TextEditingController();
+  final _medicalSpecialityController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _hospitalController = TextEditingController();
+  final _degreeController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _uinController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _surnameController.dispose();
+    _passwordController.dispose();
+    _emailController.dispose();
+    _confirmPasswordController.dispose();
+    _phoneNumController.dispose();
+    _degreeController.dispose();
+    _descriptionController.dispose();
+    _uinController.dispose();
+    _medicalSpecialityController.dispose();
+    _cityController.dispose();
+    _hospitalController.dispose();
+    super.dispose();
+  }
+
+  bool passwordConfirmed() {
+    if (_passwordController.text == _confirmPasswordController.text) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text)
+          .then((value) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      }).catchError((error, stackTrace) {
+        print("Error: ${error.toString()}");
+      });
+    }
+
+    addUserInfo(
+        _emailController.text,
+        _nameController.text,
+        _surnameController.text,
+        _uinController.text,
+        _medicalSpecialityController.text,
+        _cityController.text,
+        _hospitalController.text,
+        _degreeController.text,
+        _descriptionController.text,
+        _phoneNumController.text);
+  }
+
+  Future addUserInfo(
+      String email,
+      String name,
+      String surname,
+      String uin,
+      String medicalSpeciality,
+      String city,
+      String hospital,
+      String degree,
+      String description,
+      String phoneNumber) async {
+    await FirebaseFirestore.instance.collection('Doctors').add({
+      'Email': email,
+      'Name': name,
+      'Surname': surname,
+      'UIN': uin,
+      'MedicalSpeciality': medicalSpeciality,
+      'City': city,
+      'Hospital': hospital,
+      'Degree': degree,
+      'Description': description,
+      'PhoneNumber': phoneNumber,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,7 +124,6 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
               Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.fromLTRB(50, 50, 50, 40),
-                  //color: Colors.red,
                   child: const Text(
                     'Регистрация',
                     style: TextStyle(
@@ -50,80 +132,63 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                         fontSize: 35),
                   )),
               Container(
-                //alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.blue,
-                child: textFieldWidget('Име', false, nameController),
+                child: textFieldWidget('Имейл', false, _emailController),
               ),
               Container(
-                alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.red,
-                child: textFieldWidget('Фамилия', false, surnameController),
+                child: textFieldWidget('Парола', true, _passwordController),
               ),
               Container(
-                //alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.blue,
-                child: textFieldWidget('Имейл', false, emailController),
-              ),
-              Container(
-                //alignment: Alignment.center,
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.red,
-                child: textFieldWidget('Парола', true, passwordController),
-              ),
-              Container(
-                //alignment: Alignment.center,
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.red,
                 child: textFieldWidget(
-                    'Повтори паролата', true, confirmPasswordController),
+                    'Повтори паролата', true, _confirmPasswordController),
               ),
               Container(
-                //alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.red,
+                child: textFieldWidget('Име', false, _nameController),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: textFieldWidget('Фамилия', false, _surnameController),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: textFieldWidget('УИН', false, _uinController),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: textFieldWidget(
+                    'Специалност', false, _medicalSpecialityController),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: textFieldWidget('Област', false, _cityController),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                 child:
-                    textFieldWidget('Специалност', false, categoryController),
+                    textFieldWidget('Месторабота', false, _hospitalController),
               ),
               Container(
-                //alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.red,
+                child: textFieldWidget('Титла', false, _degreeController),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                 child:
-                    textFieldWidget('Месторабота', false, hospitalController),
+                    textFieldWidget('Описание', false, _descriptionController),
               ),
               Container(
-                //alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                //color: Colors.red,
-                child: textFieldWidget('Област', false, cityController),
-              ),
-              Container(
-                //alignment: Alignment.center,
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: numberFieldWidget('Телефон', phoneNumController),
-                //color: Colors.red,
+                child: numberFieldWidget('Телефон', _phoneNumController),
               ),
               Container(
                   alignment: Alignment.center,
-                  //color: Colors.green,
                   padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                   child: buttonWidget(context, 'Регистрация',
                       const Color(0xFF2862B7), Colors.white, () {
-                    FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
-                        .then((value) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Home()),
-                      );
-                    }).catchError((error, stackTrace) {
-                      print("Error: ${error.toString()}");
-                    });
+                    signUp();
                   })),
             ],
           ),

@@ -8,13 +8,13 @@ class MedicalSpecialityModel {
   });
 
   MedicalSpecialityModel.fromJson(Map<String, dynamic> json) {
-    medicalSpeciality = json['medicalSpeciality'];
+    medicalSpeciality = json['Medical_speciality'];
     //code = json['code'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['medicalSpeciality'] = this.medicalSpeciality;
+    data['medicalSpeciality'] = medicalSpeciality;
     return data;
   }
 }

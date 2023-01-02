@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:test_flutter_app/screens/signin.dart';
+import 'package:test_flutter_app/auth/main_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -17,11 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const SignIn(),
+      home: const MainPage(),
     );
   }
 }

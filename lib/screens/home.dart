@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,6 @@ class _HomeState extends State<Home> {
               width: 397,
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-              //color: Colors.amber,
               child: const Text(
                 'Добре дошли в Mydoctor',
                 style: TextStyle(
@@ -34,7 +34,6 @@ class _HomeState extends State<Home> {
               )),
           Container(
               alignment: Alignment.center,
-              //color: Colors.green,
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
               child: buttonWidget(
                   context, 'Изход', const Color(0xFF2862B7), Colors.white, () {
@@ -49,7 +48,6 @@ class _HomeState extends State<Home> {
               })),
           Container(
               alignment: Alignment.center,
-              //color: Colors.green,
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
               child: buttonWidget(
                   context, 'Категории', const Color(0xFF2862B7), Colors.white,
