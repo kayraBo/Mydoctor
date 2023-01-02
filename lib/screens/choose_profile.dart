@@ -24,10 +24,6 @@ class _ProfileTypeState extends State<ProfileType> {
               icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () {
                 Navigator.pop(context);
-                /*Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SignIn()),
-                  );*/
               },
             ),
           ),
@@ -35,8 +31,6 @@ class _ProfileTypeState extends State<ProfileType> {
               height: 182,
               width: 397,
               alignment: Alignment.bottomCenter,
-              //padding: const EdgeInsets.fromLTRB(50, 200, 50, 20),
-              //color: Colors.amber,
               child: const Text(
                 'Регистрация',
                 style: TextStyle(
@@ -59,8 +53,6 @@ class _ProfileTypeState extends State<ProfileType> {
               height: 90,
               width: 397,
               alignment: Alignment.center,
-              //color: Colors.green,
-              //padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -89,8 +81,6 @@ class _ProfileTypeState extends State<ProfileType> {
               height: 70,
               width: 397,
               alignment: Alignment.center,
-              //color: Colors.blue,
-              //padding: const EdgeInsets.fromLTRB(10, 20, 10, 60),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -118,7 +108,6 @@ class _ProfileTypeState extends State<ProfileType> {
             height: 300,
             width: 397,
             alignment: Alignment.bottomCenter,
-            //color: Colors.yellow,
             padding: const EdgeInsets.fromLTRB(5, 40, 20, 0),
             child: pictureWidget("assets/images/Doctors.png"),
           ),

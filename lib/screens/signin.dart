@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/screens/choose_profile.dart';
+import 'package:test_flutter_app/screens/forgot_password.dart';
 import 'package:test_flutter_app/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -13,14 +14,28 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
+  }
+
+  Future signIn() async {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: _emailController.text, password: _passwordController.text)
+        .then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
+    }).onError((error, stackTrace) {
+      print("Error: ${error.toString()}");
+    });
   }
 
   @override
@@ -44,49 +59,40 @@ class _SignInState extends State<SignIn> {
                 )),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: textFieldWidget('Имейл', false, emailController),
+              child: textFieldWidget('Имейл', false, _emailController),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: textFieldWidget('Парола', true, passwordController),
+              child: textFieldWidget('Парола', true, _passwordController),
             ),
             Container(
               alignment: Alignment.centerRight,
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: TextButton(
                 onPressed: () {
-                  /*Navigator.push(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignIn()),
-                  );*/
+                    MaterialPageRoute(
+                        builder: (context) => const ForgotPassword()),
+                  );
                 },
                 child: const Text(
                   'Забравена парола?',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.underline,
-                      fontSize: 18),
+                    color: Color(0xFF2862B7),
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
             Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                padding: const EdgeInsets.fromLTRB(10, 20, 10, 15),
                 child: buttonWidget(
                     context, 'Вход', const Color(0xFF2862B7), Colors.white, () {
-                  FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text)
-                      .then((value) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Home()),
-                    );
-                  }).onError((error, stackTrace) {
-                    print("Error: ${error.toString()}");
-                  });
+                  signIn();
                 })),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +126,7 @@ class _SignInState extends State<SignIn> {
               ],
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(5, 40, 20, 0),
+              padding: const EdgeInsets.fromLTRB(5, 40, 15, 0),
               child: pictureWidget("assets/images/Doctors.png"),
             ),
           ],
