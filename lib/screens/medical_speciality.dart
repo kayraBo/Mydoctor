@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/medical_speciality_ref.dart';
 import 'package:test_flutter_app/model/medical_speciality_model.dart';
@@ -10,31 +11,7 @@ class MedicalSpeciality extends StatefulWidget {
 }
 
 class _MedicalSpeciality extends State<MedicalSpeciality> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child:
-          displayMedicalSpecialities(), /*ListView(
-        children: <Widget>[
-          Container(
-              height: 200,
-              width: 397,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-              //color: Colors.amber,
-              child: const Text(
-                'Категории',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35),
-              )),
-          displayMedicalSpecialities(),
-        ],
-      ),*/
-    ));
-  }
+  final _searchController = TextEditingController();
 
   displayMedicalSpecialities() {
     return FutureBuilder(
@@ -66,7 +43,7 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                             specialities[index].medicalSpeciality,
                             style: const TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.normal,
                                 fontSize: 20),
                           ),
                         ),
@@ -76,5 +53,93 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
             }
           }
         });
+  }
+
+  List serachResult = [];
+  String inputText = "";
+
+  void serachList(String search) async {
+    final result = await FirebaseFirestore.instance
+        .collection('Medical_speciality_list')
+        .where("Medical_speciality", isEqualTo: search)
+        .get();
+
+    setState(() {
+      serachResult = result.docs.map((e) => e.data()).toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(children: <Widget>[
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        Container(
+            height: 50,
+            width: 397,
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+            //color: Colors.amber,
+            child: const Text(
+              'Категории',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 35),
+            )),
+        Container(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: TextField(
+                controller: _searchController,
+                cursorColor: Colors.black,
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      serachList(inputText);
+                    },
+                  ),
+                  hintText: 'Търси...',
+                  hintStyle: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+                  filled: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  fillColor: const Color(0xFFE4EFFF),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide:
+                        const BorderSide(width: 0, style: BorderStyle.none),
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                onChanged: (search) {
+                  serachList(search);
+                })),
+        Expanded(
+            child: Container(
+          child: displayMedicalSpecialities(),
+          width: 357,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ))
+      ]),
+    );
   }
 }
