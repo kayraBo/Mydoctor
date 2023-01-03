@@ -74,19 +74,9 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
     return Scaffold(
       body: Column(children: <Widget>[
         Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        Container(
-            height: 50,
+            height: 150,
             width: 397,
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
             //color: Colors.amber,
             child: const Text(
@@ -97,7 +87,7 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                   fontSize: 35),
             )),
         Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
             child: TextField(
                 controller: _searchController,
                 cursorColor: Colors.black,
