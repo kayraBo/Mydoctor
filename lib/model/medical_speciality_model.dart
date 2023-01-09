@@ -6,7 +6,7 @@ class MedicalSpecialityModel {
 
   MedicalSpecialityModel.fromJson(Map<String, dynamic> json) {
     medicalSpeciality = json['Medical_speciality'];
-    code = json['code'];
+    code = json['Code'];
   }
 
   Map<String, dynamic> toJson() {

@@ -14,7 +14,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   displayUserData() {
     return FutureBuilder(
-        future: getUserData(FirebaseAuth.instance.currentUser!.uid),
+        future: getPatientData(FirebaseAuth.instance.currentUser!.uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -110,7 +110,7 @@ class _ProfileState extends State<Profile> {
       SingleChildScrollView(
           child: Container(
               alignment: Alignment.bottomCenter,
-              height: 200,
+              height: 20,
               width: 397,
               decoration: const BoxDecoration(
                 color: Color(0xFFE4EFFF),
