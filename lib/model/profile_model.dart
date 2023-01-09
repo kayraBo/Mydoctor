@@ -2,7 +2,7 @@ class ProfileModel {
   String? email;
   String? name;
   String? surname;
-  String? phoneNumber;
+  late String phoneNumber;
   String? city;
   String? degree;
   String? description;
@@ -14,7 +14,7 @@ class ProfileModel {
       {this.email,
       this.name,
       this.surname,
-      this.phoneNumber,
+      required this.phoneNumber,
       this.city,
       this.degree,
       this.description,

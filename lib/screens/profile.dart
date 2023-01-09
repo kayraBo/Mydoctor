@@ -32,7 +32,7 @@ class _ProfileState extends State<Profile> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  tileColor: const Color(0xFFE4EFFF),
+                  tileColor: Colors.white,
                   title: Text(
                     '${userData.name}',
                     style: const TextStyle(
@@ -42,6 +42,9 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -51,7 +54,7 @@ class _ProfileState extends State<Profile> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  tileColor: const Color(0xFFE4EFFF),
+                  tileColor: Colors.white,
                   title: Text(
                     '${userData.surname}',
                     style: const TextStyle(
@@ -61,24 +64,8 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                margin: const EdgeInsets.all(8),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  tileColor: const Color(0xFFE4EFFF),
-                  title: Text(
-                    '${userData.email}',
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20),
-                  ),
-                ),
+              SizedBox(
+                height: 10,
               ),
               Card(
                 shape: RoundedRectangleBorder(
@@ -89,7 +76,29 @@ class _ProfileState extends State<Profile> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  tileColor: const Color(0xFFE4EFFF),
+                  tileColor: Colors.white,
+                  title: Text(
+                    '${userData.email}',
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                margin: const EdgeInsets.all(8),
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  tileColor: Colors.white,
                   title: Text(
                     '${userData.phoneNumber}',
                     style: const TextStyle(
@@ -106,11 +115,25 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SingleChildScrollView(
-          child: Container(
-              alignment: Alignment.bottomCenter,
-              height: 20,
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+              color: Colors.amber,
+              height: 293,
+              width: 397,
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: const Text(
+                'Добре дошли в Mydoctor',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35),
+              )),
+          Stack(alignment: AlignmentDirectional.center, children: [
+            Container(
+              height: 400,
               width: 397,
               decoration: const BoxDecoration(
                 color: Color(0xFFE4EFFF),
@@ -118,6 +141,8 @@ class _ProfileState extends State<Profile> {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30)),
               ),
+            ),
+            SingleChildScrollView(
               child: Expanded(
                   child: Container(
                 child: displayUserData(),
@@ -125,7 +150,11 @@ class _ProfileState extends State<Profile> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
-              )))),
-    ]);
+              )),
+            )
+          ]),
+        ],
+      ),
+    );
   }
 }

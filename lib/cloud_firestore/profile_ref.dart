@@ -9,7 +9,7 @@ Future<ProfileModel> getPatientData(String uid) async {
     var profileModel = ProfileModel.fromJson(snapshot.data()!);
     return profileModel;
   } else {
-    return ProfileModel();
+    return ProfileModel(phoneNumber: '1');
   }
 }
 
@@ -21,6 +21,6 @@ Future<ProfileModel> getDoctorData(String uid) async {
     var profileModel = ProfileModel.fromJson(snapshot.data()!);
     return profileModel;
   } else {
-    return ProfileModel();
+    return ProfileModel(phoneNumber: '');
   }
 }

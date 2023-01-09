@@ -14,8 +14,8 @@ class _NavigationState extends State<Navigation> {
   int index = 0;
 
   final _pages = [
-    const MedicalSpeciality(),
     const Home(),
+    const MedicalSpeciality(),
     const Profile(),
   ];
 
@@ -41,18 +41,18 @@ class _NavigationState extends State<Navigation> {
           destinations: [
             NavigationDestination(
                 icon: Image.asset(
-                  'assets/icons/doctor.png',
-                  width: 30,
-                  height: 30,
-                ),
-                label: 'Лекари'),
-            NavigationDestination(
-                icon: Image.asset(
                   'assets/icons/medical.png',
                   width: 30,
                   height: 30,
                 ),
                 label: 'Прегледи'),
+            NavigationDestination(
+                icon: Image.asset(
+                  'assets/icons/doctor.png',
+                  width: 30,
+                  height: 30,
+                ),
+                label: 'Лекари'),
             NavigationDestination(
                 icon: Image.asset(
                   'assets/icons/profile.png',
