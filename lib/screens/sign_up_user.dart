@@ -1,44 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../widgets/widgets.dart';
-import 'home.dart';
+import 'package:flutter/material.dart';
+import 'package:test_flutter_app/screens/navigation.dart';
 
-class SignUpDoctor extends StatefulWidget {
-  const SignUpDoctor({Key? key}) : super(key: key);
+import '../widgets/widgets.dart';
+
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<SignUpDoctor> createState() => _SignUpDoctorState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpDoctorState extends State<SignUpDoctor> {
+class _SignUpState extends State<SignUp> {
   final _nameController = TextEditingController();
   final _surnameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _phoneNumController = TextEditingController();
-  final _medicalSpecialityController = TextEditingController();
-  final _cityController = TextEditingController();
-  final _hospitalController = TextEditingController();
-  final _degreeController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _uinController = TextEditingController();
 
   @override
   void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
     _nameController.dispose();
     _surnameController.dispose();
-    _passwordController.dispose();
-    _emailController.dispose();
-    _confirmPasswordController.dispose();
     _phoneNumController.dispose();
-    _degreeController.dispose();
-    _descriptionController.dispose();
-    _uinController.dispose();
-    _medicalSpecialityController.dispose();
-    _cityController.dispose();
-    _hospitalController.dispose();
     super.dispose();
   }
 
@@ -58,47 +47,23 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
           .then((value) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const Home()),
+          MaterialPageRoute(builder: (context) => const Navigation()),
         );
       }).catchError((error, stackTrace) {
         print("Error: ${error.toString()}");
       });
     }
 
-    addUserInfo(
-        _emailController.text,
-        _nameController.text,
-        _surnameController.text,
-        _uinController.text,
-        _medicalSpecialityController.text,
-        _cityController.text,
-        _hospitalController.text,
-        _degreeController.text,
-        _descriptionController.text,
-        _phoneNumController.text);
+    addUserInfo(_nameController.text, _surnameController.text,
+        _emailController.text, _phoneNumController.text);
   }
 
   Future addUserInfo(
-      String email,
-      String name,
-      String surname,
-      String uin,
-      String medicalSpeciality,
-      String city,
-      String hospital,
-      String degree,
-      String description,
-      String phoneNumber) async {
-    await FirebaseFirestore.instance.collection('Doctors').add({
-      'Email': email,
+      String name, String surname, String email, String phoneNumber) async {
+    await FirebaseFirestore.instance.collection('Patients').add({
       'Name': name,
       'Surname': surname,
-      'UIN': uin,
-      'MedicalSpeciality': medicalSpeciality,
-      'City': city,
-      'Hospital': hospital,
-      'Degree': degree,
-      'Description': description,
+      'Email': email,
       'PhoneNumber': phoneNumber,
     });
   }
@@ -133,6 +98,15 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   )),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: textFieldWidget('Име', false, _nameController),
+              ),
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: textFieldWidget('Фамилия', false, _surnameController),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                 child: textFieldWidget('Имейл', false, _emailController),
               ),
               Container(
@@ -146,41 +120,6 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: textFieldWidget('Име', false, _nameController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: textFieldWidget('Фамилия', false, _surnameController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: textFieldWidget('УИН', false, _uinController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: textFieldWidget(
-                    'Специалност', false, _medicalSpecialityController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: textFieldWidget('Област', false, _cityController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child:
-                    textFieldWidget('Месторабота', false, _hospitalController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: textFieldWidget('Титла', false, _degreeController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child:
-                    textFieldWidget('Описание', false, _descriptionController),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                 child: numberFieldWidget('Телефон', _phoneNumController),
               ),
               Container(
@@ -189,7 +128,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   child: buttonWidget(context, 'Регистрация',
                       const Color(0xFF2862B7), Colors.white, () {
                     signUp();
-                  })),
+                  }))
             ],
           ),
         )));

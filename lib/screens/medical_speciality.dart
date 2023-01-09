@@ -33,18 +33,28 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                   child: ListView.builder(
                     itemCount: specialities.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        child: ListTile(
+                      return GestureDetector(
+                        /*onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Home()),
+                        ),*/
+                        child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          tileColor: const Color(0xFFE4EFFF),
-                          title: Text(
-                            specialities[index].medicalSpeciality,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 20),
+                          margin: const EdgeInsets.all(8),
+                          child: ListTile(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            tileColor: const Color(0xFFE4EFFF),
+                            title: Text(
+                              specialities[index].medicalSpeciality,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 20),
+                            ),
                           ),
                         ),
                       );
@@ -78,7 +88,6 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
             width: 397,
             alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-            //color: Colors.amber,
             child: const Text(
               'Категории',
               style: TextStyle(
@@ -87,16 +96,18 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                   fontSize: 35),
             )),
         Container(
+            height: 80,
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
             child: TextField(
                 controller: _searchController,
-                cursorColor: Colors.black,
-                style: const TextStyle(color: Colors.black),
+                cursorColor: Colors.white,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
                 decoration: InputDecoration(
-                  suffixIcon: IconButton(
+                  contentPadding: const EdgeInsets.all(10.0),
+                  prefixIcon: IconButton(
                     icon: const Icon(
                       Icons.search,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                     onPressed: () {
                       serachList(inputText);
@@ -104,15 +115,14 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                   ),
                   hintText: 'Търси...',
                   hintStyle: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.normal,
-                    fontSize: 18,
+                    fontSize: 20,
                   ),
                   filled: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  fillColor: const Color(0xFFE4EFFF),
+                  fillColor: const Color(0xFF2862B7),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(30),
                     borderSide:
                         const BorderSide(width: 0, style: BorderStyle.none),
                   ),

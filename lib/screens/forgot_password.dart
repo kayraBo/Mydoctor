@@ -46,7 +46,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             content: Text(
               e.message.toString(),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 15,

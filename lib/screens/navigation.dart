@@ -14,9 +14,9 @@ class _NavigationState extends State<Navigation> {
   int index = 0;
 
   final _pages = [
-    MedicalSpeciality(),
-    Home(),
-    Profile(),
+    const MedicalSpeciality(),
+    const Home(),
+    const Profile(),
   ];
 
   @override
@@ -29,7 +29,7 @@ class _NavigationState extends State<Navigation> {
           labelTextStyle: MaterialStatePropertyAll(
             TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),

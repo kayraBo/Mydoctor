@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/screens/choose_profile.dart';
 import 'package:test_flutter_app/screens/forgot_password.dart';
-import 'package:test_flutter_app/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:test_flutter_app/screens/navigation.dart';
 
 import '../widgets/widgets.dart';
 
@@ -31,7 +31,7 @@ class _SignInState extends State<SignIn> {
         .then((value) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Home()),
+        MaterialPageRoute(builder: (context) => const Navigation()),
       );
     }).onError((error, stackTrace) {
       print("Error: ${error.toString()}");
