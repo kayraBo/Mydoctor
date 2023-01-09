@@ -44,28 +44,32 @@ class _SignUpState extends State<SignUp> {
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text)
-          .then((value) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Navigation()),
-        );
+          .then((value) async {
+        await addUserInfo(
+            value.user!.uid,
+            _nameController.text,
+            _surnameController.text,
+            _emailController.text,
+            _phoneNumController.text);
       }).catchError((error, stackTrace) {
         print("Error: ${error.toString()}");
       });
     }
-
-    addUserInfo(_nameController.text, _surnameController.text,
-        _emailController.text, _phoneNumController.text);
   }
 
-  Future addUserInfo(
-      String name, String surname, String email, String phoneNumber) async {
-    await FirebaseFirestore.instance.collection('Patients').add({
+  Future addUserInfo(String uid, String name, String surname, String email,
+      String phoneNumber) async {
+    await FirebaseFirestore.instance.collection('Patients').doc(uid).set({
       'Name': name,
       'Surname': surname,
       'Email': email,
       'PhoneNumber': phoneNumber,
-    });
+    }).then((value) => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Navigation()),
+          )
+        });
   }
 
   @override

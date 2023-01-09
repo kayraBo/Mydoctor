@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/profile_ref.dart';
+import 'package:test_flutter_app/screens/sign_in.dart';
 
 import '../model/profile_model.dart';
+import '../widgets/widgets.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -22,93 +24,111 @@ class _ProfileState extends State<Profile> {
             );
           } else {
             var userData = snapshot.data as ProfileModel;
-            return Column(children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                margin: const EdgeInsets.all(8),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+            return ListView(
+              shrinkWrap: true,
+              children: [
+                Column(children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      tileColor: Colors.white,
+                      title: Text(
+                        '${userData.name}',
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 20),
+                      ),
+                    ),
                   ),
-                  tileColor: Colors.white,
-                  title: Text(
-                    '${userData.name}',
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20),
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                margin: const EdgeInsets.all(8),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      tileColor: Colors.white,
+                      title: Text(
+                        '${userData.surname}',
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 20),
+                      ),
+                    ),
                   ),
-                  tileColor: Colors.white,
-                  title: Text(
-                    '${userData.surname}',
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20),
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                margin: const EdgeInsets.all(8),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      tileColor: Colors.white,
+                      title: Text(
+                        '${userData.email}',
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 20),
+                      ),
+                    ),
                   ),
-                  tileColor: Colors.white,
-                  title: Text(
-                    '${userData.email}',
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20),
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                margin: const EdgeInsets.all(8),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    margin: const EdgeInsets.all(8),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      tileColor: Colors.white,
+                      title: Text(
+                        '${userData.phoneNumber}',
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 20),
+                      ),
+                    ),
                   ),
-                  tileColor: Colors.white,
-                  title: Text(
-                    '${userData.phoneNumber}',
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20),
-                  ),
-                ),
-              ),
-            ]);
+                  Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                      child: buttonWidget(context, 'Изход',
+                          const Color(0xFF2862B7), Colors.white, () {
+                        FirebaseAuth.instance.signOut().then((value) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignIn()),
+                          );
+                        });
+                      })),
+                ]),
+              ],
+            );
           }
         });
   }
@@ -119,13 +139,13 @@ class _ProfileState extends State<Profile> {
       child: Column(
         children: [
           Container(
-              color: Colors.amber,
-              height: 293,
+              //color: Colors.amber,
+              height: 243,
               width: 397,
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: const Text(
-                'Добре дошли в Mydoctor',
+                'Профил',
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -133,7 +153,7 @@ class _ProfileState extends State<Profile> {
               )),
           Stack(alignment: AlignmentDirectional.center, children: [
             Container(
-              height: 400,
+              height: 450,
               width: 397,
               decoration: const BoxDecoration(
                 color: Color(0xFFE4EFFF),
@@ -142,16 +162,14 @@ class _ProfileState extends State<Profile> {
                     topRight: Radius.circular(30)),
               ),
             ),
-            SingleChildScrollView(
-              child: Expanded(
-                  child: Container(
-                child: displayUserData(),
-                width: 357,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              )),
-            )
+            Expanded(
+                child: Container(
+              child: displayUserData(),
+              width: 357,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            )),
           ]),
         ],
       ),
