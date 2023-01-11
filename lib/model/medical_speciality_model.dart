@@ -1,8 +1,8 @@
 class MedicalSpecialityModel {
   late String medicalSpeciality;
-  late int code;
+  int? code;
 
-  MedicalSpecialityModel({required this.medicalSpeciality, required this.code});
+  MedicalSpecialityModel({required this.medicalSpeciality, this.code});
 
   MedicalSpecialityModel.fromJson(Map<String, dynamic> json) {
     medicalSpeciality = json['Medical_speciality'];

@@ -55,30 +55,27 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text)
-          .then((value) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Navigation()),
-        );
+          .then((value) async {
+        await addUserInfo(
+            value.user!.uid,
+            _emailController.text,
+            _nameController.text,
+            _surnameController.text,
+            _uinController.text,
+            _medicalSpecialityController.text,
+            _cityController.text,
+            _hospitalController.text,
+            _degreeController.text,
+            _descriptionController.text,
+            _phoneNumController.text);
       }).catchError((error, stackTrace) {
         print("Error: ${error.toString()}");
       });
     }
-
-    addUserInfo(
-        _emailController.text,
-        _nameController.text,
-        _surnameController.text,
-        _uinController.text,
-        _medicalSpecialityController.text,
-        _cityController.text,
-        _hospitalController.text,
-        _degreeController.text,
-        _descriptionController.text,
-        _phoneNumController.text);
   }
 
   Future addUserInfo(
+      String uid,
       String email,
       String name,
       String surname,
@@ -89,7 +86,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
       String degree,
       String description,
       String phoneNumber) async {
-    await FirebaseFirestore.instance.collection('Doctors').add({
+    await FirebaseFirestore.instance.collection('Doctors').doc(uid).set({
       'Email': email,
       'Name': name,
       'Surname': surname,
@@ -100,7 +97,12 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
       'Degree': degree,
       'Description': description,
       'PhoneNumber': phoneNumber,
-    });
+    }).then((value) => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Navigation()),
+          )
+        });
   }
 
   @override

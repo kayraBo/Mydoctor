@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/medical_speciality_ref.dart';
 import 'package:test_flutter_app/model/medical_speciality_model.dart';
 
+import 'medical_speciality_doctors.dart';
+
 class MedicalSpeciality extends StatefulWidget {
   const MedicalSpeciality({Key? key}) : super(key: key);
 
@@ -34,10 +36,12 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                     itemCount: specialities.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        /*onTap: () => Navigator.push(
+                        onTap: () => Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Home()),
-                        ),*/
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const MedicalSpecialityDoctors()),
+                        ),
                         child: Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),

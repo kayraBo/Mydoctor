@@ -11,3 +11,17 @@ Future<List<MedicalSpecialityModel>> getSpecialities() async {
   }
   return specialities;
 }
+
+Future/*<MedicalSpecialityModel> */ getSpecialitiesName(String uid) async {
+  var snapshot = await FirebaseFirestore.instance
+      .collection('Medical_speciality_list')
+      .doc(uid)
+      .get();
+
+  if (snapshot.exists) {
+    var profileModel = MedicalSpecialityModel.fromJson(snapshot.data()!);
+    return profileModel;
+  } else {
+    return MedicalSpecialityModel(medicalSpeciality: uid);
+  }
+}
