@@ -19,85 +19,80 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
 
   displayMedicalSpecialities() {
     return FutureBuilder(
-        future: getDoctorData(FirebaseAuth.instance.currentUser!.uid),
+        future: getDoctorsBySpectialityCode('9'),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
-            var doctorData = snapshot.data as ProfileModel;
+            var doctorData = snapshot.data as List<ProfileModel>;
             return GestureDetector(
                 onTap: null,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Column(
-                      children: [
-                        Card(
+                child: ListView.builder(
+                    itemCount: doctorData.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        margin: const EdgeInsets.all(8),
+                        child: ListTile(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          margin: const EdgeInsets.all(8),
-                          child: ListTile(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            tileColor: Color(0xFFE4EFFF),
-                            title: Column(children: [
-                              Row(children: [
-                                Text(
-                                  '${doctorData.degree}',
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20),
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  '${doctorData.name}',
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20),
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  '${doctorData.surname}',
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20),
-                                ),
-                              ]),
+                          tileColor: Color(0xFFE4EFFF),
+                          title: Column(children: [
+                            Row(children: [
                               Text(
-                                '${doctorData.medicalSpeciality}',
+                                '${doctorData[index].degree}',
                                 style: const TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20),
+                              ),
+                              SizedBox(
+                                width: 4,
                               ),
                               Text(
-                                '${doctorData.hospital}',
+                                '${doctorData[index].name}',
                                 style: const TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20),
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                '${doctorData[index].surname}',
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20),
                               ),
                             ]),
-                          ),
+                            Text(
+                              '${doctorData[index].medicalSpeciality}',
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                            Text(
+                              '${doctorData[index].hospital}',
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ]),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    )
-                  ],
-                ));
+                      );
+                      const SizedBox(
+                        height: 10,
+                      );
+                    }));
           }
         });
   }

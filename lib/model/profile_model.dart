@@ -9,6 +9,7 @@ class ProfileModel {
   String? hospital;
   String? medicalSpeciality;
   String? uin;
+  String? code;
 
   ProfileModel(
       {this.email,
@@ -20,7 +21,8 @@ class ProfileModel {
       this.description,
       this.hospital,
       this.medicalSpeciality,
-      this.uin});
+      this.uin,
+      this.code});
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
     email = json['Email'];
@@ -33,6 +35,7 @@ class ProfileModel {
     hospital = json['Hospital'];
     medicalSpeciality = json['MedicalSpeciality'];
     uin = json['UIN'];
+    code = json['Code'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +50,7 @@ class ProfileModel {
     data['hospital'] = hospital;
     data['medicalSpeciality'] = medicalSpeciality;
     data['uin'] = uin;
+    data['code'] = code;
     return data;
   }
 }

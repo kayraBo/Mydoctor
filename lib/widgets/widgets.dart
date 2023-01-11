@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../model/medical_speciality_model.dart';
+
 Image pictureWidget(String name) {
   return Image.asset(
     name,
@@ -81,5 +83,17 @@ ElevatedButton buttonWidget(BuildContext context, String text, Color color,
         fontSize: 22,
       ),
     ),
+  );
+}
+
+DropdownButton dropdownButtonMDSpec(
+    List<MedicalSpecialityModel> specList, Function onChanged) {
+  return DropdownButton(
+    value: const Text('Избери специалност...'),
+    onChanged: onChanged(),
+    items: specList.map<DropdownMenuItem<String>>((spec) {
+      return DropdownMenuItem<String>(
+          value: spec.code.toString(), child: Text(spec.medicalSpeciality));
+    }).toList(),
   );
 }
