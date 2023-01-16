@@ -24,20 +24,6 @@ Future updateUserInfo(String uid, String name, String surname, String email,
   });
 }
 
-Future<List<ProfileModel>> getDoctorByMS(String msName) async {
-  var doctors = List<ProfileModel>.empty(growable: true);
-  var doctorsRef = FirebaseFirestore.instance
-      .collection('Medical_speciality_list')
-      .doc(msName)
-      .collection('Doctors');
-
-  var snapshot = await doctorsRef.get();
-  for (var element in snapshot.docs) {
-    doctors.add(ProfileModel.fromJson(element.data()));
-  }
-  return doctors;
-}
-
 Future<List<ProfileModel>> getAllDoctors() async {
   List<ProfileModel> doctorsList = List.empty(growable: true);
   var snapshot = await _getFirebaseSnapshotByDoc('Doctors');
@@ -51,13 +37,13 @@ Future<List<ProfileModel>> getAllDoctors() async {
   return doctorsList;
 }
 
-Future<List<ProfileModel>> getDoctorsBySpectialityCode(String msName) async {
+Future<List<ProfileModel>> getDoctorsBySpectialityCode(int msCode) async {
   late List<ProfileModel> filteredDoctorsList = List.empty(growable: true);
   List<ProfileModel> doctorsList = await getAllDoctors();
 
   if (doctorsList.isNotEmpty) {
     for (ProfileModel doctor in doctorsList) {
-      if (doctor.medicalSpeciality == msName) {
+      if (doctor.medicalSpeciality == msCode) {
         filteredDoctorsList.add(doctor);
       }
     }

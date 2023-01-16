@@ -44,164 +44,166 @@ class _ProfileState extends State<Profile> {
             );
           } else {
             var userData = snapshot.data as ProfileModel;
-            return ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                final singleUser = userData[index];
-                return Column(children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
+            return ListView /*.builder*/ (shrinkWrap: true,
+                //itemBuilder: (BuildContext context, int index) {
+                //final singleUser = userData[index];
+                /*return*/
+                children: [
+                  Column(children: [
+                    Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      tileColor: Colors.white,
-                      title: Text(
-                        '${userData.name}',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20),
+                      margin: const EdgeInsets.all(8),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        tileColor: Colors.white,
+                        title: Text(
+                          '${userData.name}',
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20),
+                        ),
+                        // trailing: GestureDetector(
+                        //     onTap: () => Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) => EditProfile(
+                        //                   user: ProfileModel(
+                        //                       name: singleUser.name,
+                        //                       surname: singleUser.surname,
+                        //                       email: singleUser.email,
+                        //                       phoneNumber:
+                        //                           singleUser.phoneNumber))),
+                        //         ),
+                        //     child: Icon(Icons.edit)),
                       ),
-                      trailing: GestureDetector(
-                          onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditProfile(
-                                        user: ProfileModel(
-                                            name: singleUser.name,
-                                            surname: singleUser.surname,
-                                            email: singleUser.email,
-                                            phoneNumber:
-                                                singleUser.phoneNumber))),
-                              ),
-                          child: Icon(Icons.edit)),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                    const SizedBox(
+                      height: 10,
                     ),
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
+                    Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      tileColor: Colors.white,
-                      title: Text(
-                        '${userData.surname}',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20),
+                      margin: const EdgeInsets.all(8),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        tileColor: Colors.white,
+                        title: Text(
+                          '${userData.surname}',
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20),
+                        ),
+                        // trailing: GestureDetector(
+                        //     onTap: () => Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) => EditProfile(
+                        //                   user: ProfileModel(
+                        //                       name: singleUser.name,
+                        //                       surname: singleUser.surname,
+                        //                       email: singleUser.email,
+                        //                       phoneNumber:
+                        //                           singleUser.phoneNumber))),
+                        //         ),
+                        //     child: Icon(Icons.edit)),
                       ),
-                      trailing: GestureDetector(
-                          onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditProfile(
-                                        user: ProfileModel(
-                                            name: singleUser.name,
-                                            surname: singleUser.surname,
-                                            email: singleUser.email,
-                                            phoneNumber:
-                                                singleUser.phoneNumber))),
-                              ),
-                          child: Icon(Icons.edit)),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                    const SizedBox(
+                      height: 10,
                     ),
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
+                    Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      tileColor: Colors.white,
-                      title: Text(
-                        '${userData.email}',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20),
+                      margin: const EdgeInsets.all(8),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        tileColor: Colors.white,
+                        title: Text(
+                          '${userData.email}',
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20),
+                        ),
+                        // trailing: GestureDetector(
+                        //     onTap: () => Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) => EditProfile(
+                        //                   user: ProfileModel(
+                        //                       name: singleUser.name,
+                        //                       surname: singleUser.surname,
+                        //                       email: singleUser.email,
+                        //                       phoneNumber:
+                        //                           singleUser.phoneNumber))),
+                        //         ),
+                        //     child: Icon(Icons.edit)),
                       ),
-                      trailing: GestureDetector(
-                          onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditProfile(
-                                        user: ProfileModel(
-                                            name: singleUser.name,
-                                            surname: singleUser.surname,
-                                            email: singleUser.email,
-                                            phoneNumber:
-                                                singleUser.phoneNumber))),
-                              ),
-                          child: Icon(Icons.edit)),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                    const SizedBox(
+                      height: 10,
                     ),
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
+                    Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      tileColor: Colors.white,
-                      title: Text(
-                        '${userData.phoneNumber}',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20),
+                      margin: const EdgeInsets.all(8),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        tileColor: Colors.white,
+                        title: Text(
+                          '${userData.phoneNumber}',
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20),
+                        ),
+                        // trailing: GestureDetector(
+                        //     onTap: () => Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) => EditProfile(
+                        //                   user: ProfileModel(
+                        //                       name: singleUser.name,
+                        //                       surname: singleUser.surname,
+                        //                       email: singleUser.email,
+                        //                       phoneNumber:
+                        //                           singleUser.phoneNumber))),
+                        //         ),
+                        //     child: Icon(Icons.edit)),
                       ),
-                      trailing: GestureDetector(
-                          onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditProfile(
-                                        user: ProfileModel(
-                                            name: singleUser.name,
-                                            surname: singleUser.surname,
-                                            email: singleUser.email,
-                                            phoneNumber:
-                                                singleUser.phoneNumber))),
-                              ),
-                          child: Icon(Icons.edit)),
                     ),
-                  ),
-                  Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                      child: buttonWidget(context, 'Изход',
-                          const Color(0xFF2862B7), Colors.white, () {
-                        FirebaseAuth.instance.signOut().then((value) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignIn()),
-                          );
-                        });
-                      })),
-                ]);
-              },
-            );
+                    Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                        child: buttonWidget(context, 'Изход',
+                            const Color(0xFF2862B7), Colors.white, () {
+                          FirebaseAuth.instance.signOut().then((value) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignIn()),
+                            );
+                          });
+                        })),
+                  ])
+                ]
+                //},
+                );
           }
         });
   }
@@ -213,7 +215,7 @@ class _ProfileState extends State<Profile> {
         children: [
           Container(
               //color: Colors.amber,
-              height: 198,
+              height: 294,
               width: 397,
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
@@ -227,7 +229,6 @@ class _ProfileState extends State<Profile> {
           Stack(alignment: AlignmentDirectional.center, children: [
             Container(
               height: 450,
-              width: 397,
               decoration: const BoxDecoration(
                 color: Color(0xFFE4EFFF),
                 borderRadius: BorderRadius.only(
@@ -238,7 +239,7 @@ class _ProfileState extends State<Profile> {
             Expanded(
                 child: Container(
               child: displayUserData(),
-              width: 357,
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
               ),

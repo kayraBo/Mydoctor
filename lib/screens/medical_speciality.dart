@@ -27,19 +27,24 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
             var specialities = snapshot.data as List<MedicalSpecialityModel>;
             if (specialities.isEmpty) {
               return const Center(
-                child: Text('Cannot load specialites'),
+                child: Text('Няма намерени медицински специалности'),
               );
             } else {
               return ListView.builder(
                 itemCount: specialities.length,
                 itemBuilder: (context, index) {
+                  MedicalSpecialityModel speciality = specialities[index];
+                  int msCode = speciality.code;
+                  String msName = speciality.medicalSpeciality;
                   return GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const MedicalSpecialityDoctors()),
-                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MedicalSpecialityDoctors(
+                                msCode: msCode, msName: msName)),
+                      );
+                    },
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -136,7 +141,8 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
         Expanded(
             child: Container(
           child: displayMedicalSpecialities(),
-          width: 357,
+          //width: 357,
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
           ),

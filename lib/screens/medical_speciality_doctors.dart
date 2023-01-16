@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/auth/state_management.dart';
-import 'package:test_flutter_app/cloud_firestore/medical_speciality_ref.dart';
-import 'package:test_flutter_app/model/medical_speciality_model.dart';
-
+import '../cloud_firestore/medical_speciality_ref.dart';
 import '../cloud_firestore/profile_ref.dart';
+import '../model/medical_speciality_model.dart';
 import '../model/profile_model.dart';
 
 class MedicalSpecialityDoctors extends StatefulWidget {
-  const MedicalSpecialityDoctors({Key? key}) : super(key: key);
+  const MedicalSpecialityDoctors({
+    Key? key,
+    required this.msCode,
+    required this.msName,
+  }) : super(key: key);
+
+  final int msCode;
+  final String msName;
 
   @override
   State<MedicalSpecialityDoctors> createState() => _MedicalSpecialityDoctors();
@@ -18,9 +22,9 @@ class MedicalSpecialityDoctors extends StatefulWidget {
 class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
   final _searchController = TextEditingController();
 
-  displayMedicalSpecialities(/*String msName*/) {
+  displayMedicalSpecialities() {
     return FutureBuilder(
-        future: getDoctorsBySpectialityCode('Клинична лаборатория'),
+        future: getDoctorsBySpectialityCode(widget.msCode),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -102,32 +106,6 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
         });
   }
 
-  // displayMedicalSpecialityName() {
-  //   return FutureBuilder(
-  //       future: getSpecialitiesName(FirebaseFirestore.instance.collection('Medical_speciality_list').doc(uid)),
-  //       builder: (context, snapshot) {
-  //         if (snapshot.connectionState == ConnectionState.waiting) {
-  //           return const Center(
-  //             child: CircularProgressIndicator(),
-  //           );
-  //         } else {
-  //           var specialityName = snapshot.data as MedicalSpecialityModel;
-  //           return Container(
-  //               height: 150,
-  //               width: 397,
-  //               alignment: Alignment.bottomLeft,
-  //               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-  //               child: Text(
-  //                 '${specialityName.medicalSpeciality}',
-  //                 style: const TextStyle(
-  //                     color: Colors.black,
-  //                     fontWeight: FontWeight.bold,
-  //                     fontSize: 35),
-  //               ));
-  //         }
-  //       });
-  // }
-
   List serachResult = [];
   String inputText = "";
 
@@ -156,19 +134,6 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
             },
           ),
         ),
-        Container(
-            height: 50,
-            width: 397,
-            alignment: Alignment.bottomLeft,
-            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-            child: const Text(
-              'Категории',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35),
-            )),
-        //displayMedicalSpecialityName(),
         Container(
             height: 80,
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
