@@ -42,6 +42,9 @@ dependencies:
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.1
   cloud_firestore: ^4.3.0
+  flutter_riverpod: any
+  rflutter_alert: any
+  
 
 dev_dependencies:
   flutter_test:

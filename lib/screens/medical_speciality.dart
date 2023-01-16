@@ -30,40 +30,38 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                 child: Text('Cannot load specialites'),
               );
             } else {
-              return GestureDetector(
-                  onTap: null,
-                  child: ListView.builder(
-                    itemCount: specialities.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const MedicalSpecialityDoctors()),
+              return ListView.builder(
+                itemCount: specialities.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const MedicalSpecialityDoctors()),
+                    ),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      margin: const EdgeInsets.all(8),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          margin: const EdgeInsets.all(8),
-                          child: ListTile(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            tileColor: const Color(0xFFE4EFFF),
-                            title: Text(
-                              specialities[index].medicalSpeciality,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20),
-                            ),
-                          ),
+                        tileColor: const Color(0xFFE4EFFF),
+                        title: Text(
+                          specialities[index].medicalSpeciality,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20),
                         ),
-                      );
-                    },
-                  ));
+                      ),
+                    ),
+                  );
+                },
+              );
             }
           }
         });

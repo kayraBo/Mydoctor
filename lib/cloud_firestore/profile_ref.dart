@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import '../model/profile_model.dart';
 
 Future<ProfileModel> getPatientData(String uid) async {
@@ -13,16 +14,28 @@ Future<ProfileModel> getPatientData(String uid) async {
   }
 }
 
-Future<ProfileModel> getDoctorData(String uid) async {
-  var snapshot =
-      await FirebaseFirestore.instance.collection('Doctors').doc(uid).get();
+Future updateUserInfo(String uid, String name, String surname, String email,
+    String phoneNumber) async {
+  await FirebaseFirestore.instance.collection('Patients').doc(uid).update({
+    'Name': name,
+    'Surname': surname,
+    'Email': email,
+    'PhoneNumber': phoneNumber,
+  });
+}
 
-  if (snapshot.exists) {
-    var profileModel = ProfileModel.fromJson(snapshot.data()!);
-    return profileModel;
-  } else {
-    return ProfileModel();
+Future<List<ProfileModel>> getDoctorByMS(String msName) async {
+  var doctors = List<ProfileModel>.empty(growable: true);
+  var doctorsRef = FirebaseFirestore.instance
+      .collection('Medical_speciality_list')
+      .doc(msName)
+      .collection('Doctors');
+
+  var snapshot = await doctorsRef.get();
+  for (var element in snapshot.docs) {
+    doctors.add(ProfileModel.fromJson(element.data()));
   }
+  return doctors;
 }
 
 Future<List<ProfileModel>> getAllDoctors() async {
@@ -38,13 +51,13 @@ Future<List<ProfileModel>> getAllDoctors() async {
   return doctorsList;
 }
 
-Future<List<ProfileModel>> getDoctorsBySpectialityCode(String code) async {
+Future<List<ProfileModel>> getDoctorsBySpectialityCode(String msName) async {
   late List<ProfileModel> filteredDoctorsList = List.empty(growable: true);
   List<ProfileModel> doctorsList = await getAllDoctors();
 
   if (doctorsList.isNotEmpty) {
     for (ProfileModel doctor in doctorsList) {
-      if (doctor.medicalSpeciality == code) {
+      if (doctor.medicalSpeciality == msName) {
         filteredDoctorsList.add(doctor);
       }
     }

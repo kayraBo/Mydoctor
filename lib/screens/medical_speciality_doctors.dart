@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:test_flutter_app/auth/state_management.dart';
 import 'package:test_flutter_app/cloud_firestore/medical_speciality_ref.dart';
 import 'package:test_flutter_app/model/medical_speciality_model.dart';
 
@@ -17,82 +18,86 @@ class MedicalSpecialityDoctors extends StatefulWidget {
 class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
   final _searchController = TextEditingController();
 
-  displayMedicalSpecialities() {
+  displayMedicalSpecialities(/*String msName*/) {
     return FutureBuilder(
-        future: getDoctorsBySpectialityCode('9'),
+        future: getDoctorsBySpectialityCode('Клинична лаборатория'),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
-            var doctorData = snapshot.data as List<ProfileModel>;
-            return GestureDetector(
-                onTap: null,
-                child: ListView.builder(
-                    itemCount: doctorData.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        margin: const EdgeInsets.all(8),
-                        child: ListTile(
+            var specialities = snapshot.data as List<ProfileModel>;
+            if (specialities.isEmpty) {
+              return const Center(
+                child: Text('Няма намерени лекари от тази специалност'),
+              );
+            } else {
+              var doctorData = snapshot.data as List<ProfileModel>;
+              return GestureDetector(
+                  onTap: null,
+                  child: ListView.builder(
+                      itemCount: doctorData.length,
+                      itemBuilder: (context, index) {
+                        return Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          tileColor: Color(0xFFE4EFFF),
-                          title: Column(children: [
-                            Row(children: [
+                          margin: const EdgeInsets.all(8),
+                          child: ListTile(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            tileColor: const Color(0xFFE4EFFF),
+                            title: Column(children: [
+                              Row(children: [
+                                Text(
+                                  '${doctorData[index].degree}',
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  '${doctorData[index].name}',
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  '${doctorData[index].surname}',
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
+                              ]),
                               Text(
-                                '${doctorData[index].degree}',
+                                '${doctorData[index].medicalSpeciality}',
                                 style: const TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
-                              ),
-                              SizedBox(
-                                width: 4,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 18),
                               ),
                               Text(
-                                '${doctorData[index].name}',
+                                '${doctorData[index].hospital}',
                                 style: const TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
-                              ),
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                '${doctorData[index].surname}',
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 18),
                               ),
                             ]),
-                            Text(
-                              '${doctorData[index].medicalSpeciality}',
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 18),
-                            ),
-                            Text(
-                              '${doctorData[index].hospital}',
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 18),
-                            ),
-                          ]),
-                        ),
-                      );
-                      const SizedBox(
-                        height: 10,
-                      );
-                    }));
+                          ),
+                        );
+                      }));
+            }
           }
         });
   }
