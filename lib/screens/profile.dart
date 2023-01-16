@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/profile_ref.dart';
+import 'package:test_flutter_app/screens/edit_profile.dart';
 import 'package:test_flutter_app/screens/sign_in.dart';
 
 import '../model/profile_model.dart';
@@ -14,6 +16,24 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _phoneNumController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _nameController.dispose();
+    _surnameController.dispose();
+    _phoneNumController.dispose();
+    super.dispose();
+  }
+
   displayUserData() {
     return FutureBuilder(
         future: getPatientData(FirebaseAuth.instance.currentUser!.uid),
@@ -24,10 +44,11 @@ class _ProfileState extends State<Profile> {
             );
           } else {
             var userData = snapshot.data as ProfileModel;
-            return ListView(
+            return ListView.builder(
               shrinkWrap: true,
-              children: [
-                Column(children: [
+              itemBuilder: (BuildContext context, int index) {
+                final singleUser = userData[index];
+                return Column(children: [
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -45,6 +66,19 @@ class _ProfileState extends State<Profile> {
                             fontWeight: FontWeight.normal,
                             fontSize: 20),
                       ),
+                      trailing: GestureDetector(
+                          onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditProfile(
+                                        user: ProfileModel(
+                                            name: singleUser.name,
+                                            surname: singleUser.surname,
+                                            email: singleUser.email,
+                                            phoneNumber:
+                                                singleUser.phoneNumber))),
+                              ),
+                          child: Icon(Icons.edit)),
                     ),
                   ),
                   const SizedBox(
@@ -67,6 +101,19 @@ class _ProfileState extends State<Profile> {
                             fontWeight: FontWeight.normal,
                             fontSize: 20),
                       ),
+                      trailing: GestureDetector(
+                          onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditProfile(
+                                        user: ProfileModel(
+                                            name: singleUser.name,
+                                            surname: singleUser.surname,
+                                            email: singleUser.email,
+                                            phoneNumber:
+                                                singleUser.phoneNumber))),
+                              ),
+                          child: Icon(Icons.edit)),
                     ),
                   ),
                   const SizedBox(
@@ -89,6 +136,19 @@ class _ProfileState extends State<Profile> {
                             fontWeight: FontWeight.normal,
                             fontSize: 20),
                       ),
+                      trailing: GestureDetector(
+                          onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditProfile(
+                                        user: ProfileModel(
+                                            name: singleUser.name,
+                                            surname: singleUser.surname,
+                                            email: singleUser.email,
+                                            phoneNumber:
+                                                singleUser.phoneNumber))),
+                              ),
+                          child: Icon(Icons.edit)),
                     ),
                   ),
                   const SizedBox(
@@ -111,6 +171,19 @@ class _ProfileState extends State<Profile> {
                             fontWeight: FontWeight.normal,
                             fontSize: 20),
                       ),
+                      trailing: GestureDetector(
+                          onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditProfile(
+                                        user: ProfileModel(
+                                            name: singleUser.name,
+                                            surname: singleUser.surname,
+                                            email: singleUser.email,
+                                            phoneNumber:
+                                                singleUser.phoneNumber))),
+                              ),
+                          child: Icon(Icons.edit)),
                     ),
                   ),
                   Container(
@@ -126,8 +199,8 @@ class _ProfileState extends State<Profile> {
                           );
                         });
                       })),
-                ]),
-              ],
+                ]);
+              },
             );
           }
         });
@@ -140,7 +213,7 @@ class _ProfileState extends State<Profile> {
         children: [
           Container(
               //color: Colors.amber,
-              height: 243,
+              height: 198,
               width: 397,
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
