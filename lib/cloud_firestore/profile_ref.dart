@@ -14,6 +14,18 @@ Future<ProfileModel> getPatientData(String uid) async {
   }
 }
 
+Future<ProfileModel> getDocInfo(String uid) async {
+  var snapshot =
+      await FirebaseFirestore.instance.collection('Doctors').doc(uid).get();
+
+  if (snapshot.exists) {
+    var profileModel = ProfileModel.fromJson(snapshot.data()!);
+    return profileModel;
+  } else {
+    return ProfileModel();
+  }
+}
+
 Future updateUserInfo(String uid, String name, String surname, String email,
     String phoneNumber) async {
   await FirebaseFirestore.instance.collection('Patients').doc(uid).update({

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/medical_speciality_ref.dart';
 import 'package:test_flutter_app/model/medical_speciality_model.dart';
 
-import 'medical_speciality_doctors.dart';
+import 'medical_specialities_doctors.dart';
 
 class MedicalSpeciality extends StatefulWidget {
   const MedicalSpeciality({Key? key}) : super(key: key);
