@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../cloud_firestore/medical_speciality_ref.dart';
 import '../cloud_firestore/profile_ref.dart';
-import '../model/medical_speciality_model.dart';
 import '../model/profile_model.dart';
 import 'doctor_information.dart';
 
@@ -41,14 +39,18 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
               return ListView.builder(
                   itemCount: doctorData.length,
                   itemBuilder: (context, index) {
-                    ProfileModel profile = doctorData[index];
-                    // String? uidDoc = profile.;
                     return GestureDetector(
                       onTap: () {
+                        ProfileModel profile = doctorData[index];
+                        String profileID = '';
+                        if (profile.id != null) {
+                          profileID = profile.id!;
+                        }
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DocInfo(uidDoc: '')),
+                              builder: (context) => DocInfo(uidDoc: profileID)),
                         );
                       },
                       child: Card(

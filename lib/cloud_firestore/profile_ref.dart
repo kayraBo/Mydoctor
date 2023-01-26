@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import '../model/profile_model.dart';
 
 Future<ProfileModel> getPatientData(String uid) async {
@@ -20,6 +19,7 @@ Future<ProfileModel> getDocInfo(String uid) async {
 
   if (snapshot.exists) {
     var profileModel = ProfileModel.fromJson(snapshot.data()!);
+    profileModel.id = snapshot.id;
     return profileModel;
   } else {
     return ProfileModel();
@@ -43,6 +43,7 @@ Future<List<ProfileModel>> getAllDoctors() async {
   if (snapshot.docs.isNotEmpty) {
     for (var element in snapshot.docs) {
       ProfileModel doctor = ProfileModel.fromJson(element.data());
+      doctor.id = element.id;
       doctorsList.add(doctor);
     }
   }

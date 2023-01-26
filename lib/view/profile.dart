@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/profile_ref.dart';
-import 'package:test_flutter_app/view/edit_profile.dart';
 import 'package:test_flutter_app/view/sign_in.dart';
 
 import '../model/profile_model.dart';
@@ -217,8 +215,8 @@ class _ProfileState extends State<Profile> {
               //color: Colors.amber,
               height: 294,
               width: 397,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              alignment: Alignment.center,
+              // padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: const Text(
                 'Профил',
                 style: TextStyle(
@@ -236,14 +234,15 @@ class _ProfileState extends State<Profile> {
                     topRight: Radius.circular(30)),
               ),
             ),
-            Expanded(
-                child: Container(
-              child: displayUserData(),
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            )),
+            Wrap(children: [
+              Container(
+                child: displayUserData(),
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              )
+            ]),
           ]),
         ],
       ),

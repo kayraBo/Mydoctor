@@ -1,10 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/cloud_firestore/profile_ref.dart';
-import 'package:test_flutter_app/view/profile.dart';
-import 'package:test_flutter_app/view/sign_in.dart';
-
 import '../model/profile_model.dart';
 import '../widgets/widgets.dart';
 
@@ -24,6 +18,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   void initState() {
+    super.initState();
     _nameController = TextEditingController(text: widget.user.name);
     _surnameController = TextEditingController(text: widget.user.surname);
     _emailController = TextEditingController(text: widget.user.email);

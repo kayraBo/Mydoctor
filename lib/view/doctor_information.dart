@@ -1,10 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../cloud_firestore/profile_ref.dart';
-import '../model/medical_speciality_model.dart';
 import '../model/profile_model.dart';
 
 class DocInfo extends StatefulWidget {
@@ -36,14 +32,14 @@ class _DocInfoState extends State<DocInfo> {
                 Row(
                   children: [
                     Text(
-                      '${docDesc.degree}',
+                      '${docDesc.degree} ',
                       style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.normal,
                           fontSize: 20),
                     ),
                     Text(
-                      '${docDesc.name}',
+                      '${docDesc.name} ',
                       style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.normal,
@@ -88,12 +84,26 @@ class _DocInfoState extends State<DocInfo> {
             );
           } else {
             var docDesc = snapshot.data as ProfileModel;
-            return Text(
-              '${docDesc.description}',
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 20),
+            return Column(
+              children: [
+                const Text(
+                  'Повече информация',
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20),
+                ),
+                const SizedBox(
+                  width: 50,
+                ),
+                Text(
+                  '${docDesc.description}',
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 20),
+                ),
+              ],
             );
           }
         });
@@ -104,24 +114,24 @@ class _DocInfoState extends State<DocInfo> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          // Container(
-          //   alignment: Alignment.centerLeft,
-          //   padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
-          //   child: IconButton(
-          //     icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //   ),
-          // ),
-          Expanded(
-              child: Container(
-            child: displayDocInfo(),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-          )),
-          Stack(alignment: AlignmentDirectional.center, children: [
+          ),
+          Wrap(children: [
+            Container(
+              height: 348,
+              alignment: Alignment.center,
+              child: displayDocInfo(),
+            )
+          ]),
+          Stack(alignment: AlignmentDirectional.centerStart, children: [
             Container(
               height: 450,
               decoration: const BoxDecoration(
@@ -131,14 +141,12 @@ class _DocInfoState extends State<DocInfo> {
                     topRight: Radius.circular(30)),
               ),
             ),
-            const Text('Повече информация'),
-            Expanded(
-                child: Container(
-              child: displayDoctorDesc(),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ))
+            Wrap(children: [
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: displayDoctorDesc(),
+              )
+            ])
           ]),
         ],
       ),

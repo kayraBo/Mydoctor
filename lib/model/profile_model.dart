@@ -1,4 +1,5 @@
 class ProfileModel {
+  String? id;
   String? email;
   String? name;
   String? surname;
