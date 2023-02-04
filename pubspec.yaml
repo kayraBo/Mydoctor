@@ -44,6 +44,8 @@ dependencies:
   cloud_firestore: ^4.3.0
   flutter_riverpod: any
   rflutter_alert: any
+  table_calendar: any
+  provider: ^6.0.5
   
 
 dev_dependencies:

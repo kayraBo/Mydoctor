@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../cloud_firestore/profile_ref.dart';
 import '../model/profile_model.dart';
+import 'book_appointment.dart';
 
 class DocInfo extends StatefulWidget {
   final String uidDoc;
@@ -88,7 +89,7 @@ class _DocInfoState extends State<DocInfo> {
               children: [
                 const Text(
                   'Повече информация',
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
                       fontSize: 20),
@@ -103,6 +104,34 @@ class _DocInfoState extends State<DocInfo> {
                       fontWeight: FontWeight.normal,
                       fontSize: 20),
                 ),
+                Container(
+                    height: 70,
+                    width: 397,
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Appointment()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF2862B7),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        minimumSize: const Size(328, 56),
+                      ),
+                      child: const Text(
+                        'Запиши час',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                    )),
               ],
             );
           }
@@ -126,14 +155,14 @@ class _DocInfoState extends State<DocInfo> {
           ),
           Wrap(children: [
             Container(
-              height: 348,
+              // height: 344,
               alignment: Alignment.center,
               child: displayDocInfo(),
             )
           ]),
           Stack(alignment: AlignmentDirectional.centerStart, children: [
             Container(
-              height: 450,
+              height: 550,
               decoration: const BoxDecoration(
                 color: Color(0xFFE4EFFF),
                 borderRadius: BorderRadius.only(
