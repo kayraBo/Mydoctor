@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:test_flutter_app/auth/state_management.dart';
 import 'package:test_flutter_app/utils/utils.dart';
 
-// class Appointment extends StatefulWidget {
-//   const Appointment({super.key});
+class Appointment extends StatelessWidget {
+  Appointment({super.key});
 
-//   @override
-//   State<Appointment> createState() => _AppointmentState();
-// }
-
-class Appointment extends ConsumerWidget {
   DateTime today = DateTime.now();
+
   @override
-  Widget build(BuildContext context, watch) {
+  Widget build(BuildContext context) {
     var timeWatch = watch(selectedTime).state;
     return Scaffold(
       appBar: AppBar(
@@ -130,9 +125,15 @@ class Appointment extends ConsumerWidget {
     );
   }
 
+  // void _onDaySelected(DateTime day, DateTime focusedDay) {
+  //   setState(() {
+  //     today = day;
+  //   });
+  // }
+
+  final selectedDay = useState(DateTime.now());
+
   void _onDaySelected(DateTime day, DateTime focusedDay) {
-    setState(() {
-      today = day;
-    });
+    selectedDay.value = day;
   }
 }
