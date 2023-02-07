@@ -4,14 +4,21 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:test_flutter_app/auth/state_management.dart';
 import 'package:test_flutter_app/utils/utils.dart';
 
-class Appointment extends StatelessWidget {
-  Appointment({super.key});
+class Appointment extends StatefulWidget {
+  const Appointment({
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  State<Appointment> createState() => _AppointmentState();
+}
+
+class _AppointmentState extends State<Appointment> {
   DateTime today = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    var timeWatch = watch(selectedTime).state;
+    // var timeWatch = watch(selectedTime).state;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -97,43 +104,43 @@ class Appointment extends StatelessWidget {
             onDaySelected: _onDaySelected,
           ),
         ),
-        Expanded(
-            child: GridView.builder(
-                itemCount: time_slot.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
-                itemBuilder: ((context, index) => GestureDetector(
-                      onTap: (() {
-                        context.read(selectedTime).state =
-                            time_slot.elementAt(index);
-                      }),
-                      child: Card(
-                          color: context.read(selectedTime).state ==
-                                  time_slot.elementAt(index)
-                              ? const Color(0xFF2862B7)
-                              : Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          margin: const EdgeInsets.all(10),
-                          child: GridTile(
-                            child: Center(
-                              child: Text(time_slot.elementAt(index)),
-                            ),
-                          )),
-                    ))))
+        // Expanded(
+        //     child: GridView.builder(
+        //         itemCount: time_slot.length,
+        //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //             crossAxisCount: 3),
+        //         itemBuilder: ((context, index) => GestureDetector(
+        //               onTap: (() {
+        //                 context.read(selectedTime).state =
+        //                     time_slot.elementAt(index);
+        //               }),
+        //               child: Card(
+        //                   color: context.read(selectedTime).state ==
+        //                           time_slot.elementAt(index)
+        //                       ? const Color(0xFF2862B7)
+        //                       : Colors.white,
+        //                   shape: RoundedRectangleBorder(
+        //                       borderRadius: BorderRadius.circular(20)),
+        //                   margin: const EdgeInsets.all(10),
+        //                   child: GridTile(
+        //                     child: Center(
+        //                       child: Text(time_slot.elementAt(index)),
+        //                     ),
+        //                   )),
+        //             ))))
       ],
     );
   }
 
-  // void _onDaySelected(DateTime day, DateTime focusedDay) {
-  //   setState(() {
-  //     today = day;
-  //   });
-  // }
-
-  final selectedDay = useState(DateTime.now());
-
   void _onDaySelected(DateTime day, DateTime focusedDay) {
-    selectedDay.value = day;
+    setState(() {
+      today = day;
+    });
   }
+
+  // final selectedDay = useState(DateTime.now());
+
+  // void _onDaySelected(DateTime day, DateTime focusedDay) {
+  //   selectedDay.value = day;
+  // }
 }

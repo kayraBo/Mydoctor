@@ -211,22 +211,10 @@ class _ProfileState extends State<Profile> {
     return SafeArea(
       child: Column(
         children: [
-          Container(
-              //color: Colors.amber,
-              height: 294,
-              width: 397,
-              alignment: Alignment.center,
-              // padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: const Text(
-                'Профил',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35),
-              )),
+          Image.asset("assets/images/profile_pic.png"),
           Stack(alignment: AlignmentDirectional.center, children: [
             Container(
-              height: 450,
+              height: fullHeight(context) * .5,
               decoration: const BoxDecoration(
                 color: Color(0xFFE4EFFF),
                 borderRadius: BorderRadius.only(

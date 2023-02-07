@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../cloud_firestore/profile_ref.dart';
+import '../model/medical_speciality_model.dart';
 import '../model/profile_model.dart';
 import 'doctor_information.dart';
 
@@ -63,51 +64,67 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           tileColor: const Color(0xFFE4EFFF),
-                          title: Column(children: [
-                            Row(children: [
-                              Text(
-                                '${doctorData[index].degree}',
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                '${doctorData[index].name}',
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                '${doctorData[index].surname}',
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20),
-                              ),
-                            ]),
-                            Text(
-                              '${doctorData[index].medicalSpeciality}',
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 18),
+                          title: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/images/profile_pic.png",
+                                  height: 80,
+                                ),
+                                Column(children: [
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${doctorData[index].degree}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20),
+                                        ),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          '${doctorData[index].name}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20),
+                                        ),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          '${doctorData[index].surname}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20),
+                                        ),
+                                      ]),
+                                  Text(
+                                    '${doctorData[index].medicalSpeciality}',
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 18),
+                                  ),
+                                  Text(
+                                    '${doctorData[index].hospital}',
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 18),
+                                  ),
+                                ]),
+                              ],
                             ),
-                            Text(
-                              '${doctorData[index].hospital}',
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 18),
-                            ),
-                          ]),
+                          ),
                         ),
                       ),
                     );

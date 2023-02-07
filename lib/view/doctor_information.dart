@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../cloud_firestore/profile_ref.dart';
+import '../model/medical_speciality_model.dart';
 import '../model/profile_model.dart';
+import '../widgets/widgets.dart';
 import 'book_appointment.dart';
 
 class DocInfo extends StatefulWidget {
@@ -31,6 +33,7 @@ class _DocInfoState extends State<DocInfo> {
             return Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       '${docDesc.degree} ',
@@ -86,6 +89,8 @@ class _DocInfoState extends State<DocInfo> {
           } else {
             var docDesc = snapshot.data as ProfileModel;
             return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   'Повече информация',
@@ -93,9 +98,6 @@ class _DocInfoState extends State<DocInfo> {
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
                       fontSize: 20),
-                ),
-                const SizedBox(
-                  width: 50,
                 ),
                 Text(
                   '${docDesc.description}',
@@ -153,16 +155,17 @@ class _DocInfoState extends State<DocInfo> {
               },
             ),
           ),
+          Image.asset("assets/images/profile_pic.png"),
           Wrap(children: [
             Container(
-              // height: 344,
               alignment: Alignment.center,
               child: displayDocInfo(),
             )
           ]),
-          Stack(alignment: AlignmentDirectional.centerStart, children: [
+          Stack(alignment: AlignmentDirectional.center, children: [
             Container(
-              height: 550,
+              // height: 550,
+              height: fullHeight(context) * .6,
               decoration: const BoxDecoration(
                 color: Color(0xFFE4EFFF),
                 borderRadius: BorderRadius.only(

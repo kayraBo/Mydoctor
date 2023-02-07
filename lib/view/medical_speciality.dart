@@ -141,7 +141,6 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
         Expanded(
             child: Container(
           child: displayMedicalSpecialities(),
-          //width: 357,
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
