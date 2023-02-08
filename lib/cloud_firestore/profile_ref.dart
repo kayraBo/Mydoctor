@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:test_flutter_app/model/medical_speciality_model.dart';
+import 'package:test_flutter_app/view/medical_speciality.dart';
 import '../model/profile_model.dart';
 
 Future<ProfileModel> getPatientData(String uid) async {
@@ -48,6 +50,14 @@ Future<List<ProfileModel>> getAllDoctors() async {
     }
   }
   return doctorsList;
+}
+
+Future getMsName() async {
+  var snapshot = await _getFirebaseSnapshotByDoc('Medical_speciality_list');
+
+  if (snapshot.docs.isNotEmpty) {
+    for (var element in snapshot.docs) {}
+  }
 }
 
 Future<List<ProfileModel>> getDoctorsBySpectialityCode(int msCode) async {

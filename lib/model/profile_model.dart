@@ -9,6 +9,7 @@ class ProfileModel {
   String? description;
   String? hospital;
   int? medicalSpeciality;
+  String? medicalSpecialityName;
   String? uin;
 
   ProfileModel({
