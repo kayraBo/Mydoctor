@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter_app/constants/md_app_colors.dart';
+import 'package:test_flutter_app/constants/md_app_strings.dart';
 
-import '../cloud_firestore/appointment_ref.dart';
-import '../model/appointment_model.dart';
-import '../widgets/widgets.dart';
+import '../../../cloud_firestore/appointment_ref.dart';
+import '../../../constants/md_app_fontstyle.dart';
+import '../../../model/appointment_model.dart';
+import '../../../widgets/widgets.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,7 +27,7 @@ class _HomeState extends State<Home> {
             var doctorData = snapshot.data as List<AppointmentModel>;
             if (doctorData.isEmpty) {
               return const Center(
-                child: Text('Няма предстоящи прегледи'),
+                child: Text(AppStrings.strNoUpcomingAppointments),
               );
             } else {
               return ListView.builder(
@@ -33,15 +36,13 @@ class _HomeState extends State<Home> {
                     return GestureDetector(
                       onTap: () {},
                       child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                        shape: borderRadius(),
                         margin: const EdgeInsets.all(8),
                         child: ListTile(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          tileColor: const Color(0xFFE4EFFF),
+                          tileColor: AppColors.mdLightBlueColor,
                           title: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                             child: Row(
@@ -50,23 +51,17 @@ class _HomeState extends State<Home> {
                               children: [
                                 Column(children: [
                                   Text(
-                                    '${doctorData[index].appointmentTime}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 22),
+                                    doctorData[index].appointmentTime,
+                                    style: AppFontStyles.semiBold22Black,
                                   ),
                                   Text(
-                                    '${doctorData[index].appointmentDate}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 18),
+                                    doctorData[index].appointmentDate,
+                                    style: AppFontStyles.semiBold18Black,
                                   ),
                                   // Text(
                                   //   '${doctorData[index].notes}',
                                   //   style: const TextStyle(
-                                  //       color: Colors.black,
+                                  //       color: AppColors.mdBlackColor,
                                   //       fontWeight: FontWeight.normal,
                                   //       fontSize: 18),
                                   // ),
@@ -89,16 +84,6 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         body: Column(
           children: [
-            Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: const Text(
-                  'Добре дошли в Mydoctor',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35),
-                )),
             const SizedBox(
               height: 50,
             ),
@@ -106,11 +91,18 @@ class _HomeState extends State<Home> {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: const Text(
-                  'Предстоящи прегледи',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 20),
+                  AppStrings.strWelcomeMessage,
+                  style: AppFontStyles.bold35Black,
+                )),
+            const SizedBox(
+              height: 30,
+            ),
+            Container(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: const Text(
+                  AppStrings.strUpcomingAppointmnets,
+                  style: AppFontStyles.semBold17Black,
                 )),
             Expanded(
                 child: Container(

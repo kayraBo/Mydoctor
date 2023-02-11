@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/view/choose_profile.dart';
-import 'package:test_flutter_app/view/forgot_password.dart';
+import 'package:test_flutter_app/constants/md_app_colors.dart';
+import 'package:test_flutter_app/constants/md_app_strings.dart';
+import 'package:test_flutter_app/screens/choose_profile/view/choose_profile.dart';
+import 'package:test_flutter_app/screens/forgot_password/view/forgot_password.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test_flutter_app/view/navigation.dart';
 
-import '../widgets/widgets.dart';
+import '../../../constants/md_app_fontstyle.dart';
+import '../../../widgets/widgets.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -49,21 +52,19 @@ class _SignInState extends State<SignIn> {
           children: <Widget>[
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 125, 100, 40),
-                //color: Colors.amber,
                 child: const Text(
-                  'Вход',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35),
+                  AppStrings.strSignIn,
+                  style: AppFontStyles.bold35Black,
                 )),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: textFieldWidget('Имейл', false, _emailController),
+              child:
+                  textFieldWidget(AppStrings.strEmail, false, _emailController),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: textFieldWidget('Парола', true, _passwordController),
+              child: textFieldWidget(
+                  AppStrings.strPassword, true, _passwordController),
             ),
             Container(
               alignment: Alignment.centerRight,
@@ -77,33 +78,24 @@ class _SignInState extends State<SignIn> {
                   );
                 },
                 child: const Text(
-                  'Забравена парола?',
-                  style: TextStyle(
-                    color: Color(0xFF2862B7),
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    fontSize: 18,
-                  ),
+                  AppStrings.strForgottenPassword,
+                  style: AppFontStyles.underlinedBold18DarkBlue,
                 ),
               ),
             ),
             Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(10, 20, 10, 15),
-                child: buttonWidget(
-                    context, 'Вход', const Color(0xFF2862B7), Colors.white, () {
+                child: buttonWidget(context, AppStrings.strSignIn,
+                    AppColors.mdDarkBlueColor, AppColors.mdWhiteColor, () {
                   signIn();
                 })),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
-                  'Нямаш акаунт?',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                  ),
+                  AppStrings.strNoAccount,
+                  style: AppFontStyles.semiBold18Black,
                 ),
                 TextButton(
                   onPressed: () {
@@ -114,13 +106,8 @@ class _SignInState extends State<SignIn> {
                     );
                   },
                   child: const Text(
-                    'Регистрирай се',
-                    style: TextStyle(
-                      color: Color(0xFF2862B7),
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                      fontSize: 18,
-                    ),
+                    AppStrings.strRegisterNow,
+                    style: AppFontStyles.underlinedBold18DarkBlue,
                   ),
                 ),
               ],

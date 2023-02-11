@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/profile_ref.dart';
-import 'package:test_flutter_app/view/sign_in.dart';
+import 'package:test_flutter_app/constants/md_app_strings.dart';
+import 'package:test_flutter_app/screens/signin/view/sign_in.dart';
 
-import '../model/profile_model.dart';
-import '../widgets/widgets.dart';
+import '../../../constants/md_app_colors.dart';
+import '../../../constants/md_app_fontstyle.dart';
+import '../../../model/profile_model.dart';
+import '../../../widgets/widgets.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -49,21 +52,14 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Column(children: [
                     Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      shape: borderRadius(),
                       margin: const EdgeInsets.all(8),
                       child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        tileColor: Colors.white,
+                        shape: borderRadius(),
+                        tileColor: AppColors.mdWhiteColor,
                         title: Text(
                           '${userData.name}',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20),
+                          style: AppFontStyles.normal20Black,
                         ),
                         // trailing: GestureDetector(
                         //     onTap: () => Navigator.push(
@@ -84,21 +80,14 @@ class _ProfileState extends State<Profile> {
                       height: 10,
                     ),
                     Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      shape: borderRadius(),
                       margin: const EdgeInsets.all(8),
                       child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        tileColor: Colors.white,
+                        shape: borderRadius(),
+                        tileColor: AppColors.mdWhiteColor,
                         title: Text(
                           '${userData.surname}',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20),
+                          style: AppFontStyles.normal20Black,
                         ),
                         // trailing: GestureDetector(
                         //     onTap: () => Navigator.push(
@@ -119,21 +108,14 @@ class _ProfileState extends State<Profile> {
                       height: 10,
                     ),
                     Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      shape: borderRadius(),
                       margin: const EdgeInsets.all(8),
                       child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        tileColor: Colors.white,
+                        shape: borderRadius(),
+                        tileColor: AppColors.mdWhiteColor,
                         title: Text(
                           '${userData.email}',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20),
+                          style: AppFontStyles.normal20Black,
                         ),
                         // trailing: GestureDetector(
                         //     onTap: () => Navigator.push(
@@ -154,22 +136,13 @@ class _ProfileState extends State<Profile> {
                       height: 10,
                     ),
                     Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      shape: borderRadius(),
                       margin: const EdgeInsets.all(8),
                       child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        tileColor: Colors.white,
-                        title: Text(
-                          '${userData.phoneNumber}',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20),
-                        ),
+                        shape: borderRadius(),
+                        tileColor: AppColors.mdWhiteColor,
+                        title: Text('${userData.phoneNumber}',
+                            style: AppFontStyles.normal20Black),
                         // trailing: GestureDetector(
                         //     onTap: () => Navigator.push(
                         //           context,
@@ -188,8 +161,11 @@ class _ProfileState extends State<Profile> {
                     Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                        child: buttonWidget(context, 'Изход',
-                            const Color(0xFF2862B7), Colors.white, () {
+                        child: buttonWidget(
+                            context,
+                            AppStrings.strSignOut,
+                            AppColors.mdDarkBlueColor,
+                            AppColors.mdWhiteColor, () {
                           FirebaseAuth.instance.signOut().then((value) {
                             Navigator.push(
                               context,
@@ -213,15 +189,7 @@ class _ProfileState extends State<Profile> {
         children: [
           Image.asset("assets/images/profile_pic.png"),
           Stack(alignment: AlignmentDirectional.center, children: [
-            Container(
-              height: fullHeight(context) * .5,
-              decoration: const BoxDecoration(
-                color: Color(0xFFE4EFFF),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30)),
-              ),
-            ),
+            blueContainer(context),
             Wrap(children: [
               Container(
                 child: displayUserData(),

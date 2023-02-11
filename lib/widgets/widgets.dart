@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter_app/constants/md_app_strings.dart';
 
+import '../constants/md_app_colors.dart';
+import '../constants/md_app_fontstyle.dart';
 import '../model/medical_speciality_model.dart';
 
 Image pictureWidget(String name) {
@@ -18,16 +21,13 @@ TextField textFieldWidget(
     enableSuggestions: !isPasswordType,
     autocorrect: !isPasswordType,
     cursorColor: Colors.black,
-    style: const TextStyle(color: Colors.black),
+    style: const TextStyle(color: AppColors.mdBlackColor),
     decoration: InputDecoration(
       labelText: text,
-      labelStyle: const TextStyle(
-        color: Colors.black,
-        fontSize: 17,
-      ),
+      labelStyle: AppFontStyles.text17Black,
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      fillColor: const Color(0xFFE4EFFF),
+      fillColor: AppColors.mdLightBlueColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: const BorderSide(width: 0, style: BorderStyle.none),
@@ -42,17 +42,14 @@ TextField textFieldWidget(
 TextField numberFieldWidget(String text, TextEditingController controller) {
   return TextField(
     controller: controller,
-    cursorColor: Colors.black,
-    style: const TextStyle(color: Colors.black),
+    cursorColor: AppColors.mdBlackColor,
+    style: const TextStyle(color: AppColors.mdBlackColor),
     decoration: InputDecoration(
       labelText: text,
-      labelStyle: const TextStyle(
-        color: Colors.black,
-        fontSize: 17,
-      ),
+      labelStyle: AppFontStyles.text17Black,
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      fillColor: const Color(0xFFE4EFFF),
+      fillColor: AppColors.mdLightBlueColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: const BorderSide(width: 0, style: BorderStyle.none),
@@ -70,9 +67,7 @@ ElevatedButton buttonWidget(BuildContext context, String text, Color color,
     },
     style: ElevatedButton.styleFrom(
       backgroundColor: color,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: borderRadius(),
       minimumSize: const Size(328, 56),
     ),
     child: Text(
@@ -89,7 +84,7 @@ ElevatedButton buttonWidget(BuildContext context, String text, Color color,
 DropdownButton dropdownButtonMDSpec(
     List<MedicalSpecialityModel> specList, Function onChanged) {
   return DropdownButton(
-    value: const Text('Избери специалност...'),
+    value: const Text(AppStrings.strChooseSpeciality),
     onChanged: onChanged(),
     items: specList.map<DropdownMenuItem<String>>((spec) {
       return DropdownMenuItem<String>(
@@ -104,4 +99,34 @@ double fullWidth(BuildContext context) {
 
 double fullHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
+}
+
+RoundedRectangleBorder borderRadius() {
+  return const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+    Radius.circular(20),
+  ));
+}
+
+AppBar appBar(BuildContext context) {
+  return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: GestureDetector(
+        child: AppFontStyles.iconArrowBack,
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ));
+}
+
+Container blueContainer(BuildContext context) {
+  return Container(
+    height: fullHeight(context) * .5,
+    decoration: const BoxDecoration(
+      color: AppColors.mdLightBlueColor,
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+    ),
+  );
 }

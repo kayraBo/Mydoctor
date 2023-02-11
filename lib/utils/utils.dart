@@ -1,4 +1,4 @@
-const time_slot = {
+const timeSlot = {
   '7:00',
   '7:30',
   '8:00',

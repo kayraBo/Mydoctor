@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/view/sign_up_doctor.dart';
-import 'package:test_flutter_app/view/sign_up_user.dart';
+import 'package:test_flutter_app/constants/md_app_colors.dart';
+import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
+import 'package:test_flutter_app/constants/md_app_strings.dart';
+import 'package:test_flutter_app/screens/signup/view/sign_up_doctor.dart';
 
-import '../widgets/widgets.dart';
+import '../../../widgets/widgets.dart';
+import '../../signup/view/sign_up_user.dart';
 
 class ProfileType extends StatefulWidget {
   const ProfileType({super.key});
@@ -15,39 +18,24 @@ class _ProfileTypeState extends State<ProfileType> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(context),
       body: Column(
         children: <Widget>[
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.fromLTRB(20, 50, 0, 0),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
           Container(
               height: 182,
               width: 397,
               alignment: Alignment.bottomCenter,
               child: const Text(
-                'Регистрация',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35),
+                AppStrings.strRegistration,
+                style: AppFontStyles.bold35Black,
               )),
           Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
               child: const Text(
-                'Моля, изберете типа на профила, за който искате да се регистрирате',
+                AppStrings.strChooseProfileMessage,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18),
+                style: AppFontStyles.semiBold18Black,
               )),
           Container(
               height: 90,
@@ -62,20 +50,12 @@ class _ProfileTypeState extends State<ProfileType> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2862B7),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  backgroundColor: AppColors.mdDarkBlueColor,
+                  shape: borderRadius(),
                   minimumSize: const Size(328, 56),
                 ),
-                child: const Text(
-                  'Лекарски профил',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 22,
-                  ),
-                ),
+                child: const Text(AppStrings.strDoctorProfile,
+                    style: AppFontStyles.semiBold22White),
               )),
           Container(
               height: 70,
@@ -89,19 +69,13 @@ class _ProfileTypeState extends State<ProfileType> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2862B7),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  backgroundColor: AppColors.mdDarkBlueColor,
+                  shape: borderRadius(),
                   minimumSize: const Size(328, 56),
                 ),
                 child: const Text(
-                  'Потребителски профил',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 22,
-                  ),
+                  AppStrings.strPatientProfile,
+                  style: AppFontStyles.semiBold22White,
                 ),
               )),
           Container(

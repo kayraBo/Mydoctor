@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/medical_speciality_ref.dart';
+import 'package:test_flutter_app/constants/md_app_colors.dart';
+import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
+import 'package:test_flutter_app/constants/md_app_strings.dart';
 import 'package:test_flutter_app/model/medical_speciality_model.dart';
+import 'package:test_flutter_app/widgets/widgets.dart';
 
-import 'medical_specialities_doctors.dart';
+import '../../doctors_list/view/doctors_list.dart';
 
 class MedicalSpeciality extends StatefulWidget {
   const MedicalSpeciality({Key? key}) : super(key: key);
@@ -27,7 +31,7 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
             var specialities = snapshot.data as List<MedicalSpecialityModel>;
             if (specialities.isEmpty) {
               return const Center(
-                child: Text('Няма намерени медицински специалности'),
+                child: Text(AppStrings.strNoMedicalSpecialitiesFound),
               );
             } else {
               return ListView.builder(
@@ -46,21 +50,14 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                       );
                     },
                     child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      shape: borderRadius(),
                       margin: const EdgeInsets.all(8),
                       child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        tileColor: const Color(0xFFE4EFFF),
+                        shape: borderRadius(),
+                        tileColor: AppColors.mdLightBlueColor,
                         title: Text(
                           specialities[index].medicalSpeciality,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20),
+                          style: AppFontStyles.normal20Black,
                         ),
                       ),
                     ),
@@ -96,38 +93,32 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
             alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
             child: const Text(
-              'Категории',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35),
+              AppStrings.strMedicalSpecialities,
+              style: AppFontStyles.bold35Black,
             )),
         Container(
             height: 80,
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
             child: TextField(
                 controller: _searchController,
-                cursorColor: Colors.white,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                cursorColor: AppColors.mdWhiteColor,
+                style: const TextStyle(
+                    color: AppColors.mdWhiteColor, fontSize: 20),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(10.0),
                   prefixIcon: IconButton(
                     icon: const Icon(
                       Icons.search,
-                      color: Colors.white,
+                      color: AppColors.mdWhiteColor,
                     ),
                     onPressed: () {
                       serachList(inputText);
                     },
                   ),
-                  hintText: 'Търси...',
-                  hintStyle: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 20,
-                  ),
+                  hintText: AppStrings.strSearch,
+                  hintStyle: AppFontStyles.normal20White,
                   filled: true,
-                  fillColor: const Color(0xFF2862B7),
+                  fillColor: AppColors.mdDarkBlueColor,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide:

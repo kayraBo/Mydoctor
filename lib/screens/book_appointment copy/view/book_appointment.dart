@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:test_flutter_app/auth/state_management.dart';
-import 'package:test_flutter_app/utils/utils.dart';
+import 'package:test_flutter_app/constants/md_app_colors.dart';
+import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
+
+import '../../../constants/md_app_strings.dart';
+import '../../../widgets/widgets.dart';
 
 class Appointment extends StatefulWidget {
   const Appointment({
@@ -22,16 +24,16 @@ class _AppointmentState extends State<Appointment> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Запиши час',
+          AppStrings.strBookAppointment,
           style: TextStyle(
-            color: Colors.black,
+            color: AppColors.mdBlackColor,
           ),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: GestureDetector(
-          child: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          child: AppFontStyles.iconArrowBack,
           onTap: () {
             Navigator.pop(context);
           },
@@ -45,52 +47,33 @@ class _AppointmentState extends State<Appointment> {
     return Column(
       children: [
         Card(
-          color: const Color(0xFFE4EFFF),
+          color: AppColors.mdLightBlueColor,
           margin: const EdgeInsets.all(20),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20),
-            ),
-          ),
+          shape: borderRadius(),
           child: TableCalendar(
             // locale: "bg",
             headerStyle: const HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
-              titleTextStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500),
-              leftChevronIcon: Icon(
-                Icons.chevron_left,
-                color: Colors.black,
-                size: 28,
-              ),
-              rightChevronIcon: Icon(
-                Icons.chevron_right,
-                color: Colors.black,
-                size: 28,
-              ),
+              titleTextStyle: AppFontStyles.semiBold19Black,
+              leftChevronIcon: AppFontStyles.iconLeftrrow,
+              rightChevronIcon: AppFontStyles.iconRightArrow,
             ),
 
             calendarStyle: const CalendarStyle(
-              defaultTextStyle: TextStyle(
-                fontSize: 17,
-              ),
-              weekendTextStyle: TextStyle(
-                fontSize: 17,
-              ),
+              defaultTextStyle: AppFontStyles.textSize17,
+              weekendTextStyle: AppFontStyles.textSize17,
               todayTextStyle: TextStyle(
-                color: Color(0xFF2862B7),
+                color: AppColors.mdDarkBlueColor,
                 fontSize: 17,
                 fontWeight: FontWeight.w800,
               ),
               todayDecoration: BoxDecoration(
-                color: Color(0xFFE4EFFF),
+                color: AppColors.mdLightBlueColor,
                 shape: BoxShape.circle,
               ),
               selectedDecoration: BoxDecoration(
-                color: Color(0xFF2862B7),
+                color: AppColors.mdDarkBlueColor,
                 shape: BoxShape.circle,
               ),
             ),
@@ -106,7 +89,7 @@ class _AppointmentState extends State<Appointment> {
         ),
         // Expanded(
         //     child: GridView.builder(
-        //         itemCount: time_slot.length,
+        //         itemCount: timeSlot.length,
         //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         //             crossAxisCount: 3),
         //         itemBuilder: ((context, index) => GestureDetector(
