@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/view/home.dart';
-import 'package:test_flutter_app/view/profile.dart';
-import 'medical_speciality.dart';
+import 'package:test_flutter_app/screens/home/view/home.dart';
+import 'package:test_flutter_app/screens/profile/view/profile.dart';
+import '../screens/medical_speciality/view/medical_speciality.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});

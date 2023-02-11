@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../model/appointment_model.dart';
-import '../model/profile_model.dart';
 
 Future<List<AppointmentModel>> getAppointments(String uid) async {
   var patientId;
@@ -26,14 +25,18 @@ Future<List<AppointmentModel>> getAppointments(String uid) async {
   return appointments;
 }
 
-// Future<List<AppointmentModel>> getAppointments() async {
+// Future<List<AppointmentModel>> getAppointments1() async {
 //   String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
 //   var appointments = List<AppointmentModel>.empty(growable: true);
 //   var appointmentsRef = FirebaseFirestore.instance
 //       .collection('Appointments')
 //       .where('PatiendId', isEqualTo: currentUserUid)
 //       .get()
-//       .then();
+//       .then((value) => for(appointment in value.appointments){
+//             appointments.add(AppointmentModel.fromJson(appointment))
+//         }
+//       );
+
   
 //   return appointments;
 // }
