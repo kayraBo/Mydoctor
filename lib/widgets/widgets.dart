@@ -39,6 +39,29 @@ TextField textFieldWidget(
   );
 }
 
+TextField multiLineTextWidget(String text, TextEditingController controller) {
+  return TextField(
+    controller: controller,
+    enableSuggestions: true,
+    autocorrect: true,
+    cursorColor: Colors.black,
+    keyboardType: TextInputType.multiline,
+    maxLines: null,
+    style: const TextStyle(color: AppColors.mdBlackColor),
+    decoration: InputDecoration(
+      labelText: text,
+      labelStyle: AppFontStyles.text17Black,
+      filled: true,
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      fillColor: AppColors.mdLightBlueColor,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+      ),
+    ),
+  );
+}
+
 TextField numberFieldWidget(String text, TextEditingController controller) {
   return TextField(
     controller: controller,

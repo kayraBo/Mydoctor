@@ -56,6 +56,9 @@ class _DocInfoState extends State<DocInfo> {
                 //   '${specialityName.medicalSpeciality}',
                 //   style: AppFontStyles.normal20Black,
                 // ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Text(
                   '${docDesc.hospital}',
                   style: AppFontStyles.normal19Black,
@@ -95,7 +98,7 @@ class _DocInfoState extends State<DocInfo> {
             Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: 20.0),
                   child: Image.asset(AppAssets.mdProfilePicture),
                 ),
                 Padding(
@@ -120,7 +123,7 @@ class _DocInfoState extends State<DocInfo> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.mdDarkBlueColor,
                         shape: borderRadius(),
-                        minimumSize: const Size(328, 56),
+                        minimumSize: const Size(300, 56),
                       ),
                       child: const Text(
                         AppStrings.strBookAppointment,
@@ -139,11 +142,20 @@ class _DocInfoState extends State<DocInfo> {
               ),
               child: Column(
                 children: [
-                  const Text(
-                    AppStrings.strMoreInformation,
-                    style: AppFontStyles.semiBold20Black,
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
+                      child: Text(
+                        AppStrings.strMoreInformation,
+                        style: AppFontStyles.semiBold20Black,
+                      ),
+                    ),
                   ),
-                  displayDoctorDesc()
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: displayDoctorDesc(),
+                  )
                 ],
               ),
             ),

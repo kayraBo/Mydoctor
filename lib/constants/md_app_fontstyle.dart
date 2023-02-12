@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'md_app_colors.dart';
 
 class AppFontStyles {
+  static const bold16DarkBlue = TextStyle(
+    color: AppColors.mdDarkBlueColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w800,
+  );
+
   static const text17Black = TextStyle(
     color: AppColors.mdBlackColor,
     fontSize: 17,

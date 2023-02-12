@@ -4,6 +4,7 @@ import 'package:test_flutter_app/constants/md_app_colors.dart';
 import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
 
 import '../../../constants/md_app_strings.dart';
+import '../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 
 class Appointment extends StatefulWidget {
@@ -17,6 +18,13 @@ class Appointment extends StatefulWidget {
 
 class _AppointmentState extends State<Appointment> {
   DateTime today = DateTime.now();
+  final _descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    _descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,79 +47,122 @@ class _AppointmentState extends State<Appointment> {
           },
         ),
       ),
-      body: calendar(),
-    );
-  }
+      body: Container(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Card(
+                    color: AppColors.mdLightBlueColor,
+                    margin: const EdgeInsets.all(20),
+                    shape: borderRadius(),
+                    child: TableCalendar(
+                      // locale: "bg",
+                      headerStyle: const HeaderStyle(
+                        formatButtonVisible: false,
+                        titleCentered: true,
+                        titleTextStyle: AppFontStyles.semiBold19Black,
+                        leftChevronIcon: AppFontStyles.iconLeftrrow,
+                        rightChevronIcon: AppFontStyles.iconRightArrow,
+                      ),
 
-  Widget calendar() {
-    return Column(
-      children: [
-        Card(
-          color: AppColors.mdLightBlueColor,
-          margin: const EdgeInsets.all(20),
-          shape: borderRadius(),
-          child: TableCalendar(
-            // locale: "bg",
-            headerStyle: const HeaderStyle(
-              formatButtonVisible: false,
-              titleCentered: true,
-              titleTextStyle: AppFontStyles.semiBold19Black,
-              leftChevronIcon: AppFontStyles.iconLeftrrow,
-              rightChevronIcon: AppFontStyles.iconRightArrow,
+                      calendarStyle: const CalendarStyle(
+                        defaultTextStyle: AppFontStyles.textSize17,
+                        weekendTextStyle: AppFontStyles.textSize17,
+                        todayTextStyle: AppFontStyles.bold16DarkBlue,
+                        todayDecoration: BoxDecoration(
+                          color: AppColors.mdLightBlueColor,
+                          shape: BoxShape.circle,
+                        ),
+                        selectedDecoration: BoxDecoration(
+                          color: AppColors.mdDarkBlueColor,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+
+                      availableGestures: AvailableGestures.all,
+                      selectedDayPredicate: ((day) => isSameDay(day, today)),
+                      startingDayOfWeek: StartingDayOfWeek.monday,
+                      focusedDay: today,
+                      firstDay: DateTime.utc(2022, 01),
+                      lastDay: DateTime.utc(2040, 12),
+                      onDaySelected: _onDaySelected,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(20, 20, 0, 10),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        AppStrings.strAvailableHours,
+                        style: AppFontStyles.semBold17Black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-
-            calendarStyle: const CalendarStyle(
-              defaultTextStyle: AppFontStyles.textSize17,
-              weekendTextStyle: AppFontStyles.textSize17,
-              todayTextStyle: TextStyle(
-                color: AppColors.mdDarkBlueColor,
-                fontSize: 17,
-                fontWeight: FontWeight.w800,
-              ),
-              todayDecoration: BoxDecoration(
-                color: AppColors.mdLightBlueColor,
-                shape: BoxShape.circle,
-              ),
-              selectedDecoration: BoxDecoration(
-                color: AppColors.mdDarkBlueColor,
-                shape: BoxShape.circle,
+            SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, childAspectRatio: (1 / .4)),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return GestureDetector(
+                    onTap: (() {
+                      // context.read(selectedTime).state =
+                      //     time_slot.elementAt(index);
+                    }),
+                    child: Card(
+                        color: AppColors.mdLightBlueColor,
+                        shape: borderRadius(),
+                        margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: GridTile(
+                          child: Center(
+                            child: Text(timeSlot.elementAt(index),
+                                style: AppFontStyles.normal17Black),
+                          ),
+                        )),
+                  );
+                },
+                childCount: timeSlot.length,
               ),
             ),
-
-            availableGestures: AvailableGestures.all,
-            selectedDayPredicate: ((day) => isSameDay(day, today)),
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            focusedDay: today,
-            firstDay: DateTime.utc(2022, 01),
-            lastDay: DateTime.utc(2040, 12),
-            onDaySelected: _onDaySelected,
-          ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    child: multiLineTextWidget(
+                        AppStrings.strDescription, _descriptionController),
+                  ),
+                  Container(
+                      height: 70,
+                      width: 397,
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => const Appointment()),
+                          // );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.mdDarkBlueColor,
+                          shape: borderRadius(),
+                          minimumSize: const Size(328, 56),
+                        ),
+                        child: const Text(
+                          AppStrings.strBookAppointment,
+                          style: AppFontStyles.semiBold22White,
+                        ),
+                      ))
+                ],
+              ),
+            ),
+          ],
         ),
-        // Expanded(
-        //     child: GridView.builder(
-        //         itemCount: timeSlot.length,
-        //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //             crossAxisCount: 3),
-        //         itemBuilder: ((context, index) => GestureDetector(
-        //               onTap: (() {
-        //                 context.read(selectedTime).state =
-        //                     time_slot.elementAt(index);
-        //               }),
-        //               child: Card(
-        //                   color: context.read(selectedTime).state ==
-        //                           time_slot.elementAt(index)
-        //                       ? const Color(0xFF2862B7)
-        //                       : Colors.white,
-        //                   shape: RoundedRectangleBorder(
-        //                       borderRadius: BorderRadius.circular(20)),
-        //                   margin: const EdgeInsets.all(10),
-        //                   child: GridTile(
-        //                     child: Center(
-        //                       child: Text(time_slot.elementAt(index)),
-        //                     ),
-        //                   )),
-        //             ))))
-      ],
+      ),
     );
   }
 
@@ -120,10 +171,4 @@ class _AppointmentState extends State<Appointment> {
       today = day;
     });
   }
-
-  // final selectedDay = useState(DateTime.now());
-
-  // void _onDaySelected(DateTime day, DateTime focusedDay) {
-  //   selectedDay.value = day;
-  // }
 }
