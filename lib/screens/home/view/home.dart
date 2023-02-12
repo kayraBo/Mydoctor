@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   displayDoctors() {
     return FutureBuilder(
-        future: getAppointments("WR6KgQ8TeeZqQWT6HIsm"),
+        future: getAppointments(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
