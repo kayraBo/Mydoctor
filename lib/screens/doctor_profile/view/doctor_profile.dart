@@ -7,7 +7,7 @@ import '../../../constants/md_app_colors.dart';
 import '../../../constants/md_app_strings.dart';
 import '../../../model/profile_model.dart';
 import '../../../widgets/widgets.dart';
-import '../../book_appointment copy/view/book_appointment.dart';
+import '../../book_appointment/view/book_appointment.dart';
 
 class DocInfo extends StatefulWidget {
   final String uidDoc;
