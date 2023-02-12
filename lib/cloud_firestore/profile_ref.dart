@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../model/profile_model.dart';
+import 'medical_speciality_ref.dart';
 
 Future<ProfileModel> getPatientData(String uid) async {
   var snapshot =
@@ -57,6 +58,8 @@ Future<List<ProfileModel>> getDoctorsBySpectialityCode(int msCode) async {
   if (doctorsList.isNotEmpty) {
     for (ProfileModel doctor in doctorsList) {
       if (doctor.medicalSpeciality == msCode) {
+        doctor.medicalSpecialityName =
+            await getMedSpecialityByCode(doctor.medicalSpeciality);
         filteredDoctorsList.add(doctor);
       }
     }
