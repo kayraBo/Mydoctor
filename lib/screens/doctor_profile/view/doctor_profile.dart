@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
 
 import '../../../cloud_firestore/profile_ref.dart';
+import '../../../constants/md_app_assets.dart';
 import '../../../constants/md_app_colors.dart';
 import '../../../constants/md_app_strings.dart';
 import '../../../model/profile_model.dart';
@@ -88,67 +89,64 @@ class _DocInfoState extends State<DocInfo> {
     return Scaffold(
       appBar: appBar(context),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Image.asset("assets/images/profile_pic.png"),
-            Wrap(children: [
-              Container(
-                alignment: Alignment.center,
-                child: displayDocInfo(),
-              )
-            ]),
-            Stack(children: <Widget>[
-              DraggableScrollableSheet(builder: (context, scrollController) {
-                return Container(
-                  height: fullHeight(context) * .5,
-                  decoration: const BoxDecoration(
-                    color: AppColors.mdLightBlueColor,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Image.asset(AppAssets.mdProfilePicture),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: displayDocInfo(),
                   ),
-                  child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      controller: scrollController,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text(
-                            AppStrings.strMoreInformation,
-                            style: AppFontStyles.semiBold20Black,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: displayDoctorDesc(),
-                          ),
-                          Container(
-                              height: 70,
-                              width: 397,
-                              alignment: Alignment.center,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Appointment()),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.mdDarkBlueColor,
-                                  shape: borderRadius(),
-                                  minimumSize: const Size(328, 56),
-                                ),
-                                child: const Text(
-                                  AppStrings.strBookAppointment,
-                                  style: AppFontStyles.semiBold22White,
-                                ),
-                              )),
-                        ],
-                      )),
-                );
-              }),
-            ]),
+                ),
+                Container(
+                    height: 70,
+                    width: 397,
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Appointment()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.mdDarkBlueColor,
+                        shape: borderRadius(),
+                        minimumSize: const Size(328, 56),
+                      ),
+                      child: const Text(
+                        AppStrings.strBookAppointment,
+                        style: AppFontStyles.semiBold22White,
+                      ),
+                    ))
+              ],
+            ),
+            Container(
+              height: fullHeight(context) * .5,
+              decoration: const BoxDecoration(
+                color: AppColors.mdLightBlueColor,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)),
+              ),
+              child: Column(
+                children: [
+                  const Text(
+                    AppStrings.strMoreInformation,
+                    style: AppFontStyles.semiBold20Black,
+                  ),
+                  displayDoctorDesc()
+                ],
+              ),
+            ),
           ],
         ),
       ),
