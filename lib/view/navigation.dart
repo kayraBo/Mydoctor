@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/screens/home/view/home.dart';
 import 'package:test_flutter_app/screens/profile/view/profile.dart';
+import '../constants/md_app_assets.dart';
 import '../screens/medical_speciality/view/medical_speciality.dart';
 
 class Navigation extends StatefulWidget {
@@ -41,21 +42,21 @@ class _NavigationState extends State<Navigation> {
           destinations: [
             NavigationDestination(
                 icon: Image.asset(
-                  'assets/icons/medical.png',
+                  AppAssets.mdNavBarMedicalIcon,
                   width: 30,
                   height: 30,
                 ),
                 label: 'Прегледи'),
             NavigationDestination(
                 icon: Image.asset(
-                  'assets/icons/doctor.png',
+                  AppAssets.mdNavBarDoctorIcon,
                   width: 30,
                   height: 30,
                 ),
                 label: 'Лекари'),
             NavigationDestination(
                 icon: Image.asset(
-                  'assets/icons/profile.png',
+                  AppAssets.mdNavBarProfileIcon,
                   width: 25,
                   height: 25,
                 ),

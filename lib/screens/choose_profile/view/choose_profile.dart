@@ -4,6 +4,7 @@ import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
 import 'package:test_flutter_app/screens/signup/view/sign_up_doctor.dart';
 
+import '../../../constants/md_app_assets.dart';
 import '../../../widgets/widgets.dart';
 import '../../signup/view/sign_up_user.dart';
 
@@ -83,7 +84,7 @@ class _ProfileTypeState extends State<ProfileType> {
             width: 397,
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.fromLTRB(5, 40, 20, 0),
-            child: pictureWidget("assets/images/Doctors.png"),
+            child: pictureWidget(AppAssets.mdSignInDoctorPicture),
           ),
         ],
       ),

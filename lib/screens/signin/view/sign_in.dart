@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter_app/constants/md_app_assets.dart';
 import 'package:test_flutter_app/constants/md_app_colors.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
 import 'package:test_flutter_app/screens/choose_profile/view/choose_profile.dart';
@@ -114,7 +115,7 @@ class _SignInState extends State<SignIn> {
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 40, 15, 0),
-              child: pictureWidget("assets/images/Doctors.png"),
+              child: pictureWidget(AppAssets.mdSignInDoctorPicture),
             ),
           ],
         )))));

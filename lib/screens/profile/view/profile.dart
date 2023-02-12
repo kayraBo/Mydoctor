@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/cloud_firestore/profile_ref.dart';
+import 'package:test_flutter_app/constants/md_app_assets.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
 import 'package:test_flutter_app/screens/signin/view/sign_in.dart';
 
@@ -187,7 +188,7 @@ class _ProfileState extends State<Profile> {
     return SafeArea(
       child: Column(
         children: [
-          Image.asset("assets/images/profile_pic.png"),
+          Image.asset(AppAssets.mdProfilePicture),
           Stack(alignment: AlignmentDirectional.center, children: [
             blueContainer(context),
             Wrap(children: [

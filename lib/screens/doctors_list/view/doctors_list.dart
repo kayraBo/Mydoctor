@@ -5,6 +5,7 @@ import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
 import 'package:test_flutter_app/widgets/widgets.dart';
 import '../../../cloud_firestore/profile_ref.dart';
+import '../../../constants/md_app_assets.dart';
 import '../../../model/profile_model.dart';
 import '../../doctor_profile/view/doctor_profile.dart';
 
@@ -74,7 +75,7 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      "assets/images/profile_pic.png",
+                                      AppAssets.mdProfilePicture,
                                       height: 80,
                                     ),
                                     Column(
