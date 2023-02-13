@@ -188,18 +188,29 @@ class _ProfileState extends State<Profile> {
     return SafeArea(
       child: Column(
         children: [
+          const Spacer(),
           Image.asset(AppAssets.mdProfilePicture),
+          const Spacer(),
           Stack(alignment: AlignmentDirectional.center, children: [
-            blueContainer(context),
-            Wrap(children: [
-              Container(
-                child: displayUserData(),
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              )
-            ]),
+            Container(
+              height: fullHeight(context) * .5,
+              decoration: const BoxDecoration(
+                color: AppColors.mdLightBlueColor,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)),
+              ),
+              child: Wrap(children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+                  child: displayUserData(),
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                )
+              ]),
+            ),
           ]),
         ],
       ),
