@@ -5,6 +5,7 @@ import 'package:test_flutter_app/constants/md_app_strings.dart';
 import '../../../cloud_firestore/appointment_ref.dart';
 import '../../../constants/md_app_fontstyle.dart';
 import '../../../model/appointment_model.dart';
+import '../../../model/profile_model.dart';
 import '../../../widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -25,6 +26,7 @@ class _HomeState extends State<Home> {
             );
           } else {
             var doctorData = snapshot.data as List<AppointmentModel>;
+
             if (doctorData.isEmpty) {
               return const Center(
                 child: Text(AppStrings.strNoUpcomingAppointments),

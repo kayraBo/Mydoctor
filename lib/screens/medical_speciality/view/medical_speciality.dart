@@ -85,59 +85,66 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(children: <Widget>[
-        Container(
-            height: 150,
-            width: 397,
-            alignment: Alignment.bottomLeft,
-            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-            child: const Text(
-              AppStrings.strMedicalSpecialities,
-              style: AppFontStyles.bold35Black,
-            )),
-        Container(
-            height: 80,
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-            child: TextField(
-                controller: _searchController,
-                cursorColor: AppColors.mdWhiteColor,
-                style: const TextStyle(
-                    color: AppColors.mdWhiteColor, fontSize: 20),
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10.0),
-                  prefixIcon: IconButton(
-                    icon: const Icon(
-                      Icons.search,
-                      color: AppColors.mdWhiteColor,
-                    ),
-                    onPressed: () {
-                      serachList(inputText);
-                    },
-                  ),
-                  hintText: AppStrings.strSearch,
-                  hintStyle: AppFontStyles.normal20White,
-                  filled: true,
-                  fillColor: AppColors.mdDarkBlueColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide:
-                        const BorderSide(width: 0, style: BorderStyle.none),
-                  ),
-                ),
-                keyboardType: TextInputType.text,
-                onChanged: (search) {
-                  serachList(search);
-                })),
-        Expanded(
-            child: Container(
-          child: displayMedicalSpecialities(),
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(children: <Widget>[
+          // const Spacer(),
+          const SizedBox(
+            height: 50,
           ),
-        ))
-      ]),
+          Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: const Text(
+                AppStrings.strMedicalSpecialities,
+                style: AppFontStyles.bold35Black,
+              )),
+          Container(
+              height: 80,
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+              child: TextField(
+                  controller: _searchController,
+                  cursorColor: AppColors.mdWhiteColor,
+                  style: const TextStyle(
+                      color: AppColors.mdWhiteColor, fontSize: 20),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(10.0),
+                    prefixIcon: IconButton(
+                      icon: const Icon(
+                        Icons.search,
+                        color: AppColors.mdWhiteColor,
+                      ),
+                      onPressed: () {
+                        serachList(inputText);
+                      },
+                    ),
+                    hintText: AppStrings.strSearch,
+                    hintStyle: AppFontStyles.normal20White,
+                    filled: true,
+                    fillColor: AppColors.mdDarkBlueColor,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide:
+                          const BorderSide(width: 0, style: BorderStyle.none),
+                    ),
+                  ),
+                  keyboardType: TextInputType.text,
+                  onChanged: (search) {
+                    serachList(search);
+                  })),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+              child: Container(
+            child: displayMedicalSpecialities(),
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ))
+        ]),
+      ),
     );
   }
 }

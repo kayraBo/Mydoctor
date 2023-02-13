@@ -56,8 +56,8 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    DocInfo(uidDoc: profileID)),
+                                builder: (context) => DocInfo(
+                                    uidDoc: profileID, msCode: widget.msCode)),
                           );
                         },
                         child: Card(
@@ -80,31 +80,32 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                                       height: 80,
                                     ),
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '${profile.degree}',
-                                                style: AppFontStyles
-                                                    .semiBold19Black,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text('${profile.name}',
-                                                  style: AppFontStyles
-                                                      .semiBold19Black),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                '${profile.surname}',
-                                                style: AppFontStyles
-                                                    .semiBold19Black,
-                                              ),
-                                            ]),
+                                        Row(children: [
+                                          Text(
+                                            '${profile.degree}',
+                                            style:
+                                                AppFontStyles.semiBold19Black,
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text('${profile.name}',
+                                              style: AppFontStyles
+                                                  .semiBold19Black),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            '${profile.surname}',
+                                            style:
+                                                AppFontStyles.semiBold19Black,
+                                          ),
+                                        ]),
                                         Text(
                                           '${profile.medicalSpecialityName}',
                                           style: AppFontStyles.normal17Black,

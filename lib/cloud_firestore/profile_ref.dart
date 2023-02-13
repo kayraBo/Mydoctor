@@ -14,13 +14,14 @@ Future<ProfileModel> getPatientData(String uid) async {
   }
 }
 
-Future<ProfileModel> getDocInfo(String uid) async {
+Future<ProfileModel> getDocInfo(String uid, int msCode) async {
   var snapshot =
       await FirebaseFirestore.instance.collection('Doctors').doc(uid).get();
 
   if (snapshot.exists) {
     var profileModel = ProfileModel.fromJson(snapshot.data()!);
     profileModel.id = snapshot.id;
+    profileModel.medicalSpecialityName = await getMedSpecialityByCode(msCode);
     return profileModel;
   } else {
     return ProfileModel();

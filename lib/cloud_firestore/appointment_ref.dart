@@ -19,3 +19,20 @@ Future<List<AppointmentModel>> getAppointments() async {
 
   return appointments;
 }
+
+Future<List<AppointmentModel>> getDoctorAppointments() async {
+  var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
+  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+  late List<AppointmentModel> appointments =
+      List<AppointmentModel>.empty(growable: true);
+
+  var snapshot = await appointmentsRef.get();
+  for (var element in snapshot.docs) {
+    AppointmentModel appointment = AppointmentModel.fromJson(element.data());
+    if (currentUserUid == appointment.doctorId) {
+      appointments.add(appointment);
+    }
+  }
+
+  return appointments;
+}
