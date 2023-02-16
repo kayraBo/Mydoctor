@@ -5,6 +5,7 @@ import 'package:test_flutter_app/constants/md_app_strings.dart';
 import '../../../cloud_firestore/appointment_ref.dart';
 import '../../../constants/md_app_fontstyle.dart';
 import '../../../model/appointment_model.dart';
+import '../../../model/profile_model.dart';
 import '../../../widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -17,7 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   displayDoctors() {
     return FutureBuilder(
-        future: getAppointments("WR6KgQ8TeeZqQWT6HIsm"),
+        future: getAppointments(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -25,6 +26,7 @@ class _HomeState extends State<Home> {
             );
           } else {
             var doctorData = snapshot.data as List<AppointmentModel>;
+
             if (doctorData.isEmpty) {
               return const Center(
                 child: Text(AppStrings.strNoUpcomingAppointments),

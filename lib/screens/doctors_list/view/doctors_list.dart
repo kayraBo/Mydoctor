@@ -44,9 +44,10 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
               return ListView.builder(
                   itemCount: doctorData.length,
                   itemBuilder: (context, index) {
+                    ProfileModel profile = doctorData[index];
+
                     return GestureDetector(
                         onTap: () {
-                          ProfileModel profile = doctorData[index];
                           String profileID = '';
                           if (profile.id != null) {
                             profileID = profile.id!;
@@ -55,8 +56,8 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    DocInfo(uidDoc: profileID)),
+                                builder: (context) => DocInfo(
+                                    uidDoc: profileID, msCode: widget.msCode)),
                           );
                         },
                         child: Card(
@@ -79,33 +80,34 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                                       height: 80,
                                     ),
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '${doctorData[index].degree}',
-                                                style: AppFontStyles
-                                                    .semiBold19Black,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text('${doctorData[index].name}',
-                                                  style: AppFontStyles
-                                                      .semiBold19Black),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                '${doctorData[index].surname}',
-                                                style: AppFontStyles
-                                                    .semiBold19Black,
-                                              ),
-                                            ]),
+                                        Row(children: [
+                                          Text(
+                                            '${profile.degree}',
+                                            style:
+                                                AppFontStyles.semiBold19Black,
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text('${profile.name}',
+                                              style: AppFontStyles
+                                                  .semiBold19Black),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            '${profile.surname}',
+                                            style:
+                                                AppFontStyles.semiBold19Black,
+                                          ),
+                                        ]),
                                         Text(
-                                          '${doctorData[index].medicalSpeciality}',
+                                          '${profile.medicalSpecialityName}',
                                           style: AppFontStyles.normal17Black,
                                         ),
                                         Text('${doctorData[index].hospital}',

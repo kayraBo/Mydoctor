@@ -3,40 +3,36 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../model/appointment_model.dart';
 
-Future<List<AppointmentModel>> getAppointments(String uid) async {
-  var patientId;
+Future<List<AppointmentModel>> getAppointments() async {
   var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
-  appointmentsRef.doc(uid).snapshots().listen((docSnapshot) {
-    if (docSnapshot.exists) {
-      Map<String, dynamic> data = docSnapshot.data()!;
-      patientId = data['PatientId'];
-    }
-  });
-
-  var appointments = List<AppointmentModel>.empty(growable: true);
   String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+  late List<AppointmentModel> appointments =
+      List<AppointmentModel>.empty(growable: true);
+
   var snapshot = await appointmentsRef.get();
   for (var element in snapshot.docs) {
-    if (currentUserUid == patientId) {
-      appointments.add(AppointmentModel.fromJson(element.data()));
+    AppointmentModel appointment = AppointmentModel.fromJson(element.data());
+    if (currentUserUid == appointment.patientId) {
+      appointments.add(appointment);
     }
   }
 
   return appointments;
 }
 
-// Future<List<AppointmentModel>> getAppointments1() async {
-//   String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
-//   var appointments = List<AppointmentModel>.empty(growable: true);
-//   var appointmentsRef = FirebaseFirestore.instance
-//       .collection('Appointments')
-//       .where('PatiendId', isEqualTo: currentUserUid)
-//       .get()
-//       .then((value) => for(appointment in value.appointments){
-//             appointments.add(AppointmentModel.fromJson(appointment))
-//         }
-//       );
+Future<List<AppointmentModel>> getDoctorAppointments() async {
+  var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
+  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+  late List<AppointmentModel> appointments =
+      List<AppointmentModel>.empty(growable: true);
 
-  
-//   return appointments;
-// }
+  var snapshot = await appointmentsRef.get();
+  for (var element in snapshot.docs) {
+    AppointmentModel appointment = AppointmentModel.fromJson(element.data());
+    if (currentUserUid == appointment.doctorId) {
+      appointments.add(appointment);
+    }
+  }
+
+  return appointments;
+}
