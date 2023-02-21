@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:test_flutter_app/cloud_firestore/appointment_ref.dart';
 import 'package:test_flutter_app/constants/md_app_colors.dart';
 import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
 
@@ -8,15 +10,19 @@ import '../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 
 class Appointment extends StatefulWidget {
-  const Appointment({
-    Key? key,
-  }) : super(key: key);
+  final String doctorId;
+
+  const Appointment({Key? key, required this.doctorId}) : super(key: key);
 
   @override
   State<Appointment> createState() => _AppointmentState();
 }
 
 class _AppointmentState extends State<Appointment> {
+  late String appDate;
+  late String appTime;
+  late String appNote;
+
   DateTime today = DateTime.now();
   final _descriptionController = TextEditingController();
 
@@ -109,8 +115,7 @@ class _AppointmentState extends State<Appointment> {
               (context, index) {
                 return GestureDetector(
                   onTap: (() {
-                    // context.read(selectedTime).state =
-                    //     time_slot.elementAt(index);
+                    appTime = timeSlot.elementAt(index);
                   }),
                   child: Card(
                       color: AppColors.mdLightBlueColor,
@@ -141,10 +146,9 @@ class _AppointmentState extends State<Appointment> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => const Appointment()),
-                        // );
+                        setAppointment(appDate, appTime,
+                            _descriptionController.text, widget.doctorId);
+                        Navigator.pop(context, true);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.mdDarkBlueColor,
@@ -167,6 +171,7 @@ class _AppointmentState extends State<Appointment> {
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
+      appDate = DateFormat('dd/MM/yyyy').format(day);
     });
   }
 }

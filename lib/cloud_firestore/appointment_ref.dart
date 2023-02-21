@@ -36,3 +36,24 @@ Future<List<AppointmentModel>> getDoctorAppointments() async {
 
   return appointments;
 }
+
+Future<String> setAppointment(
+    String appDate, String appTime, String appNote, String doctorId) async {
+  var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
+  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+  AppointmentModel newAppointment = AppointmentModel(
+      appointmentDate: appDate,
+      appointmentId: '',
+      appointmentTime: appTime,
+      doctorId: doctorId,
+      notes: appNote,
+      patientId: currentUserUid);
+
+  var documentSnapshot = await appointmentsRef.add(newAppointment.toJson());
+  var appId = documentSnapshot.id;
+
+  appointmentsRef.doc(appId).update({"AppointmentId": appId});
+
+  return appId;
+}
