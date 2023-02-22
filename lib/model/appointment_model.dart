@@ -5,6 +5,11 @@ class AppointmentModel {
   late String doctorId;
   late String notes;
   late String patientId;
+  String? userName;
+  String? userSurname;
+  String? doctorDegree;
+  String? doctorMedSpeciality;
+  String? doctorHospital;
 
   AppointmentModel(
       {required this.appointmentDate,
