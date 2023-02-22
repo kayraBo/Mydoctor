@@ -161,14 +161,15 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
       body: Column(children: <Widget>[
         Container(
             height: 80,
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+            padding: const EdgeInsets.fromLTRB(12, 20, 12, 10),
             child: TextField(
                 controller: _searchController,
                 cursorColor: AppColors.mdWhiteColor,
-                style: AppFontStyles.normal20White,
+                style: const TextStyle(
+                    color: AppColors.mdWhiteColor, fontSize: 20),
                 decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10.0),
-                  prefixIcon: IconButton(
+                  contentPadding: const EdgeInsets.only(left: 20),
+                  suffixIcon: IconButton(
                     icon: const Icon(
                       Icons.search,
                       color: AppColors.mdWhiteColor,

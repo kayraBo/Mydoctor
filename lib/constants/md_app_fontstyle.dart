@@ -89,6 +89,9 @@ class AppFontStyles {
   static const bold35Black = TextStyle(
       color: AppColors.mdBlackColor, fontWeight: FontWeight.bold, fontSize: 35);
 
+  static const bold30Black = TextStyle(
+      color: AppColors.mdBlackColor, fontWeight: FontWeight.bold, fontSize: 30);
+
   static const iconArrowBack =
       Icon(Icons.arrow_back_ios, color: AppColors.mdBlackColor);
 

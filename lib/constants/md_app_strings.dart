@@ -1,5 +1,5 @@
 class AppStrings {
-  static const String strWelcomeMessage = 'Добре дошли в Mydoctor';
+  static const String strWelcomeMessage = 'Добре дошли в \nMyDoctor';
   static const String strUpcomingAppointmnets = 'Предстоящи прегледи';
   static const String strMedicalSpecialities = 'Категории';
   static const String strSearch = 'Търси...';
@@ -42,4 +42,5 @@ class AppStrings {
   static const String strChooseSpeciality = 'Избери специалност...';
   static const String strAvailableHours = 'Свободни часове';
   static const String strCancel = 'Отмяна';
+  static const String strMessageHome = 'Намерете точния\nспециалист';
 }

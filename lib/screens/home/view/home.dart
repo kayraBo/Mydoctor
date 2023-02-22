@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -90,9 +90,15 @@ class _HomeState extends State<Home> {
                                             ),
                                           ],
                                         ),
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
                                         Text(
                                           '${doctorData[index].doctorMedSpeciality}',
                                           style: AppFontStyles.semiBold15Black,
+                                        ),
+                                        const SizedBox(
+                                          height: 3,
                                         ),
                                         Text(
                                           '${doctorData[index].doctorHospital}',
@@ -181,18 +187,59 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: const Text(
                   AppStrings.strWelcomeMessage,
-                  style: AppFontStyles.bold35Black,
+                  style: AppFontStyles.bold30Black,
                 )),
             const SizedBox(
-              height: 30,
+              height: 15,
+            ),
+            Card(
+              shape: borderRadius(),
+              margin: const EdgeInsets.all(8),
+              color: AppColors.mdDarkBlueColor,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 50),
+                      child: Text(
+                        AppStrings.strMessageHome,
+                        style: AppFontStyles.bold18White,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 10),
+                      child: Image.asset(
+                        AppAssets.mdDoctorsHomePicture,
+                        height: 120,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
             ),
             Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: const Text(
                   AppStrings.strUpcomingAppointmnets,
-                  style: AppFontStyles.semBold17Black,
+                  style: AppFontStyles.bold18Black,
                 )),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(
+                height: 3,
+                thickness: 1,
+                indent: 10,
+                endIndent: 10,
+                color: AppColors.mdLightBlueDividerColor,
+              ),
+            ),
             Expanded(
                 child: Container(
               child: displayDoctors(),
