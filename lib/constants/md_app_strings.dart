@@ -41,4 +41,5 @@ class AppStrings {
   static const String strCity = 'Област';
   static const String strChooseSpeciality = 'Избери специалност...';
   static const String strAvailableHours = 'Свободни часове';
+  static const String strCancel = 'Отмяна';
 }

@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:test_flutter_app/cloud_firestore/appointment_ref.dart';
 import 'package:test_flutter_app/constants/md_app_colors.dart';
 import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
+import 'package:test_flutter_app/screens/home/view/home.dart';
 
 import '../../../constants/md_app_strings.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 
 class Appointment extends StatefulWidget {
-  const Appointment({
-    Key? key,
-  }) : super(key: key);
+  final String doctorId;
+
+  const Appointment({Key? key, required this.doctorId}) : super(key: key);
 
   @override
   State<Appointment> createState() => _AppointmentState();
 }
 
 class _AppointmentState extends State<Appointment> {
+  late String appDate;
+  late String appTime;
+  late String appNote;
+  bool isSelected = false;
+
   DateTime today = DateTime.now();
   final _descriptionController = TextEditingController();
 
@@ -109,17 +117,23 @@ class _AppointmentState extends State<Appointment> {
               (context, index) {
                 return GestureDetector(
                   onTap: (() {
-                    // context.read(selectedTime).state =
-                    //     time_slot.elementAt(index);
+                    setState(() {
+                      isSelected = !isSelected;
+                    });
+                    appTime = timeSlot.elementAt(index);
                   }),
                   child: Card(
-                      color: AppColors.mdLightBlueColor,
+                      color: isSelected
+                          ? AppColors.mdDarkBlueColor
+                          : AppColors.mdLightBlueColor,
                       shape: borderRadius(),
                       margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                       child: GridTile(
                         child: Center(
                           child: Text(timeSlot.elementAt(index),
-                              style: AppFontStyles.normal17Black),
+                              style: isSelected
+                                  ? AppFontStyles.normal17White
+                                  : AppFontStyles.normal17Black),
                         ),
                       )),
                 );
@@ -131,31 +145,38 @@ class _AppointmentState extends State<Appointment> {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  margin: const EdgeInsets.fromLTRB(25, 20, 25, 20),
                   child: multiLineTextWidget(
                       AppStrings.strDescription, _descriptionController),
                 ),
-                Container(
-                    height: 70,
-                    width: 397,
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => const Appointment()),
-                        // );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.mdDarkBlueColor,
-                        shape: borderRadius(),
-                        minimumSize: const Size(328, 56),
-                      ),
-                      child: const Text(
-                        AppStrings.strBookAppointment,
-                        style: AppFontStyles.semiBold22White,
-                      ),
-                    ))
+                SafeArea(
+                  child: Container(
+                      height: 70,
+                      width: 397,
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setAppointment(appDate, appTime,
+                              _descriptionController.text, widget.doctorId);
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Home(/*uidDoc: widget.doctorId*/)),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.mdDarkBlueColor,
+                          shape: borderRadius(),
+                          minimumSize: const Size(328, 56),
+                        ),
+                        child: const Text(
+                          AppStrings.strBookAppointment,
+                          style: AppFontStyles.semiBold22White,
+                        ),
+                      )),
+                )
               ],
             ),
           ),
@@ -167,6 +188,7 @@ class _AppointmentState extends State<Appointment> {
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
+      appDate = DateFormat('dd/MM/yyyy').format(day);
     });
   }
 }

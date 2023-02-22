@@ -5,4 +5,6 @@ class AppColors {
   static const mdDarkBlueColor = Color(0xFF2862B7);
   static const mdBlackColor = Colors.black;
   static const mdWhiteColor = Colors.white;
+  static const mdLightBlueDividerColor = Color(0xFFD8E5F8);
+  static const mdRedColor = Color(0xFFE9625E);
 }

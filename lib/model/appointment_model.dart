@@ -5,6 +5,11 @@ class AppointmentModel {
   late String doctorId;
   late String notes;
   late String patientId;
+  String? userName;
+  String? userSurname;
+  String? doctorDegree;
+  String? doctorMedSpeciality;
+  String? doctorHospital;
 
   AppointmentModel(
       {required this.appointmentDate,
@@ -25,12 +30,12 @@ class AppointmentModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['appointmentDate'] = appointmentDate;
-    data['appointmentId'] = appointmentId;
-    data['appointmentTime'] = appointmentTime;
-    data['doctorId'] = doctorId;
-    data['notes'] = notes;
-    data['patientId'] = patientId;
+    data['AppointmentDate'] = appointmentDate;
+    data['AppointmentId'] = appointmentId;
+    data['AppointmentTime'] = appointmentTime;
+    data['DoctorId'] = doctorId;
+    data['Notes'] = notes;
+    data['PatientId'] = patientId;
     return data;
   }
 }

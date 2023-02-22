@@ -120,7 +120,9 @@ class _DocInfoState extends State<DocInfo> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Appointment()),
+                            builder: (context) => Appointment(
+                                  doctorId: widget.uidDoc,
+                                )),
                       );
                     },
                     style: ElevatedButton.styleFrom(

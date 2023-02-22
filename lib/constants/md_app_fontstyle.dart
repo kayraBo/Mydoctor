@@ -25,11 +25,24 @@ class AppFontStyles {
       fontWeight: FontWeight.normal,
       fontSize: 17);
 
+  static const normal17White = TextStyle(
+      color: AppColors.mdWhiteColor,
+      fontWeight: FontWeight.normal,
+      fontSize: 17);
+
   static const semBold17Black = TextStyle(
       color: AppColors.mdBlackColor, fontWeight: FontWeight.w500, fontSize: 17);
 
   static const semiBold18Black = TextStyle(
       color: AppColors.mdBlackColor, fontWeight: FontWeight.w500, fontSize: 18);
+
+  static const bold18White = TextStyle(
+      color: AppColors.mdLightBlueColor,
+      fontWeight: FontWeight.bold,
+      fontSize: 18);
+
+  static const bold18Black = TextStyle(
+      color: AppColors.mdBlackColor, fontWeight: FontWeight.bold, fontSize: 18);
 
   static const underlinedBold18DarkBlue = TextStyle(
     color: AppColors.mdDarkBlueColor,
@@ -37,6 +50,9 @@ class AppFontStyles {
     decoration: TextDecoration.underline,
     fontSize: 18,
   );
+
+  static const bold19Black = TextStyle(
+      color: AppColors.mdBlackColor, fontWeight: FontWeight.bold, fontSize: 19);
 
   static const semiBold19Black = TextStyle(
       color: AppColors.mdBlackColor, fontWeight: FontWeight.w500, fontSize: 19);
