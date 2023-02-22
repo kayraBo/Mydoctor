@@ -39,14 +39,16 @@ TextField textFieldWidget(
   );
 }
 
-TextField multiLineTextWidget(String text, TextEditingController controller) {
-  return TextField(
+TextFormField multiLineTextWidget(
+    String text, TextEditingController controller) {
+  return TextFormField(
     controller: controller,
     enableSuggestions: true,
     autocorrect: true,
     cursorColor: Colors.black,
     keyboardType: TextInputType.multiline,
-    maxLines: null,
+    maxLines: 5,
+    textAlignVertical: TextAlignVertical.top,
     style: const TextStyle(color: AppColors.mdBlackColor),
     decoration: InputDecoration(
       labelText: text,

@@ -23,6 +23,7 @@ class _AppointmentState extends State<Appointment> {
   late String appDate;
   late String appTime;
   late String appNote;
+  bool isSelected = false;
 
   DateTime today = DateTime.now();
   final _descriptionController = TextEditingController();
@@ -116,16 +117,23 @@ class _AppointmentState extends State<Appointment> {
               (context, index) {
                 return GestureDetector(
                   onTap: (() {
+                    setState(() {
+                      isSelected = !isSelected;
+                    });
                     appTime = timeSlot.elementAt(index);
                   }),
                   child: Card(
-                      color: AppColors.mdLightBlueColor,
+                      color: isSelected
+                          ? AppColors.mdDarkBlueColor
+                          : AppColors.mdLightBlueColor,
                       shape: borderRadius(),
                       margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                       child: GridTile(
                         child: Center(
                           child: Text(timeSlot.elementAt(index),
-                              style: AppFontStyles.normal17Black),
+                              style: isSelected
+                                  ? AppFontStyles.normal17White
+                                  : AppFontStyles.normal17Black),
                         ),
                       )),
                 );
@@ -137,36 +145,38 @@ class _AppointmentState extends State<Appointment> {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  margin: const EdgeInsets.fromLTRB(25, 20, 25, 20),
                   child: multiLineTextWidget(
                       AppStrings.strDescription, _descriptionController),
                 ),
-                Container(
-                    height: 70,
-                    width: 397,
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setAppointment(appDate, appTime,
-                            _descriptionController.text, widget.doctorId);
+                SafeArea(
+                  child: Container(
+                      height: 70,
+                      width: 397,
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setAppointment(appDate, appTime,
+                              _descriptionController.text, widget.doctorId);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Home(/*uidDoc: widget.doctorId*/)),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.mdDarkBlueColor,
-                        shape: borderRadius(),
-                        minimumSize: const Size(328, 56),
-                      ),
-                      child: const Text(
-                        AppStrings.strBookAppointment,
-                        style: AppFontStyles.semiBold22White,
-                      ),
-                    ))
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Home(/*uidDoc: widget.doctorId*/)),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.mdDarkBlueColor,
+                          shape: borderRadius(),
+                          minimumSize: const Size(328, 56),
+                        ),
+                        child: const Text(
+                          AppStrings.strBookAppointment,
+                          style: AppFontStyles.semiBold22White,
+                        ),
+                      )),
+                )
               ],
             ),
           ),

@@ -25,6 +25,11 @@ class AppFontStyles {
       fontWeight: FontWeight.normal,
       fontSize: 17);
 
+  static const normal17White = TextStyle(
+      color: AppColors.mdWhiteColor,
+      fontWeight: FontWeight.normal,
+      fontSize: 17);
+
   static const semBold17Black = TextStyle(
       color: AppColors.mdBlackColor, fontWeight: FontWeight.w500, fontSize: 17);
 

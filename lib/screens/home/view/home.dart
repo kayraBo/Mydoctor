@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
                                   thickness: 1,
                                   indent: 10,
                                   endIndent: 10,
-                                  color: AppColors.mdLifhtBlueDividerColor,
+                                  color: AppColors.mdLightBlueDividerColor,
                                 ),
                                 const SizedBox(
                                   height: 10,
