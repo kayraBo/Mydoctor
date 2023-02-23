@@ -88,6 +88,7 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                                         Row(children: [
                                           Text(
                                             '${profile.degree}',
+                                            softWrap: false,
                                             style:
                                                 AppFontStyles.semiBold19Black,
                                           ),
@@ -95,6 +96,7 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                                             width: 4,
                                           ),
                                           Text('${profile.name}',
+                                              softWrap: false,
                                               style: AppFontStyles
                                                   .semiBold19Black),
                                           const SizedBox(
@@ -102,15 +104,20 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
                                           ),
                                           Text(
                                             '${profile.surname}',
+                                            softWrap: false,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.fade,
                                             style:
                                                 AppFontStyles.semiBold19Black,
                                           ),
                                         ]),
                                         Text(
                                           '${profile.medicalSpecialityName}',
+                                          softWrap: true,
                                           style: AppFontStyles.normal17Black,
                                         ),
                                         Text('${doctorData[index].hospital}',
+                                            softWrap: true,
                                             style: AppFontStyles.normal17Black),
                                       ],
                                     ),

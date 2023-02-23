@@ -89,7 +89,6 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
     return SafeArea(
       child: Scaffold(
         body: Column(children: <Widget>[
-          // const Spacer(),
           const SizedBox(
             height: 50,
           ),

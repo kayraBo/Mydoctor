@@ -37,6 +37,8 @@ class _HomeState extends State<Home> {
               );
             } else {
               return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: doctorData.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
@@ -176,8 +178,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Column(
+      child: ListView(shrinkWrap: true, children: [
+        Column(
           children: [
             const SizedBox(
               height: 50,
@@ -240,17 +242,18 @@ class _HomeState extends State<Home> {
                 color: AppColors.mdLightBlueDividerColor,
               ),
             ),
-            Expanded(
-                child: Container(
+            Container(
+              height: MediaQuery.of(context).size.height -
+                  kBottomNavigationBarHeight,
               child: displayDoctors(),
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
               ),
-            ))
+            )
           ],
         ),
-      ),
+      ]),
     );
   }
 }
