@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
-import 'package:test_flutter_app/view/navigation.dart';
+import 'package:test_flutter_app/app/navigation.dart';
 
 import '../../../constants/md_app_colors.dart';
 import '../../../widgets/widgets.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/auth/main_page.dart';
+import '../screens/main_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

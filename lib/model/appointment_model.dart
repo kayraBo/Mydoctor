@@ -17,7 +17,12 @@ class AppointmentModel {
       required this.appointmentTime,
       required this.doctorId,
       required this.notes,
-      required this.patientId});
+      required this.patientId,
+      this.userName,
+      this.userSurname,
+      this.doctorDegree,
+      this.doctorHospital,
+      this.doctorMedSpeciality});
 
   AppointmentModel.fromJson(Map<String, dynamic> json) {
     appointmentDate = json['AppointmentDate'];
