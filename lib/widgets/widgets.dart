@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
 
@@ -143,17 +144,6 @@ AppBar appBar(BuildContext context) {
           Navigator.pop(context);
         },
       ));
-}
-
-Container blueContainer(BuildContext context) {
-  return Container(
-    height: fullHeight(context) * .5,
-    decoration: const BoxDecoration(
-      color: AppColors.mdLightBlueColor,
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-    ),
-  );
 }
 
 Text textWidget(String text) {

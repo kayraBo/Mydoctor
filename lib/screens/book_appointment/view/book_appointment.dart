@@ -23,7 +23,7 @@ class _AppointmentState extends State<Appointment> {
   late String appDate;
   late String appTime;
   late String appNote;
-  bool isSelected = false;
+  int? isSelected;
 
   DateTime today = DateTime.now();
   final _descriptionController = TextEditingController();
@@ -118,12 +118,12 @@ class _AppointmentState extends State<Appointment> {
                 return GestureDetector(
                   onTap: (() {
                     setState(() {
-                      isSelected = !isSelected;
+                      isSelected = index;
                     });
                     appTime = timeSlot.elementAt(index);
                   }),
                   child: Card(
-                      color: isSelected
+                      color: isSelected == index
                           ? AppColors.mdDarkBlueColor
                           : AppColors.mdLightBlueColor,
                       shape: borderRadius(),
@@ -131,7 +131,7 @@ class _AppointmentState extends State<Appointment> {
                       child: GridTile(
                         child: Center(
                           child: Text(timeSlot.elementAt(index),
-                              style: isSelected
+                              style: isSelected == index
                                   ? AppFontStyles.normal17White
                                   : AppFontStyles.normal17Black),
                         ),
