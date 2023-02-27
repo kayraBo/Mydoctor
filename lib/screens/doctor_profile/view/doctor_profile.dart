@@ -56,16 +56,34 @@ class _DocInfoState extends State<DocInfo> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  '${docDesc.medicalSpecialityName}',
-                  style: AppFontStyles.normal20Black,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(height: 25, AppAssets.mdStethoscopeIcon),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '${docDesc.medicalSpecialityName}',
+                      style: AppFontStyles.normal20Black,
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  '${docDesc.hospital}',
-                  style: AppFontStyles.normal19Black,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(height: 25, AppAssets.mdHospitalIcon),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      '${docDesc.hospital}',
+                      style: AppFontStyles.normal19Black,
+                    ),
+                  ],
                 ),
               ],
             );
@@ -157,7 +175,7 @@ class _DocInfoState extends State<DocInfo> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: displayDoctorDesc(),
                 )
               ],

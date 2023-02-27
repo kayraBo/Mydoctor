@@ -37,6 +37,8 @@ class _HomeState extends State<Home> {
               );
             } else {
               return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: doctorData.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
@@ -64,7 +66,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -90,9 +92,15 @@ class _HomeState extends State<Home> {
                                             ),
                                           ],
                                         ),
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
                                         Text(
                                           '${doctorData[index].doctorMedSpeciality}',
                                           style: AppFontStyles.semiBold15Black,
+                                        ),
+                                        const SizedBox(
+                                          height: 3,
                                         ),
                                         Text(
                                           '${doctorData[index].doctorHospital}',
@@ -170,8 +178,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Column(
+      child: ListView(shrinkWrap: true, children: [
+        Column(
           children: [
             const SizedBox(
               height: 50,
@@ -181,29 +189,69 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: const Text(
                   AppStrings.strWelcomeMessage,
-                  style: AppFontStyles.bold35Black,
+                  style: AppFontStyles.bold30Black,
                 )),
             const SizedBox(
-              height: 30,
+              height: 15,
+            ),
+            Card(
+              shape: borderRadius(),
+              margin: const EdgeInsets.all(8),
+              color: AppColors.mdDarkBlueColor,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 50),
+                      child: Text(
+                        AppStrings.strMessageHome,
+                        style: AppFontStyles.bold18White,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 10),
+                      child: Image.asset(
+                        AppAssets.mdDoctorsHomePicture,
+                        height: 120,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
             ),
             Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: const Text(
                   AppStrings.strUpcomingAppointmnets,
-                  style: AppFontStyles.semBold17Black,
+                  style: AppFontStyles.bold18Black,
                 )),
-            Expanded(
-                child: Container(
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(
+                height: 3,
+                thickness: 1,
+                indent: 10,
+                endIndent: 10,
+                color: AppColors.mdLightBlueDividerColor,
+              ),
+            ),
+            Container(
               child: displayDoctors(),
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
               ),
-            ))
+            )
           ],
         ),
-      ),
+      ]),
     );
   }
 }

@@ -51,13 +51,14 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
                     },
                     child: Card(
                       shape: borderRadius(),
-                      margin: const EdgeInsets.all(8),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 12),
                       child: ListTile(
                         shape: borderRadius(),
                         tileColor: AppColors.mdLightBlueColor,
                         title: Text(
                           specialities[index].medicalSpeciality,
-                          style: AppFontStyles.normal20Black,
+                          style: AppFontStyles.normal19Black,
                         ),
                       ),
                     ),
@@ -88,7 +89,6 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
     return SafeArea(
       child: Scaffold(
         body: Column(children: <Widget>[
-          // const Spacer(),
           const SizedBox(
             height: 50,
           ),
@@ -97,19 +97,19 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: const Text(
                 AppStrings.strMedicalSpecialities,
-                style: AppFontStyles.bold35Black,
+                style: AppFontStyles.bold30Black,
               )),
           Container(
               height: 80,
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+              padding: const EdgeInsets.fromLTRB(12, 20, 12, 10),
               child: TextField(
                   controller: _searchController,
                   cursorColor: AppColors.mdWhiteColor,
                   style: const TextStyle(
                       color: AppColors.mdWhiteColor, fontSize: 20),
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(10.0),
-                    prefixIcon: IconButton(
+                    contentPadding: const EdgeInsets.only(left: 20),
+                    suffixIcon: IconButton(
                       icon: const Icon(
                         Icons.search,
                         color: AppColors.mdWhiteColor,
@@ -138,7 +138,7 @@ class _MedicalSpeciality extends State<MedicalSpeciality> {
           Expanded(
               child: Container(
             child: displayMedicalSpecialities(),
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            // padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
             ),

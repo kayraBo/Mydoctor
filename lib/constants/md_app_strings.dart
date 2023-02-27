@@ -1,5 +1,5 @@
 class AppStrings {
-  static const String strWelcomeMessage = 'Добре дошли в Mydoctor';
+  static const String strWelcomeMessage = 'Добре дошли в \nMyDoctor';
   static const String strUpcomingAppointmnets = 'Предстоящи прегледи';
   static const String strMedicalSpecialities = 'Категории';
   static const String strSearch = 'Търси...';
@@ -32,7 +32,7 @@ class AppStrings {
   static const String strConfirmPassword = 'Повтори паролата';
   static const String strName = 'Име';
   static const String strSurname = 'Фамилия';
-  static const String strPhoneNumber = 'Област';
+  static const String strPhoneNumber = 'Телефонен номер';
   static const String strMedicalSpeciality = 'Специалност';
   static const String strUin = 'УИН';
   static const String strDegree = 'Титла';
@@ -42,4 +42,5 @@ class AppStrings {
   static const String strChooseSpeciality = 'Избери специалност...';
   static const String strAvailableHours = 'Свободни часове';
   static const String strCancel = 'Отмяна';
+  static const String strMessageHome = 'Намерете точния\nспециалист';
 }
