@@ -243,8 +243,6 @@ class _HomeState extends State<Home> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height -
-                  kBottomNavigationBarHeight,
               child: displayDoctors(),
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(

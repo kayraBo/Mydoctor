@@ -29,17 +29,19 @@ class _SignInState extends State<SignIn> {
   }
 
   Future signIn() async {
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: _emailController.text, password: _passwordController.text)
-        .then((value) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Navigation()),
-      );
-    }).onError((error, stackTrace) {
-      print("Error: ${error.toString()}");
-    });
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text)
+          .then((value) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Navigation()),
+        );
+      });
+    } on FirebaseException catch (error) {
+      errorDialog(subtitle: '${error.message}', context: context);
+    }
   }
 
   @override

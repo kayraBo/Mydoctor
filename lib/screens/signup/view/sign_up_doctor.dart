@@ -56,25 +56,28 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
 
   Future signUp() async {
     if (passwordConfirmed()) {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _emailController.text, password: _passwordController.text)
-          .then((value) async {
-        await addUserInfo(
-            value.user!.uid,
-            _emailController.text,
-            _nameController.text,
-            _surnameController.text,
-            _uinController.text,
-            _medicalSpecialityController.text,
-            _cityController.text,
-            _hospitalController.text,
-            _degreeController.text,
-            _descriptionController.text,
-            _phoneNumController.text);
-      }).catchError((error, stackTrace) {
-        print("Error: ${error.toString()}");
-      });
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: _emailController.text,
+                password: _passwordController.text)
+            .then((value) async {
+          await addUserInfo(
+              value.user!.uid,
+              _emailController.text,
+              _nameController.text,
+              _surnameController.text,
+              _uinController.text,
+              _medicalSpecialityController.text,
+              _cityController.text,
+              _hospitalController.text,
+              _degreeController.text,
+              _descriptionController.text,
+              _phoneNumController.text);
+        });
+      } on FirebaseException catch (error) {
+        errorDialog(subtitle: '${error.message}', context: context);
+      }
     }
   }
 

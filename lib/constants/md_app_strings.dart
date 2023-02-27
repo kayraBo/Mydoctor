@@ -32,7 +32,7 @@ class AppStrings {
   static const String strConfirmPassword = 'Повтори паролата';
   static const String strName = 'Име';
   static const String strSurname = 'Фамилия';
-  static const String strPhoneNumber = 'Област';
+  static const String strPhoneNumber = 'Телефонен номер';
   static const String strMedicalSpeciality = 'Специалност';
   static const String strUin = 'УИН';
   static const String strDegree = 'Титла';

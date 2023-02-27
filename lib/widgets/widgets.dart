@@ -155,3 +155,41 @@ Container blueContainer(BuildContext context) {
     ),
   );
 }
+
+Text textWidget(String text) {
+  return Text(
+    text,
+    style: AppFontStyles.normal17Black,
+  );
+}
+
+Future<void> errorDialog({
+  required String subtitle,
+  required BuildContext context,
+}) async {
+  await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: borderRadius(),
+          title: const Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'An Error occured',
+              style: AppFontStyles.bold18Red,
+            ),
+          ),
+          content: Text(subtitle),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: textWidget('OK'),
+            ),
+          ],
+        );
+      });
+}
