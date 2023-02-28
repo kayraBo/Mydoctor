@@ -55,29 +55,42 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
   }
 
   Future signUp() async {
-    if (passwordConfirmed()) {
-      try {
-        await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-                email: _emailController.text,
-                password: _passwordController.text)
-            .then((value) async {
-          await addUserInfo(
-              value.user!.uid,
-              _emailController.text,
-              _nameController.text,
-              _surnameController.text,
-              _uinController.text,
-              _medicalSpecialityController.text,
-              _cityController.text,
-              _hospitalController.text,
-              _degreeController.text,
-              _descriptionController.text,
-              _phoneNumController.text);
-        });
-      } on FirebaseException catch (error) {
-        errorDialog(subtitle: '${error.message}', context: context);
-      }
+    final String valueUIN = _uinController.text.trim();
+    final String valuePhoneNum = _phoneNumController.text.trim();
+    String errorMessage = '';
+
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text)
+          .then((value) async {
+        await addUserInfo(
+            value.user!.uid,
+            _emailController.text,
+            _nameController.text,
+            _surnameController.text,
+            _uinController.text,
+            _medicalSpecialityController.text,
+            _cityController.text,
+            _hospitalController.text,
+            _degreeController.text,
+            _descriptionController.text,
+            _phoneNumController.text);
+      });
+    } on FirebaseException catch (error) {
+      errorDialog(subtitle: '${error.message}', context: context);
+    }
+
+    if (!passwordConfirmed()) {
+      errorMessage = 'Passwords do not match';
+    } else if (valueUIN.length != 10) {
+      errorMessage = 'Invalid UIN. It should be 10 digits long';
+    } else if (valuePhoneNum.length != 10) {
+      errorMessage = 'Invalid phone number. It should be 10 digits long';
+    }
+
+    if (errorMessage.isNotEmpty) {
+      errorDialog(subtitle: errorMessage, context: context);
     }
   }
 
@@ -155,8 +168,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                    child: textFieldWidget(
-                        AppStrings.strUin, false, _uinController),
+                    child: numberFieldWidget(AppStrings.strUin, _uinController),
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),

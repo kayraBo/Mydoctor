@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter_app/constants/md_app_colors.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
 import 'package:test_flutter_app/view%20models/home_view_model.dart';
-
-import '../services/appointment_ref.dart';
 import '../constants/md_app_assets.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../widgets/widgets.dart';

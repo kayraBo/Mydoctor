@@ -67,9 +67,11 @@ TextFormField multiLineTextWidget(
 TextField numberFieldWidget(String text, TextEditingController controller) {
   return TextField(
     controller: controller,
+    maxLength: 10,
     cursorColor: AppColors.mdBlackColor,
     style: const TextStyle(color: AppColors.mdBlackColor),
     decoration: InputDecoration(
+      counter: const Offstage(),
       labelText: text,
       labelStyle: AppFontStyles.text17Black,
       filled: true,
