@@ -1,11 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/constants/md_app_assets.dart';
 import 'package:test_flutter_app/view%20models/profile_view_model.dart';
 import '../constants/md_app_colors.dart';
+import '../services/profile_ref.dart';
 import '../widgets/widgets.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  const Profile({
+    super.key,
+  });
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -20,6 +25,8 @@ class _ProfileState extends State<Profile> {
   final _phoneNumController = TextEditingController();
 
   late ProfileViewModel profileViewModel = ProfileViewModel();
+
+  bool isDoctor = false;
 
   @override
   void dispose() {
@@ -52,7 +59,9 @@ class _ProfileState extends State<Profile> {
               child: Wrap(children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                  child: profileViewModel.displayUserData(),
+                  child: isDoctor
+                      ? profileViewModel.displayDoctorData()
+                      : profileViewModel.displayPatientData(),
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),

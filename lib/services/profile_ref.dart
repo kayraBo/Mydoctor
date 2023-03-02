@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../model/profile_model.dart';
 import 'medical_speciality_ref.dart';
 
@@ -72,4 +73,13 @@ Future<List<ProfileModel>> getDoctorsBySpectialityCode(int msCode) async {
 Future<QuerySnapshot<Map<String, dynamic>>> _getFirebaseSnapshotByDoc(
     String document) async {
   return await FirebaseFirestore.instance.collection(document).get();
+}
+
+Future<bool> isCurrentUserInCollection(String collectionName) async {
+  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+  var snapshot = await FirebaseFirestore.instance
+      .collection(collectionName)
+      .doc(currentUserUid)
+      .get();
+  return snapshot.exists;
 }

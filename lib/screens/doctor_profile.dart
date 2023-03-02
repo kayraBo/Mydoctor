@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
 import 'package:test_flutter_app/view%20models/doctor_profile_view_model.dart';

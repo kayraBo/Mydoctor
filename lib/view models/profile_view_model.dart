@@ -10,7 +10,7 @@ import '../../../widgets/widgets.dart';
 import '../services/profile_ref.dart';
 
 class ProfileViewModel {
-  displayUserData() {
+  displayPatientData() {
     return FutureBuilder(
         future: getPatientData(FirebaseAuth.instance.currentUser!.uid),
         builder: (context, snapshot) {
@@ -20,139 +20,206 @@ class ProfileViewModel {
             );
           } else {
             var userData = snapshot.data as ProfileModel;
-            return ListView /*.builder*/ (shrinkWrap: true,
-                //itemBuilder: (BuildContext context, int index) {
-                //final singleUser = userData[index];
-                /*return*/
-                children: [
-                  Column(children: [
-                    Card(
-                      shape: borderRadius(),
-                      margin: const EdgeInsets.all(8),
-                      child: ListTile(
-                        shape: borderRadius(),
-                        tileColor: AppColors.mdWhiteColor,
-                        title: Text(
-                          '${userData.name}',
-                          style: AppFontStyles.normal20Black,
-                        ),
-                        // trailing: GestureDetector(
-                        //     onTap: () => Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: (context) => EditProfile(
-                        //                   user: ProfileModel(
-                        //                       name: singleUser.name,
-                        //                       surname: singleUser.surname,
-                        //                       email: singleUser.email,
-                        //                       phoneNumber:
-                        //                           singleUser.phoneNumber))),
-                        //         ),
-                        //     child: Icon(Icons.edit)),
-                      ),
+            return ListView(shrinkWrap: true, children: [
+              Column(children: [
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text(
+                      '${userData.name}',
+                      style: AppFontStyles.normal20Black,
                     ),
-                    const SizedBox(
-                      height: 10,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text(
+                      '${userData.surname}',
+                      style: AppFontStyles.normal20Black,
                     ),
-                    Card(
-                      shape: borderRadius(),
-                      margin: const EdgeInsets.all(8),
-                      child: ListTile(
-                        shape: borderRadius(),
-                        tileColor: AppColors.mdWhiteColor,
-                        title: Text(
-                          '${userData.surname}',
-                          style: AppFontStyles.normal20Black,
-                        ),
-                        // trailing: GestureDetector(
-                        //     onTap: () => Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: (context) => EditProfile(
-                        //                   user: ProfileModel(
-                        //                       name: singleUser.name,
-                        //                       surname: singleUser.surname,
-                        //                       email: singleUser.email,
-                        //                       phoneNumber:
-                        //                           singleUser.phoneNumber))),
-                        //         ),
-                        //     child: Icon(Icons.edit)),
-                      ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text(
+                      '${userData.email}',
+                      style: AppFontStyles.normal20Black,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Card(
-                      shape: borderRadius(),
-                      margin: const EdgeInsets.all(8),
-                      child: ListTile(
-                        shape: borderRadius(),
-                        tileColor: AppColors.mdWhiteColor,
-                        title: Text(
-                          '${userData.email}',
-                          style: AppFontStyles.normal20Black,
-                        ),
-                        // trailing: GestureDetector(
-                        //     onTap: () => Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: (context) => EditProfile(
-                        //                   user: ProfileModel(
-                        //                       name: singleUser.name,
-                        //                       surname: singleUser.surname,
-                        //                       email: singleUser.email,
-                        //                       phoneNumber:
-                        //                           singleUser.phoneNumber))),
-                        //         ),
-                        //     child: Icon(Icons.edit)),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Card(
-                      shape: borderRadius(),
-                      margin: const EdgeInsets.all(8),
-                      child: ListTile(
-                        shape: borderRadius(),
-                        tileColor: AppColors.mdWhiteColor,
-                        title: Text('${userData.phoneNumber}',
-                            style: AppFontStyles.normal20Black),
-                        // trailing: GestureDetector(
-                        //     onTap: () => Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: (context) => EditProfile(
-                        //                   user: ProfileModel(
-                        //                       name: singleUser.name,
-                        //                       surname: singleUser.surname,
-                        //                       email: singleUser.email,
-                        //                       phoneNumber:
-                        //                           singleUser.phoneNumber))),
-                        //         ),
-                        //     child: Icon(Icons.edit)),
-                      ),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                        child: buttonWidget(
-                            context,
-                            AppStrings.strSignOut,
-                            AppColors.mdDarkBlueColor,
-                            AppColors.mdWhiteColor, () {
-                          FirebaseAuth.instance.signOut().then((value) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignIn()),
-                            );
-                          });
-                        })),
-                  ])
-                ]
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text('${userData.phoneNumber}',
+                        style: AppFontStyles.normal20Black),
+                  ),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                    child: buttonWidget(context, AppStrings.strSignOut,
+                        AppColors.mdDarkBlueColor, AppColors.mdWhiteColor, () {
+                      FirebaseAuth.instance.signOut().then((value) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignIn()),
+                        );
+                      });
+                    })),
+              ])
+            ]
                 //},
                 );
+          }
+        });
+  }
+
+  displayDoctorData() {
+    return FutureBuilder(
+        future: getDocInfo(FirebaseAuth.instance.currentUser!.uid, 8),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            var userData = snapshot.data as ProfileModel;
+            return ListView(shrinkWrap: true, children: [
+              Column(children: [
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text(
+                      '${userData.name}',
+                      style: AppFontStyles.normal20Black,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text(
+                      '${userData.surname}',
+                      style: AppFontStyles.normal20Black,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text(
+                      '${userData.email}',
+                      style: AppFontStyles.normal20Black,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text('${userData.phoneNumber}',
+                        style: AppFontStyles.normal20Black),
+                  ),
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text('${userData.medicalSpecialityName}',
+                        style: AppFontStyles.normal20Black),
+                  ),
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text('${userData.uin}',
+                        style: AppFontStyles.normal20Black),
+                  ),
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text('${userData.city}',
+                        style: AppFontStyles.normal20Black),
+                  ),
+                ),
+                Card(
+                  shape: borderRadius(),
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    shape: borderRadius(),
+                    tileColor: AppColors.mdWhiteColor,
+                    title: Text('${userData.hospital}',
+                        style: AppFontStyles.normal20Black),
+                  ),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                    child: buttonWidget(context, AppStrings.strSignOut,
+                        AppColors.mdDarkBlueColor, AppColors.mdWhiteColor, () {
+                      FirebaseAuth.instance.signOut().then((value) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignIn()),
+                        );
+                      });
+                    })),
+              ])
+            ]);
           }
         });
   }
