@@ -4,7 +4,7 @@ import 'package:test_flutter_app/model/profile_model.dart';
 
 import '../model/appointment_model.dart';
 
-Future<List<AppointmentModel>> getAppointments(/*String uid*/) async {
+Future<List<AppointmentModel>> getAppointments() async {
   var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
   String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
   late List<AppointmentModel> appointments =
@@ -44,19 +44,25 @@ Future<String> setAppointment(
   var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
   String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
 
-  var doctorsRef =
-      FirebaseFirestore.instance.collection('Doctors').doc(doctorId);
-  var snapshot = await doctorsRef.get();
-  ProfileModel model = ProfileModel.fromJson(snapshot.data()!);
+  var doctorSnapshot = await FirebaseFirestore.instance
+      .collection('Doctors')
+      .doc(doctorId)
+      .get();
+
+  ProfileModel doctor = ProfileModel.fromJson(doctorSnapshot.data()!);
 
   AppointmentModel newAppointment = AppointmentModel(
       appointmentDate: appDate,
       appointmentId: '',
       appointmentTime: appTime,
       doctorId: doctorId,
+      doctorDegree: doctor.degree,
+      doctorMedSpeciality: doctor.medicalSpecialityName,
+      doctorHospital: doctor.hospital,
       notes: appNote,
       patientId: currentUserUid,
-      userName: model.name);
+      doctorName: doctor.name,
+      doctorSurname: doctor.surname);
 
   var documentSnapshot = await appointmentsRef.add(newAppointment.toJson());
   var appId = documentSnapshot.id;

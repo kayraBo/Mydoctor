@@ -36,7 +36,6 @@ class _AppointmentState extends State<Appointment> {
 
   @override
   Widget build(BuildContext context) {
-    // var timeWatch = watch(selectedTime).state;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -162,8 +161,7 @@ class _AppointmentState extends State<Appointment> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const Home(/*uidDoc: widget.doctorId*/)),
+                                builder: (context) => const Home()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

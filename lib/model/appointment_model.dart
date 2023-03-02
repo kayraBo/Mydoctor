@@ -5,8 +5,10 @@ class AppointmentModel {
   late String doctorId;
   late String notes;
   late String patientId;
-  String? userName;
-  String? userSurname;
+  String? doctorName;
+  String? doctorSurname;
+  String? patientName;
+  String? patientSurname;
   String? doctorDegree;
   String? doctorMedSpeciality;
   String? doctorHospital;
@@ -18,8 +20,10 @@ class AppointmentModel {
       required this.doctorId,
       required this.notes,
       required this.patientId,
-      this.userName,
-      this.userSurname,
+      this.doctorName,
+      this.doctorSurname,
+      this.patientName,
+      this.patientSurname,
       this.doctorDegree,
       this.doctorHospital,
       this.doctorMedSpeciality});
