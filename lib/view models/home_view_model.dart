@@ -69,14 +69,14 @@ class HomeViewModel {
                                               width: 5,
                                             ),
                                             Text(
-                                              '${doctorData[index].userName}',
+                                              '${doctorData[index].doctorName}',
                                               style: AppFontStyles.bold18Black,
                                             ),
                                             const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
-                                              '${doctorData[index].userSurname}',
+                                              '${doctorData[index].doctorSurname}',
                                               style: AppFontStyles.bold18Black,
                                             ),
                                           ],

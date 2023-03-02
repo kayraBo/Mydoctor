@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:test_flutter_app/model/profile_model.dart';
 
 import '../model/appointment_model.dart';
@@ -49,7 +50,14 @@ Future<String> setAppointment(
       .doc(doctorId)
       .get();
 
+  var patientSnapshot = await FirebaseFirestore.instance
+      .collection('Patients')
+      .doc(doctorId)
+      .get();
+
   ProfileModel doctor = ProfileModel.fromJson(doctorSnapshot.data()!);
+
+  ProfileModel patient = ProfileModel.fromJson(patientSnapshot.data()!);
 
   AppointmentModel newAppointment = AppointmentModel(
       appointmentDate: appDate,
@@ -62,7 +70,9 @@ Future<String> setAppointment(
       notes: appNote,
       patientId: currentUserUid,
       doctorName: doctor.name,
-      doctorSurname: doctor.surname);
+      doctorSurname: doctor.surname,
+      patientName: patient.name,
+      patientSurname: patient.surname);
 
   var documentSnapshot = await appointmentsRef.add(newAppointment.toJson());
   var appId = documentSnapshot.id;
