@@ -15,3 +15,21 @@ const timeSlot = {
   '13:30',
   '14:00',
 };
+
+// Set<MapEntry<String, bool>> timeSlot = {
+//   const MapEntry('7:00', false),
+//   const MapEntry('7:30', false),
+//   const MapEntry('8:00', false),
+//   const MapEntry('8:30', false),
+//   const MapEntry('9:00', false),
+//   const MapEntry('9:30', false),
+//   const MapEntry('10:00', false),
+//   const MapEntry('10:30', false),
+//   const MapEntry('11:00', false),
+//   const MapEntry('11:30', false),
+//   const MapEntry('12:00', false),
+//   const MapEntry('12:30', false),
+//   const MapEntry('13:00', false),
+//   const MapEntry('13:30', false),
+//   const MapEntry('14:00', false),
+// };

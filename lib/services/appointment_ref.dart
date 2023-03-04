@@ -56,7 +56,7 @@ Future<String> setAppointment(
 
   ProfileModel doctor = ProfileModel.fromJson(doctorSnapshot.data()!);
 
-  ProfileModel patient = ProfileModel.fromJson(patientSnapshot.data()!);
+  // ProfileModel patient = ProfileModel.fromJson(patientSnapshot.data()!);
 
   AppointmentModel newAppointment = AppointmentModel(
       appointmentDate: appDate,
@@ -69,9 +69,9 @@ Future<String> setAppointment(
       notes: appNote,
       patientId: currentUserUid,
       doctorName: doctor.name,
-      doctorSurname: doctor.surname,
-      patientName: patient.name,
-      patientSurname: patient.surname);
+      doctorSurname: doctor.surname);
+  // patientName: patient.name,
+  // patientSurname: patient.surname);
 
   var documentSnapshot = await appointmentsRef.add(newAppointment.toJson());
   var appId = documentSnapshot.id;

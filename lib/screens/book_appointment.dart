@@ -120,6 +120,8 @@ class _AppointmentState extends State<Appointment> {
                       isSelected = index;
                     });
                     appTime = timeSlot.elementAt(index);
+                    // appTime = timeSlot.elementAt(index).key;
+                    // timeSlot.elementAt(index).value = true;
                   }),
                   child: Card(
                       color: isSelected == index
@@ -158,11 +160,11 @@ class _AppointmentState extends State<Appointment> {
                           setAppointment(appDate, appTime,
                               _descriptionController.text, widget.doctorId);
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Home()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const Home()),
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.mdDarkBlueColor,
