@@ -4,7 +4,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:test_flutter_app/services/appointment_ref.dart';
 import 'package:test_flutter_app/constants/md_app_colors.dart';
 import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
-import 'package:test_flutter_app/screens/home.dart';
 
 import '../constants/md_app_strings.dart';
 import '../utils/utils.dart';
