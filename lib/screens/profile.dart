@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/constants/md_app_assets.dart';
 import 'package:test_flutter_app/view%20models/profile_view_model.dart';
 import '../constants/md_app_colors.dart';
-import '../services/profile_ref.dart';
 import '../widgets/widgets.dart';
 
 class Profile extends StatefulWidget {

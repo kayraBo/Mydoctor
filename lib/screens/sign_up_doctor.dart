@@ -70,7 +70,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
             _nameController.text,
             _surnameController.text,
             _uinController.text,
-            _medicalSpecialityController.text,
+            int.parse(_medicalSpecialityController.text),
             _cityController.text,
             _hospitalController.text,
             _degreeController.text,
@@ -100,7 +100,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
       String name,
       String surname,
       String uin,
-      String medicalSpeciality,
+      int medicalSpeciality,
       String city,
       String hospital,
       String degree,
@@ -172,8 +172,8 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                    child: textFieldWidget(AppStrings.strMedicalSpeciality,
-                        false, _medicalSpecialityController),
+                    child: numberFieldWidget(AppStrings.strMedicalSpeciality,
+                        _medicalSpecialityController),
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),

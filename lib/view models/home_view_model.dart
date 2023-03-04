@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/md_app_assets.dart';
@@ -9,6 +10,10 @@ import '../services/appointment_ref.dart';
 import '../widgets/widgets.dart';
 
 class HomeViewModel {
+  var appointmentsRef = FirebaseFirestore.instance
+      .collection('Appointmnets')
+      .doc('7Uv1gBNBeXslzkfNzq1i');
+
   displayDoctors() {
     return FutureBuilder(
         future: getAppointments(),
@@ -137,7 +142,9 @@ class HomeViewModel {
                                         ],
                                       ),
                                       ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          appointmentsRef.delete();
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
                                               AppColors.mdDarkBlueColor,

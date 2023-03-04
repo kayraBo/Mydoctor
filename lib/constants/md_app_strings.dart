@@ -33,7 +33,7 @@ class AppStrings {
   static const String strName = 'Име';
   static const String strSurname = 'Фамилия';
   static const String strPhoneNumber = 'Телефонен номер';
-  static const String strMedicalSpeciality = 'Специалност';
+  static const String strMedicalSpeciality = 'Код на специалност';
   static const String strUin = 'УИН';
   static const String strDegree = 'Титла';
   static const String strDescription = 'Описание';
