@@ -9,7 +9,7 @@ import '../services/appointment_ref.dart';
 import '../widgets/widgets.dart';
 
 class HomeViewModel {
-  displayDoctors() {
+  displayPatientsAppointments() {
     return FutureBuilder(
         future: getAppointments(),
         builder: (context, snapshot) {
@@ -140,6 +140,150 @@ class HomeViewModel {
                                         onPressed: () {
                                           deleteAppoinment(
                                               doctorData[index].appointmentId);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppColors.mdDarkBlueColor,
+                                          shape: borderRadius(),
+                                          minimumSize: const Size(114.96, 37),
+                                        ),
+                                        child: const Text(
+                                          AppStrings.strCancel,
+                                          style: AppFontStyles.bold18White,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+            }
+          }
+        });
+  }
+
+  displayDoctorsAppointments() {
+    return FutureBuilder(
+        future: getDoctorAppointments(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            var patientData = snapshot.data as List<AppointmentModel>;
+
+            if (patientData.isEmpty) {
+              return const Center(
+                child: Text(AppStrings.strNoUpcomingAppointments),
+              );
+            } else {
+              return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: patientData.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Card(
+                        shape: borderRadius(),
+                        margin: const EdgeInsets.all(8),
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          tileColor: AppColors.mdLightBlueColor,
+                          title: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      AppAssets.mdProfilePicture,
+                                      height: 80,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '${patientData[index].patientName}',
+                                              style: AppFontStyles.bold18Black,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              '${patientData[index].patientSurname}',
+                                              style: AppFontStyles.bold18Black,
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
+                                        Text(
+                                          patientData[index].notes,
+                                          style: AppFontStyles.semiBold15Black,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Divider(
+                                  height: 1,
+                                  thickness: 1,
+                                  indent: 10,
+                                  endIndent: 10,
+                                  color: AppColors.mdLightBlueDividerColor,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            patientData[index].appointmentTime,
+                                            style: AppFontStyles.bold18Black,
+                                          ),
+                                          Text(
+                                            patientData[index].appointmentDate,
+                                            style:
+                                                AppFontStyles.semiBold18Black,
+                                          ),
+                                        ],
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          deleteAppoinment(
+                                              patientData[index].appointmentId);
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
