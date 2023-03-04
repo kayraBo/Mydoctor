@@ -70,6 +70,19 @@ Future<List<ProfileModel>> getDoctorsBySpectialityCode(int msCode) async {
   return filteredDoctorsList;
 }
 
+Future<ProfileModel> getDocInfoById(String uid) async {
+  var snapshot =
+      await FirebaseFirestore.instance.collection('Doctors').doc(uid).get();
+
+  if (snapshot.exists) {
+    var profileModel = ProfileModel.fromJson(snapshot.data()!);
+    profileModel.id = snapshot.id;
+    return profileModel;
+  } else {
+    return ProfileModel();
+  }
+}
+
 Future<QuerySnapshot<Map<String, dynamic>>> _getFirebaseSnapshotByDoc(
     String document) async {
   return await FirebaseFirestore.instance.collection(document).get();
