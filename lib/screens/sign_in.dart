@@ -60,17 +60,17 @@ class _SignInState extends State<SignIn> {
                   AppStrings.strSignIn,
                   style: AppFontStyles.bold35Black,
                 )),
-            CheckboxListTile(
-              title: const Text('I am a doctor'),
-              checkColor: AppColors.mdLightBlueColor,
-              activeColor: AppColors.mdDarkBlueColor,
-              value: this.isChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  this.isChecked = value;
-                });
-              },
-            ),
+            // CheckboxListTile(
+            //   title: const Text('I am a doctor'),
+            //   checkColor: AppColors.mdLightBlueColor,
+            //   activeColor: AppColors.mdDarkBlueColor,
+            //   value: this.isChecked,
+            //   onChanged: (bool? value) {
+            //     setState(() {
+            //       this.isChecked = value;
+            //     });
+            //   },
+            // ),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child:

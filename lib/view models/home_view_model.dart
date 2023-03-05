@@ -30,133 +30,128 @@ class HomeViewModel {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: doctorData.length,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Card(
-                        shape: borderRadius(),
-                        margin: const EdgeInsets.all(8),
-                        child: ListTile(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          tileColor: AppColors.mdLightBlueColor,
-                          title: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      AppAssets.mdProfilePicture,
-                                      height: 80,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '${doctorData[index].doctorDegree}',
-                                              style: AppFontStyles.bold18Black,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              '${doctorData[index].doctorName}',
-                                              style: AppFontStyles.bold18Black,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              '${doctorData[index].doctorSurname}',
-                                              style: AppFontStyles.bold18Black,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 3,
-                                        ),
-                                        Text(
-                                          '${doctorData[index].doctorMedSpeciality}',
-                                          style: AppFontStyles.semiBold15Black,
-                                        ),
-                                        const SizedBox(
-                                          height: 3,
-                                        ),
-                                        Text(
-                                          '${doctorData[index].doctorHospital}',
-                                          style: AppFontStyles.semiBold15Black,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Divider(
-                                  height: 1,
-                                  thickness: 1,
-                                  indent: 10,
-                                  endIndent: 10,
-                                  color: AppColors.mdLightBlueDividerColor,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  child: Row(
+                    return Card(
+                      shape: borderRadius(),
+                      margin: const EdgeInsets.all(8),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        tileColor: AppColors.mdLightBlueColor,
+                        title: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    AppAssets.mdProfilePicture,
+                                    height: 80,
+                                  ),
+                                  Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceEvenly,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Row(
                                         children: [
                                           Text(
-                                            doctorData[index].appointmentTime,
+                                            '${doctorData[index].doctorDegree}',
                                             style: AppFontStyles.bold18Black,
                                           ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
                                           Text(
-                                            doctorData[index].appointmentDate,
-                                            style:
-                                                AppFontStyles.semiBold18Black,
+                                            '${doctorData[index].doctorName}',
+                                            style: AppFontStyles.bold18Black,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '${doctorData[index].doctorSurname}',
+                                            style: AppFontStyles.bold18Black,
                                           ),
                                         ],
                                       ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          deleteAppoinment(
-                                              doctorData[index].appointmentId);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              AppColors.mdDarkBlueColor,
-                                          shape: borderRadius(),
-                                          minimumSize: const Size(114.96, 37),
-                                        ),
-                                        child: const Text(
-                                          AppStrings.strCancel,
-                                          style: AppFontStyles.bold18White,
-                                        ),
+                                      const SizedBox(
+                                        height: 3,
+                                      ),
+                                      Text(
+                                        '${doctorData[index].doctorMedSpeciality}',
+                                        style: AppFontStyles.semiBold15Black,
+                                      ),
+                                      const SizedBox(
+                                        height: 3,
+                                      ),
+                                      Text(
+                                        '${doctorData[index].doctorHospital}',
+                                        style: AppFontStyles.semiBold15Black,
                                       ),
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 10,
+                                endIndent: 10,
+                                color: AppColors.mdLightBlueDividerColor,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          doctorData[index].appointmentTime,
+                                          style: AppFontStyles.bold18Black,
+                                        ),
+                                        Text(
+                                          doctorData[index].appointmentDate,
+                                          style: AppFontStyles.semiBold18Black,
+                                        ),
+                                      ],
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        deleteAppoinment(
+                                            doctorData[index].appointmentId);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            AppColors.mdDarkBlueColor,
+                                        shape: borderRadius(),
+                                        minimumSize: const Size(114.96, 37),
+                                      ),
+                                      child: const Text(
+                                        AppStrings.strCancel,
+                                        style: AppFontStyles.bold18White,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),

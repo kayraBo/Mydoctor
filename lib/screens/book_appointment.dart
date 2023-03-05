@@ -90,7 +90,7 @@ class _AppointmentState extends State<Appointment> {
                     selectedDayPredicate: ((day) => isSameDay(day, today)),
                     startingDayOfWeek: StartingDayOfWeek.monday,
                     focusedDay: today,
-                    firstDay: DateTime.utc(2022, 01),
+                    firstDay: DateTime.now(),
                     lastDay: DateTime.utc(2040, 12),
                     onDaySelected: _onDaySelected,
                   ),
@@ -119,8 +119,6 @@ class _AppointmentState extends State<Appointment> {
                       isSelected = index;
                     });
                     appTime = timeSlot.elementAt(index);
-                    // appTime = timeSlot.elementAt(index).key;
-                    // timeSlot.elementAt(index).value = true;
                   }),
                   child: Card(
                       color: isSelected == index
@@ -158,12 +156,10 @@ class _AppointmentState extends State<Appointment> {
                         onPressed: () {
                           setAppointment(appDate, appTime,
                               _descriptionController.text, widget.doctorId);
-
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const Home()),
-                          // );
+                          Navigator.pop(context);
+                          alertDialog(
+                              subtitle: AppStrings.strSuccessMessage,
+                              context: context);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.mdDarkBlueColor,

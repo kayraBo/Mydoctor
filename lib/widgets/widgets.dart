@@ -184,3 +184,47 @@ Future<void> errorDialog({
         );
       });
 }
+
+Future<void> alertDialog({
+  required String subtitle,
+  required BuildContext context,
+}) async {
+  await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: borderRadius(),
+          title: Align(
+            alignment: Alignment.topCenter,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Icon(
+                  Icons.check,
+                  color: AppColors.mdGreenColor,
+                  size: 40.0,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  'Success',
+                  style: AppFontStyles.bold18DarkBlue,
+                ),
+              ],
+            ),
+          ),
+          content: Text(subtitle),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: textWidget('OK'),
+            ),
+          ],
+        );
+      });
+}
