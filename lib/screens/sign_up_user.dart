@@ -44,19 +44,24 @@ class _SignUpState extends State<SignUp> {
 
   Future signUp() async {
     if (passwordConfirmed()) {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _emailController.text, password: _passwordController.text)
-          .then((value) async {
-        await addUserInfo(
-            value.user!.uid,
-            _nameController.text,
-            _surnameController.text,
-            _emailController.text,
-            _phoneNumController.text);
-      }).catchError((error, stackTrace) {
-        print("Error: ${error.toString()}");
-      });
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: _emailController.text,
+                password: _passwordController.text)
+            .then((value) async {
+          await addUserInfo(
+              value.user!.uid,
+              _nameController.text,
+              _surnameController.text,
+              _emailController.text,
+              _phoneNumController.text);
+        });
+      } on FirebaseException catch (error) {
+        errorDialog(subtitle: '${error.message}', context: context);
+      }
+    } else {
+      errorDialog(subtitle: 'Passwords do not match', context: context);
     }
   }
 

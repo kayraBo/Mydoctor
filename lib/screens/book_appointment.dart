@@ -63,7 +63,6 @@ class _AppointmentState extends State<Appointment> {
                   margin: const EdgeInsets.all(20),
                   shape: borderRadius(),
                   child: TableCalendar(
-                    // locale: "bg",
                     headerStyle: const HeaderStyle(
                       formatButtonVisible: false,
                       titleCentered: true,
@@ -71,7 +70,6 @@ class _AppointmentState extends State<Appointment> {
                       leftChevronIcon: AppFontStyles.iconLeftrrow,
                       rightChevronIcon: AppFontStyles.iconRightArrow,
                     ),
-
                     calendarStyle: const CalendarStyle(
                       defaultTextStyle: AppFontStyles.textSize17,
                       weekendTextStyle: AppFontStyles.textSize17,
@@ -85,7 +83,6 @@ class _AppointmentState extends State<Appointment> {
                         shape: BoxShape.circle,
                       ),
                     ),
-
                     availableGestures: AvailableGestures.all,
                     selectedDayPredicate: ((day) => isSameDay(day, today)),
                     startingDayOfWeek: StartingDayOfWeek.monday,
