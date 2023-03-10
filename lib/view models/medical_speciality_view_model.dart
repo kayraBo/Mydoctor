@@ -9,9 +9,11 @@ import 'package:test_flutter_app/widgets/widgets.dart';
 import '../screens/doctors_list.dart';
 
 class MedicalSpecialityViewModel {
+  MedSpecialitiesService medSpecialitiesService = MedSpecialitiesService();
+
   displayMedicalSpecialities() {
     return FutureBuilder(
-        future: getSpecialities(),
+        future: medSpecialitiesService.getSpecialities(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

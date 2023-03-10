@@ -2,17 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/constants/md_app_strings.dart';
 import 'package:test_flutter_app/screens/sign_in.dart';
+import 'package:test_flutter_app/services/profile_ref.dart';
 
 import '../../../constants/md_app_colors.dart';
 import '../../../constants/md_app_fontstyle.dart';
 import '../../../model/profile_model.dart';
 import '../../../widgets/widgets.dart';
-import '../services/profile_ref.dart';
 
 class ProfileViewModel {
+  ProfileService profileService = ProfileService();
   displayPatientData() {
     return FutureBuilder(
-        future: getPatientData(FirebaseAuth.instance.currentUser!.uid),
+        future: profileService
+            .getPatientData(FirebaseAuth.instance.currentUser!.uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -100,7 +102,8 @@ class ProfileViewModel {
 
   displayDoctorData() {
     return FutureBuilder(
-        future: getDocInfo(FirebaseAuth.instance.currentUser!.uid, 8),
+        future: profileService.getDocInfo(
+            FirebaseAuth.instance.currentUser!.uid, 8),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

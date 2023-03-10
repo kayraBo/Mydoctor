@@ -6,49 +6,88 @@ import 'package:test_flutter_app/services/profile_ref.dart';
 
 import '../model/appointment_model.dart';
 
-Future<List<AppointmentModel>> getAppointments() async {
-  var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
-  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
-  late List<AppointmentModel> appointments =
-      List<AppointmentModel>.empty(growable: true);
+class AppointmentsService {
+  MedSpecialitiesService medSpecialitiesService = MedSpecialitiesService();
+  ProfileService profileService = ProfileService();
 
-  var snapshot = await appointmentsRef.get();
+  Future<List<AppointmentModel>> getAppointments() async {
+    var appointmentsRef = getProfileRef();
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+    late List<AppointmentModel> appointments =
+        List<AppointmentModel>.empty(growable: true);
 
-  for (var element in snapshot.docs) {
-    AppointmentModel appointment = AppointmentModel.fromJson(element.data());
-    if (currentUserUid == appointment.patientId) {
-      ProfileModel doctor = await getDocInfoById(appointment.doctorId);
-      appointment.doctorDegree = doctor.degree;
-      appointment.doctorName = doctor.name;
-      appointment.doctorSurname = doctor.surname;
-      appointment.doctorHospital = doctor.hospital;
-      appointment.doctorMedSpeciality =
-          await getMedSpecialityByCode(doctor.medicalSpeciality);
-      appointments.add(appointment);
+    var snapshot = await appointmentsRef.get();
+
+    for (var element in snapshot.docs) {
+      AppointmentModel appointment = AppointmentModel.fromJson(element.data());
+      if (currentUserUid == appointment.patientId) {
+        ProfileModel doctor =
+            await profileService.getDocInfoById(appointment.doctorId);
+        appointment.doctorDegree = doctor.degree;
+        appointment.doctorName = doctor.name;
+        appointment.doctorSurname = doctor.surname;
+        appointment.doctorHospital = doctor.hospital;
+        appointment.doctorMedSpeciality = await medSpecialitiesService
+            .getMedSpecialityByCode(doctor.medicalSpeciality);
+        appointments.add(appointment);
+      }
     }
+
+    return appointments;
   }
 
-  return appointments;
-}
+  Future<List<AppointmentModel>> getDoctorAppointments() async {
+    var appointmentsRef = getProfileRef();
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+    late List<AppointmentModel> appointments =
+        List<AppointmentModel>.empty(growable: true);
 
-Future<List<AppointmentModel>> getDoctorAppointments() async {
-  var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
-  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
-  late List<AppointmentModel> appointments =
-      List<AppointmentModel>.empty(growable: true);
-
-  var snapshot = await appointmentsRef.get();
-  for (var element in snapshot.docs) {
-    AppointmentModel appointment = AppointmentModel.fromJson(element.data());
-    if (currentUserUid == appointment.doctorId) {
-      ProfileModel patient = await getPatientData(appointment.patientId);
-      appointment.patientName = patient.name;
-      appointment.patientSurname = patient.surname;
-      appointments.add(appointment);
+    var snapshot = await appointmentsRef.get();
+    for (var element in snapshot.docs) {
+      AppointmentModel appointment = AppointmentModel.fromJson(element.data());
+      if (currentUserUid == appointment.doctorId) {
+        ProfileModel patient =
+            await profileService.getPatientData(appointment.patientId);
+        appointment.patientName = patient.name;
+        appointment.patientSurname = patient.surname;
+        appointments.add(appointment);
+      }
     }
+
+    return appointments;
   }
 
-  return appointments;
+  Future<void> deleteAppoinment(String appId) async {
+    var appointment =
+        FirebaseFirestore.instance.collection('Appointments').doc(appId);
+    appointment.delete();
+  }
+
+  Future<String> setAppointment(
+      String appDate, String appTime, String appNote, String doctorId) async {
+    var appointmentsRef = getProfileRef();
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+    AppointmentModel newAppointment = AppointmentModel(
+      appointmentDate: appDate,
+      appointmentId: '',
+      appointmentTime: appTime,
+      doctorId: doctorId,
+      notes: appNote,
+      patientId: currentUserUid,
+    );
+
+    var documentSnapshot = await appointmentsRef.add(newAppointment.toJson());
+    var appId = documentSnapshot.id;
+
+    appointmentsRef.doc(appId).update({"AppointmentId": appId});
+
+    return appId;
+  }
+
+  getProfileRef() {
+    return FirebaseFirestore.instance.collection('Appointments');
+  }
 }
 
 Future<List<String>> getDoctorTakenHours(String doctorId) async {
@@ -64,32 +103,4 @@ Future<List<String>> getDoctorTakenHours(String doctorId) async {
   }
 
   return hoursList;
-}
-
-Future<void> deleteAppoinment(String appId) async {
-  var appointment =
-      FirebaseFirestore.instance.collection('Appointments').doc(appId);
-  appointment.delete();
-}
-
-Future<String> setAppointment(
-    String appDate, String appTime, String appNote, String doctorId) async {
-  var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
-  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
-
-  AppointmentModel newAppointment = AppointmentModel(
-    appointmentDate: appDate,
-    appointmentId: '',
-    appointmentTime: appTime,
-    doctorId: doctorId,
-    notes: appNote,
-    patientId: currentUserUid,
-  );
-
-  var documentSnapshot = await appointmentsRef.add(newAppointment.toJson());
-  var appId = documentSnapshot.id;
-
-  appointmentsRef.doc(appId).update({"AppointmentId": appId});
-
-  return appId;
 }

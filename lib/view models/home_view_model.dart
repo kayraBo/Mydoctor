@@ -9,9 +9,10 @@ import '../services/appointment_ref.dart';
 import '../widgets/widgets.dart';
 
 class HomeViewModel {
+  AppointmentsService appointmentsService = AppointmentsService();
   displayPatientsAppointments() {
     return FutureBuilder(
-        future: getAppointments(),
+        future: appointmentsService.getAppointments(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -134,7 +135,7 @@ class HomeViewModel {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        deleteAppoinment(
+                                        appointmentsService.deleteAppoinment(
                                             doctorData[index].appointmentId);
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -164,7 +165,7 @@ class HomeViewModel {
 
   displayDoctorsAppointments() {
     return FutureBuilder(
-        future: getDoctorAppointments(),
+        future: appointmentsService.getDoctorAppointments(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -277,7 +278,7 @@ class HomeViewModel {
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
-                                          deleteAppoinment(
+                                          appointmentsService.deleteAppoinment(
                                               patientData[index].appointmentId);
                                         },
                                         style: ElevatedButton.styleFrom(

@@ -8,15 +8,16 @@ import '../model/profile_model.dart';
 class DoctorProfileViewModel {
   final String uidDoc;
   final int msCode;
+  ProfileService profileService = ProfileService();
 
-  const DoctorProfileViewModel({
+  DoctorProfileViewModel({
     required this.uidDoc,
     required this.msCode,
   });
 
   displayDocInfo() {
     return FutureBuilder(
-        future: getDocInfo(uidDoc, msCode),
+        future: profileService.getDocInfo(uidDoc, msCode),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -83,7 +84,7 @@ class DoctorProfileViewModel {
 
   displayDoctorDesc() {
     return FutureBuilder(
-        future: getDocInfo(uidDoc, msCode),
+        future: profileService.getDocInfo(uidDoc, msCode),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

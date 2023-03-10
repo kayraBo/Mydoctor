@@ -26,6 +26,7 @@ class _AppointmentState extends State<Appointment> {
 
   DateTime today = DateTime.now();
   final _descriptionController = TextEditingController();
+  AppointmentsService appointmentsService = AppointmentsService();
 
   @override
   void dispose() {
@@ -151,7 +152,7 @@ class _AppointmentState extends State<Appointment> {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {
-                          setAppointment(appDate, appTime,
+                          appointmentsService.setAppointment(appDate, appTime,
                               _descriptionController.text, widget.doctorId);
                           Navigator.pop(context);
                           alertDialog(

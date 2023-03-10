@@ -12,14 +12,17 @@ import '../widgets/widgets.dart';
 class DoctorsListViewModel {
   final int msCode;
   final String msName;
-  const DoctorsListViewModel({
+
+  ProfileService profileService = ProfileService();
+
+  DoctorsListViewModel({
     required this.msCode,
     required this.msName,
   });
 
   displayDoctors() {
     return FutureBuilder(
-        future: getDoctorsBySpectialityCode(msCode),
+        future: profileService.getDoctorsBySpectialityCode(msCode),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

@@ -19,11 +19,11 @@ class _HomeState extends State<Home> {
   late HomeViewModel homeViewModel = HomeViewModel();
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await homeViewModel.displayPatientsAppointments();
-      },
-      child: SafeArea(
+    return SafeArea(
+      child: RefreshIndicator(
+        onRefresh: () async {
+          await homeViewModel.displayPatientsAppointments();
+        },
         child: ListView(shrinkWrap: true, children: [
           Column(
             children: [
