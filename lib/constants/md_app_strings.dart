@@ -45,4 +45,10 @@ class AppStrings {
   static const String strMessageHome = 'Намерете точния\nспециалист';
   static const String strSuccessMessage =
       'Your appointment has been successfully booked';
+  static const String strIAmDoctor = 'Аз съм лекар';
+  static const String strPasswords = 'Passwords do not match';
+  static const String strUINInvalid =
+      'Invalid UIN. It should be 10 digits long';
+  static const String strPhoneNumInvalid =
+      'Invalid phone number. It should be 10 digits long';
 }

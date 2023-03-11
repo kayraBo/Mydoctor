@@ -75,7 +75,7 @@ class DoctorProfileViewModel {
                       style: AppFontStyles.normal19Black,
                     ),
                   ],
-                ),
+                )
               ],
             );
           }

@@ -82,11 +82,11 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
     }
 
     if (!passwordConfirmed()) {
-      errorMessage = 'Passwords do not match';
+      errorMessage = AppStrings.strPasswords;
     } else if (valueUIN.length != 10) {
-      errorMessage = 'Invalid UIN. It should be 10 digits long';
+      errorMessage = AppStrings.strUINInvalid;
     } else if (valuePhoneNum.length != 10) {
-      errorMessage = 'Invalid phone number. It should be 10 digits long';
+      errorMessage = AppStrings.strPhoneNumInvalid;
     }
 
     if (errorMessage.isNotEmpty) {

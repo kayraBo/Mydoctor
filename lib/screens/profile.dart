@@ -23,7 +23,7 @@ class _ProfileState extends State<Profile> {
 
   late ProfileViewModel profileViewModel = ProfileViewModel();
 
-  bool isDoctor = false;
+  bool isDoctor = true;
 
   @override
   void dispose() {
@@ -53,18 +53,16 @@ class _ProfileState extends State<Profile> {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30)),
               ),
-              child: Wrap(children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                  child: isDoctor
-                      ? profileViewModel.displayDoctorData()
-                      : profileViewModel.displayPatientData(),
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                )
-              ]),
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+                child: isDoctor
+                    ? profileViewModel.displayDoctorData()
+                    : profileViewModel.displayPatientData(),
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
           ]),
         ],

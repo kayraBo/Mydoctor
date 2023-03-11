@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
         errorDialog(subtitle: '${error.message}', context: context);
       }
     } else {
-      errorDialog(subtitle: 'Passwords do not match', context: context);
+      errorDialog(subtitle: AppStrings.strPasswords, context: context);
     }
   }
 

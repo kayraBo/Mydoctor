@@ -17,6 +17,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late HomeViewModel homeViewModel = HomeViewModel();
+  bool isDoctor = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,7 +44,7 @@ class _HomeState extends State<Home> {
               ),
               Card(
                 shape: borderRadius(),
-                margin: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(10),
                 color: AppColors.mdDarkBlueColor,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
@@ -61,7 +63,7 @@ class _HomeState extends State<Home> {
                             vertical: 0, horizontal: 10),
                         child: Image.asset(
                           AppAssets.mdDoctorsHomePicture,
-                          height: 120,
+                          height: 115,
                         ),
                       ),
                     ],
@@ -89,7 +91,9 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                child: homeViewModel.displayPatientsAppointments(),
+                child: isDoctor
+                    ? homeViewModel.displayDoctorsAppointments()
+                    : homeViewModel.displayPatientsAppointments(),
                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

@@ -20,7 +20,46 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool isChecked = false;
+  bool light = false;
+
+  Switch switchIsDoctor() {
+    final MaterialStateProperty<Color?> trackColor =
+        MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.mdDarkBlueColor;
+        }
+
+        return null;
+      },
+    );
+    final MaterialStateProperty<Color?> overlayColor =
+        MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.mdDarkBlueColor.withOpacity(0.54);
+        }
+
+        if (states.contains(MaterialState.disabled)) {
+          return AppColors.mdGreyColor;
+        }
+
+        return null;
+      },
+    );
+
+    return Switch(
+      value: light,
+      overlayColor: overlayColor,
+      trackColor: trackColor,
+      thumbColor: const MaterialStatePropertyAll<Color>(AppColors.mdBlackColor),
+      onChanged: (bool value) {
+        setState(() {
+          light = value;
+        });
+      },
+    );
+  }
 
   @override
   void dispose() {
@@ -60,17 +99,12 @@ class _SignInState extends State<SignIn> {
                   AppStrings.strSignIn,
                   style: AppFontStyles.bold35Black,
                 )),
-            // CheckboxListTile(
-            //   title: const Text('I am a doctor'),
-            //   checkColor: AppColors.mdLightBlueColor,
-            //   activeColor: AppColors.mdDarkBlueColor,
-            //   value: this.isChecked,
-            //   onChanged: (bool? value) {
-            //     setState(() {
-            //       this.isChecked = value;
-            //     });
-            //   },
-            // ),
+            Row(
+              children: [
+                switchIsDoctor(),
+                const Text(AppStrings.strIAmDoctor),
+              ],
+            ),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child:
