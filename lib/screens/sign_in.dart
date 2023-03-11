@@ -22,44 +22,44 @@ class _SignInState extends State<SignIn> {
   final _passwordController = TextEditingController();
   bool light = false;
 
-  Switch switchIsDoctor() {
-    final MaterialStateProperty<Color?> trackColor =
-        MaterialStateProperty.resolveWith<Color?>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
-          return AppColors.mdDarkBlueColor;
-        }
+  // Switch switchIsDoctor() {
+  //   final MaterialStateProperty<Color?> trackColor =
+  //       MaterialStateProperty.resolveWith<Color?>(
+  //     (Set<MaterialState> states) {
+  //       if (states.contains(MaterialState.selected)) {
+  //         return AppColors.mdDarkBlueColor;
+  //       }
 
-        return null;
-      },
-    );
-    final MaterialStateProperty<Color?> overlayColor =
-        MaterialStateProperty.resolveWith<Color?>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
-          return AppColors.mdDarkBlueColor.withOpacity(0.54);
-        }
+  //       return null;
+  //     },
+  //   );
+  //   final MaterialStateProperty<Color?> overlayColor =
+  //       MaterialStateProperty.resolveWith<Color?>(
+  //     (Set<MaterialState> states) {
+  //       if (states.contains(MaterialState.selected)) {
+  //         return AppColors.mdDarkBlueColor.withOpacity(0.54);
+  //       }
 
-        if (states.contains(MaterialState.disabled)) {
-          return AppColors.mdGreyColor;
-        }
+  //       if (states.contains(MaterialState.disabled)) {
+  //         return AppColors.mdGreyColor;
+  //       }
 
-        return null;
-      },
-    );
+  //       return null;
+  //     },
+  //   );
 
-    return Switch(
-      value: light,
-      overlayColor: overlayColor,
-      trackColor: trackColor,
-      thumbColor: const MaterialStatePropertyAll<Color>(AppColors.mdRedColor),
-      onChanged: (bool value) {
-        setState(() {
-          light = value;
-        });
-      },
-    );
-  }
+  //   return Switch(
+  //     value: light,
+  //     overlayColor: overlayColor,
+  //     trackColor: trackColor,
+  //     thumbColor: const MaterialStatePropertyAll<Color>(AppColors.mdRedColor),
+  //     onChanged: (bool value) {
+  //       setState(() {
+  //         light = value;
+  //       });
+  //     },
+  //   );
+  // }
 
   @override
   void dispose() {
@@ -93,20 +93,20 @@ class _SignInState extends State<SignIn> {
                 child: Column(
           children: <Widget>[
             Container(
-                padding: const EdgeInsets.fromLTRB(100, 115, 100, 30),
+                padding: const EdgeInsets.fromLTRB(100, 125, 100, 40),
                 child: const Text(
                   AppStrings.strSignIn,
                   style: AppFontStyles.bold35Black,
                 )),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: switchIsDoctor(),
-                ),
-                const Text(AppStrings.strIAmDoctor),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.only(left: 10),
+            //       child: switchIsDoctor(),
+            //     ),
+            //     const Text(AppStrings.strIAmDoctor),
+            //   ],
+            // ),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child:
@@ -164,7 +164,7 @@ class _SignInState extends State<SignIn> {
               ],
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(5, 40, 15, 0),
+              padding: const EdgeInsets.fromLTRB(5, 60, 15, 0),
               child: pictureWidget(AppAssets.mdSignInDoctorPicture),
             ),
           ],
