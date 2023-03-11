@@ -52,7 +52,7 @@ class _SignInState extends State<SignIn> {
       value: light,
       overlayColor: overlayColor,
       trackColor: trackColor,
-      thumbColor: const MaterialStatePropertyAll<Color>(AppColors.mdBlackColor),
+      thumbColor: const MaterialStatePropertyAll<Color>(AppColors.mdRedColor),
       onChanged: (bool value) {
         setState(() {
           light = value;
@@ -90,18 +90,20 @@ class _SignInState extends State<SignIn> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
             body: Center(
-                child: SingleChildScrollView(
-                    child: Column(
+                child: Column(
           children: <Widget>[
             Container(
-                padding: const EdgeInsets.fromLTRB(100, 125, 100, 40),
+                padding: const EdgeInsets.fromLTRB(100, 115, 100, 30),
                 child: const Text(
                   AppStrings.strSignIn,
                   style: AppFontStyles.bold35Black,
                 )),
             Row(
               children: [
-                switchIsDoctor(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: switchIsDoctor(),
+                ),
                 const Text(AppStrings.strIAmDoctor),
               ],
             ),
@@ -166,6 +168,6 @@ class _SignInState extends State<SignIn> {
               child: pictureWidget(AppAssets.mdSignInDoctorPicture),
             ),
           ],
-        )))));
+        ))));
   }
 }

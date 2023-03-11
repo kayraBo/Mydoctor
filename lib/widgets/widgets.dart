@@ -8,8 +8,8 @@ import '../model/medical_speciality_model.dart';
 Image pictureWidget(String name) {
   return Image.asset(
     name,
-    width: 291.33,
-    height: 224.21,
+    width: 281.33,
+    height: 214.21,
   );
 }
 
