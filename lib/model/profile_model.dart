@@ -11,7 +11,7 @@ class ProfileModel {
   int? medicalSpeciality;
   String? medicalSpecialityName;
   String? uin;
-  int? isDoctor;
+  bool? isDoctor;
 
   ProfileModel(
       {this.email,

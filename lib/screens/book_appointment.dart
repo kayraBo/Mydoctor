@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:test_flutter_app/services/appointment_ref.dart';
-import 'package:test_flutter_app/constants/md_app_colors.dart';
-import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
+import '../services/appointment_ref.dart';
+import '../constants/md_app_colors.dart';
+import '../constants/md_app_fontstyle.dart';
 
 import '../constants/md_app_strings.dart';
 import '../utils/utils.dart';

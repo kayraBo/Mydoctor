@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test_flutter_app/model/profile_model.dart';
-import 'package:test_flutter_app/services/medical_speciality_ref.dart';
-import 'package:test_flutter_app/services/profile_ref.dart';
+import '../model/profile_model.dart';
+import '../services/medical_speciality_ref.dart';
+import '../services/profile_ref.dart';
 
 import '../model/appointment_model.dart';
 

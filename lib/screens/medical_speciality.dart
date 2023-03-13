@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/constants/md_app_colors.dart';
-import 'package:test_flutter_app/constants/md_app_fontstyle.dart';
-import 'package:test_flutter_app/constants/md_app_strings.dart';
-import 'package:test_flutter_app/view%20models/medical_speciality_view_model.dart';
+import '../constants/md_app_colors.dart';
+import '../constants/md_app_fontstyle.dart';
+import '../constants/md_app_strings.dart';
+import '../view%20models/medical_speciality_view_model.dart';
 
 class MedicalSpeciality extends StatefulWidget {
   const MedicalSpeciality({Key? key}) : super(key: key);

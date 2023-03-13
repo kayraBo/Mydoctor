@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/constants/md_app_assets.dart';
-import 'package:test_flutter_app/view%20models/profile_view_model.dart';
+import '../constants/md_app_assets.dart';
+import '../view%20models/profile_view_model.dart';
 import '../constants/md_app_colors.dart';
 import '../widgets/widgets.dart';
 
@@ -21,9 +21,9 @@ class _ProfileState extends State<Profile> {
   final _confirmPasswordController = TextEditingController();
   final _phoneNumController = TextEditingController();
 
-  late ProfileViewModel profileViewModel = ProfileViewModel();
+  ProfileViewModel profileViewModel = ProfileViewModel();
 
-  bool isDoctor = true;
+  bool isDoctor = false;
 
   @override
   void dispose() {

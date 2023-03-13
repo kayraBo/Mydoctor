@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/constants/md_app_colors.dart';
-import 'package:test_flutter_app/app/navigation.dart';
+import '../constants/md_app_colors.dart';
+import '../app/navigation.dart';
 
 import '../../../constants/md_app_fontstyle.dart';
 import '../../../constants/md_app_strings.dart';
@@ -22,7 +22,7 @@ class _SignUpState extends State<SignUp> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _phoneNumController = TextEditingController();
-  final isDoctor = 0;
+  final isDoctor = false;
 
   @override
   void dispose() {
@@ -69,7 +69,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future addUserInfo(String uid, String name, String surname, String email,
-      String phoneNumber, int isDoctor) async {
+      String phoneNumber, bool isDoctor) async {
     await FirebaseFirestore.instance.collection('Patients').doc(uid).set({
       'Name': name,
       'Surname': surname,

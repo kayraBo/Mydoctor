@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/screens/home.dart';
-import 'package:test_flutter_app/screens/profile.dart';
+import '../screens/home.dart';
+import '../screens/profile.dart';
 import '../constants/md_app_assets.dart';
 import '../screens/medical_speciality.dart';
 

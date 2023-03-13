@@ -20,46 +20,6 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool light = false;
-
-  // Switch switchIsDoctor() {
-  //   final MaterialStateProperty<Color?> trackColor =
-  //       MaterialStateProperty.resolveWith<Color?>(
-  //     (Set<MaterialState> states) {
-  //       if (states.contains(MaterialState.selected)) {
-  //         return AppColors.mdDarkBlueColor;
-  //       }
-
-  //       return null;
-  //     },
-  //   );
-  //   final MaterialStateProperty<Color?> overlayColor =
-  //       MaterialStateProperty.resolveWith<Color?>(
-  //     (Set<MaterialState> states) {
-  //       if (states.contains(MaterialState.selected)) {
-  //         return AppColors.mdDarkBlueColor.withOpacity(0.54);
-  //       }
-
-  //       if (states.contains(MaterialState.disabled)) {
-  //         return AppColors.mdGreyColor;
-  //       }
-
-  //       return null;
-  //     },
-  //   );
-
-  //   return Switch(
-  //     value: light,
-  //     overlayColor: overlayColor,
-  //     trackColor: trackColor,
-  //     thumbColor: const MaterialStatePropertyAll<Color>(AppColors.mdRedColor),
-  //     onChanged: (bool value) {
-  //       setState(() {
-  //         light = value;
-  //       });
-  //     },
-  //   );
-  // }
 
   @override
   void dispose() {
