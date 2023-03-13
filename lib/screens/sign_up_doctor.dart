@@ -28,6 +28,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
   final _degreeController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _uinController = TextEditingController();
+  final isDoctor = 1;
 
   @override
   void dispose() {
@@ -75,7 +76,8 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
             _hospitalController.text,
             _degreeController.text,
             _descriptionController.text,
-            _phoneNumController.text);
+            _phoneNumController.text,
+            isDoctor);
       });
     } on FirebaseException catch (error) {
       errorDialog(subtitle: '${error.message}', context: context);
@@ -105,7 +107,8 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
       String hospital,
       String degree,
       String description,
-      String phoneNumber) async {
+      String phoneNumber,
+      int isDoctor) async {
     await FirebaseFirestore.instance.collection('Doctors').doc(uid).set({
       'Email': email,
       'Name': name,
@@ -117,6 +120,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
       'Degree': degree,
       'Description': description,
       'PhoneNumber': phoneNumber,
+      'isDoctor': isDoctor,
     }).then((value) => {
           Navigator.push(
             context,

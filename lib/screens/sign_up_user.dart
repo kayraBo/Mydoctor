@@ -22,6 +22,7 @@ class _SignUpState extends State<SignUp> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _phoneNumController = TextEditingController();
+  final isDoctor = 0;
 
   @override
   void dispose() {
@@ -31,6 +32,7 @@ class _SignUpState extends State<SignUp> {
     _nameController.dispose();
     _surnameController.dispose();
     _phoneNumController.dispose();
+
     super.dispose();
   }
 
@@ -55,7 +57,8 @@ class _SignUpState extends State<SignUp> {
               _nameController.text,
               _surnameController.text,
               _emailController.text,
-              _phoneNumController.text);
+              _phoneNumController.text,
+              isDoctor);
         });
       } on FirebaseException catch (error) {
         errorDialog(subtitle: '${error.message}', context: context);
@@ -66,12 +69,13 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future addUserInfo(String uid, String name, String surname, String email,
-      String phoneNumber) async {
+      String phoneNumber, int isDoctor) async {
     await FirebaseFirestore.instance.collection('Patients').doc(uid).set({
       'Name': name,
       'Surname': surname,
       'Email': email,
       'PhoneNumber': phoneNumber,
+      'isDoctor': isDoctor,
     }).then((value) => {
           Navigator.push(
             context,
