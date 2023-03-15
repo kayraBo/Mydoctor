@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../constants/md_app_strings.dart';
 
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../model/medical_speciality_model.dart';
+import '../screens/sign_in.dart';
 
 Image pictureWidget(String name) {
   return Image.asset(
@@ -223,6 +225,47 @@ Future<void> alertDialog({
                 }
               },
               child: textWidget('OK'),
+            ),
+          ],
+        );
+      });
+}
+
+Future<void> logOutDialog({
+  required BuildContext context,
+}) async {
+  await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: borderRadius(),
+          title: const Align(
+            alignment: Alignment.topCenter,
+            child: Text(
+              'Logout',
+              style: AppFontStyles.bold18DarkBlue,
+            ),
+          ),
+          content: const Text('Are you sure you want to Logout?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: textWidget('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignIn()),
+                  );
+                });
+              },
+              child: textWidget('Logout'),
             ),
           ],
         );

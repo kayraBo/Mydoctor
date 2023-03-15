@@ -58,15 +58,6 @@ class _SignInState extends State<SignIn> {
                   AppStrings.strSignIn,
                   style: AppFontStyles.bold35Black,
                 )),
-            // Row(
-            //   children: [
-            //     Padding(
-            //       padding: const EdgeInsets.only(left: 10),
-            //       child: switchIsDoctor(),
-            //     ),
-            //     const Text(AppStrings.strIAmDoctor),
-            //   ],
-            // ),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child:

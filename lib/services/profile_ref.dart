@@ -82,22 +82,3 @@ class ProfileService {
     return await FirebaseFirestore.instance.collection(document).get();
   }
 }
-
-Future updateUserInfo(String uid, String name, String surname, String email,
-    String phoneNumber) async {
-  await FirebaseFirestore.instance.collection('Patients').doc(uid).update({
-    'Name': name,
-    'Surname': surname,
-    'Email': email,
-    'PhoneNumber': phoneNumber,
-  });
-}
-
-Future<bool> isCurrentUserInCollection(String collectionName) async {
-  String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
-  var snapshot = await FirebaseFirestore.instance
-      .collection(collectionName)
-      .doc(currentUserUid)
-      .get();
-  return snapshot.exists;
-}
