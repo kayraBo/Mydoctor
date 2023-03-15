@@ -1,16 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:test_flutter_app/constants/md_app_strings.dart';
+import '../constants/md_app_strings.dart';
 
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../model/medical_speciality_model.dart';
+import '../screens/sign_in.dart';
 
 Image pictureWidget(String name) {
   return Image.asset(
     name,
-    width: 291.33,
-    height: 224.21,
+    width: 281.33,
+    height: 214.21,
   );
 }
 
@@ -68,9 +69,11 @@ TextFormField multiLineTextWidget(
 TextField numberFieldWidget(String text, TextEditingController controller) {
   return TextField(
     controller: controller,
+    maxLength: 10,
     cursorColor: AppColors.mdBlackColor,
     style: const TextStyle(color: AppColors.mdBlackColor),
     decoration: InputDecoration(
+      counter: const Offstage(),
       labelText: text,
       labelStyle: AppFontStyles.text17Black,
       filled: true,
@@ -178,6 +181,91 @@ Future<void> errorDialog({
                 }
               },
               child: textWidget('OK'),
+            ),
+          ],
+        );
+      });
+}
+
+Future<void> alertDialog({
+  required String subtitle,
+  required BuildContext context,
+}) async {
+  await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: borderRadius(),
+          title: Align(
+            alignment: Alignment.topCenter,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Icon(
+                  Icons.check,
+                  color: AppColors.mdGreenColor,
+                  size: 40.0,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  'Success',
+                  style: AppFontStyles.bold18DarkBlue,
+                ),
+              ],
+            ),
+          ),
+          content: Text(subtitle),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: textWidget('OK'),
+            ),
+          ],
+        );
+      });
+}
+
+Future<void> logOutDialog({
+  required BuildContext context,
+}) async {
+  await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: borderRadius(),
+          title: const Align(
+            alignment: Alignment.topCenter,
+            child: Text(
+              'Logout',
+              style: AppFontStyles.bold18DarkBlue,
+            ),
+          ),
+          content: const Text('Are you sure you want to Logout?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: textWidget('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignIn()),
+                  );
+                });
+              },
+              child: textWidget('Logout'),
             ),
           ],
         );

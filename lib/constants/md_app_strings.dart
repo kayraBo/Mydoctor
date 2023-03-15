@@ -33,7 +33,7 @@ class AppStrings {
   static const String strName = 'Име';
   static const String strSurname = 'Фамилия';
   static const String strPhoneNumber = 'Телефонен номер';
-  static const String strMedicalSpeciality = 'Специалност';
+  static const String strMedicalSpeciality = 'Код на специалност';
   static const String strUin = 'УИН';
   static const String strDegree = 'Титла';
   static const String strDescription = 'Описание';
@@ -43,4 +43,12 @@ class AppStrings {
   static const String strAvailableHours = 'Свободни часове';
   static const String strCancel = 'Отмяна';
   static const String strMessageHome = 'Намерете точния\nспециалист';
+  static const String strSuccessMessage =
+      'Your appointment has been successfully booked';
+  static const String strIAmDoctor = 'Аз съм лекар';
+  static const String strPasswords = 'Passwords do not match';
+  static const String strUINInvalid =
+      'Invalid UIN. It should be 10 digits long';
+  static const String strPhoneNumInvalid =
+      'Invalid phone number. It should be 10 digits long';
 }

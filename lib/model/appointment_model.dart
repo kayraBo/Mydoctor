@@ -5,8 +5,10 @@ class AppointmentModel {
   late String doctorId;
   late String notes;
   late String patientId;
-  String? userName;
-  String? userSurname;
+  String? doctorName;
+  String? doctorSurname;
+  String? patientName;
+  String? patientSurname;
   String? doctorDegree;
   String? doctorMedSpeciality;
   String? doctorHospital;
@@ -17,7 +19,14 @@ class AppointmentModel {
       required this.appointmentTime,
       required this.doctorId,
       required this.notes,
-      required this.patientId});
+      required this.patientId,
+      this.doctorName,
+      this.doctorSurname,
+      this.patientName,
+      this.patientSurname,
+      this.doctorDegree,
+      this.doctorHospital,
+      this.doctorMedSpeciality});
 
   AppointmentModel.fromJson(Map<String, dynamic> json) {
     appointmentDate = json['AppointmentDate'];
