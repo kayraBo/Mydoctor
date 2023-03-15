@@ -45,7 +45,7 @@ dependencies:
   flutter_riverpod: any
   rflutter_alert: any
   table_calendar: any
-  intl: ^0.17.0
+  intl: any
   
 
 dev_dependencies:
