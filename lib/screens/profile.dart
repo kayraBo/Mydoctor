@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import '../constants/md_app_assets.dart';
 import '../view%20models/profile_view_model.dart';
@@ -5,9 +7,8 @@ import '../constants/md_app_colors.dart';
 import '../widgets/widgets.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({
-    super.key,
-  });
+  const Profile({super.key, required this.isDoctor});
+  final bool isDoctor;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -22,8 +23,6 @@ class _ProfileState extends State<Profile> {
   final _phoneNumController = TextEditingController();
 
   ProfileViewModel profileViewModel = ProfileViewModel();
-
-  bool isDoctor = false;
 
   @override
   void dispose() {
@@ -55,7 +54,7 @@ class _ProfileState extends State<Profile> {
               ),
               child: Container(
                 margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                child: isDoctor
+                child: widget.isDoctor
                     ? profileViewModel.displayDoctorData()
                     : profileViewModel.displayPatientData(),
                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),

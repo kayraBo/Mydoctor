@@ -55,4 +55,8 @@ class ProfileModel {
     data['isDoctor'] = isDoctor;
     return data;
   }
+
+  bool checkIfAnyIsNull() {
+    return [id, email, name].contains(null);
+  }
 }

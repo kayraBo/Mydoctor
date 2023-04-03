@@ -7,9 +7,8 @@ import '../constants/md_app_fontstyle.dart';
 import '../widgets/widgets.dart';
 
 class Home extends StatefulWidget {
-  const Home({
-    Key? key,
-  }) : super(key: key);
+  const Home({Key? key, required this.isDoctor}) : super(key: key);
+  final bool isDoctor;
 
   @override
   State<Home> createState() => _HomeState();
@@ -17,8 +16,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   HomeViewModel homeViewModel = HomeViewModel();
-
-  bool isDoctor = false;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +85,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             Container(
-              child: isDoctor
+              child: widget.isDoctor
                   ? homeViewModel.displayDoctorsAppointments()
                   : homeViewModel.displayPatientsAppointments(),
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),

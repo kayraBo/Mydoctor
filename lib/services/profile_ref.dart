@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../model/profile_model.dart';
 import 'medical_speciality_ref.dart';
 
@@ -71,6 +70,8 @@ class ProfileService {
     if (snapshot.exists) {
       var profileModel = ProfileModel.fromJson(snapshot.data()!);
       profileModel.id = snapshot.id;
+      profileModel.medicalSpecialityName = await medSpecialitiesService
+          .getMedSpecialityByCode(profileModel.medicalSpeciality);
       return profileModel;
     } else {
       return ProfileModel();

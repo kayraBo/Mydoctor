@@ -100,8 +100,8 @@ class ProfileViewModel {
 
   displayDoctorData() {
     return FutureBuilder(
-        future: profileService.getDocInfo(
-            FirebaseAuth.instance.currentUser!.uid, 8),
+        future: profileService
+            .getDocInfoById(FirebaseAuth.instance.currentUser!.uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
