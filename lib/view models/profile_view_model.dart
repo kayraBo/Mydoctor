@@ -24,17 +24,26 @@ class ProfileViewModel {
             var userData = snapshot.data as ProfileModel;
             return ListView(shrinkWrap: true, children: [
               Column(children: [
-                Card(
-                  shape: borderRadius(),
-                  margin: const EdgeInsets.all(8),
-                  child: ListTile(
-                    shape: borderRadius(),
-                    tileColor: AppColors.mdWhiteColor,
-                    title: Text(
-                      '${userData.name}',
-                      style: AppFontStyles.normal20Black,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      child: Text('Име'),
                     ),
-                  ),
+                    Card(
+                      shape: borderRadius(),
+                      margin: const EdgeInsets.all(8),
+                      child: ListTile(
+                        shape: borderRadius(),
+                        tileColor: AppColors.mdWhiteColor,
+                        title: Text(
+                          '${userData.name}',
+                          style: AppFontStyles.normal20Black,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
