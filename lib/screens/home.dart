@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
             Container(
               child: widget.isDoctor
                   ? homeViewModel.displayDoctorsAppointments()
-                  : homeViewModel.displayPatientsAppointments(),
+                  : homeViewModel.displayPatientsAppointments(refreshHome),
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -97,5 +97,9 @@ class _HomeState extends State<Home> {
         ),
       ]),
     );
+  }
+
+  void refreshHome() {
+    setState(() {});
   }
 }

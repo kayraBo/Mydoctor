@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../model/profile_model.dart';
 import '../services/medical_speciality_ref.dart';
 import '../services/profile_ref.dart';
+import 'package:asbool/asbool.dart';
 
 import '../model/appointment_model.dart';
 
@@ -57,10 +58,31 @@ class AppointmentsService {
     return appointments;
   }
 
-  Future<void> deleteAppoinment(String appId) async {
-    var appointment =
-        FirebaseFirestore.instance.collection('Appointments').doc(appId);
-    appointment.delete();
+  Future<List<String>> getTakenHoursByDocId(String uid, String date) async {
+    var appointmentsRef = getProfileRef();
+    late List<String> takenHours = List<String>.empty(growable: true);
+
+    var snapshot = await appointmentsRef.get();
+
+    for (var element in snapshot.docs) {
+      AppointmentModel appointment = AppointmentModel.fromJson(element.data());
+      if (uid == appointment.doctorId && date == appointment.appointmentDate) {
+        takenHours.add(appointment.appointmentTime);
+      }
+    }
+
+    return takenHours;
+  }
+
+  bool deleteAppoinment(String appId) {
+    CollectionReference<Map<String, dynamic>> appointment = getProfileRef();
+
+    var deleted = appointment
+        .doc(appId)
+        .delete()
+        .then((value) => true, onError: (e) => false);
+
+    return deleted.asBool;
   }
 
   Future<String> setAppointment(
@@ -85,7 +107,7 @@ class AppointmentsService {
     return appId;
   }
 
-  getProfileRef() {
+  CollectionReference<Map<String, dynamic>> getProfileRef() {
     return FirebaseFirestore.instance.collection('Appointments');
   }
 }
