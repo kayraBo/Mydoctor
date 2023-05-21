@@ -66,10 +66,11 @@ TextFormField multiLineTextWidget(
   );
 }
 
-TextField numberFieldWidget(String text, TextEditingController controller) {
+TextField numberFieldWidget(
+    String text, TextEditingController controller, int length) {
   return TextField(
     controller: controller,
-    maxLength: 10,
+    maxLength: length,
     cursorColor: AppColors.mdBlackColor,
     style: const TextStyle(color: AppColors.mdBlackColor),
     decoration: InputDecoration(

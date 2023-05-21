@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import '../constants/md_app_assets.dart';
 import '../view%20models/profile_view_model.dart';

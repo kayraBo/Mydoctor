@@ -111,18 +111,3 @@ class AppointmentsService {
     return FirebaseFirestore.instance.collection('Appointments');
   }
 }
-
-Future<List<String>> getDoctorTakenHours(String doctorId) async {
-  var appointmentsRef = FirebaseFirestore.instance.collection('Appointments');
-  late List<String> hoursList = List<String>.empty(growable: true);
-
-  var snapshot = await appointmentsRef.get();
-  for (var element in snapshot.docs) {
-    AppointmentModel appointment = AppointmentModel.fromJson(element.data());
-    if (appointment.doctorId == doctorId) {
-      hoursList.add(appointment.appointmentTime);
-    }
-  }
-
-  return hoursList;
-}
