@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../constants/md_app_strings.dart';
-import '../view%20models/doctors_list_view_model.dart';
+import '../viewModels/doctors_list_view_model.dart';
 
 class MedicalSpecialityDoctors extends StatefulWidget {
   const MedicalSpecialityDoctors({
@@ -26,6 +27,7 @@ class _MedicalSpecialityDoctors extends State<MedicalSpecialityDoctors> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         title: const Text(
           AppStrings.strDoctors,
           style: TextStyle(

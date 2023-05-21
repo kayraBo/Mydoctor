@@ -136,11 +136,20 @@ class HomeViewModel {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        if (appointmentsService
-                                            .deleteAppoinment(doctorData[index]
-                                                .appointmentId)) {
-                                          refresh();
-                                        } else {}
+                                        confirmAlert(
+                                          context,
+                                          AppStrings.strCancelConfirm,
+                                          AppStrings.strCancel,
+                                          AppStrings.strCancelMessage,
+                                          () {
+                                            if (appointmentsService
+                                                .deleteAppoinment(
+                                                    doctorData[index]
+                                                        .appointmentId)) {
+                                              refresh();
+                                            } else {}
+                                          },
+                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:

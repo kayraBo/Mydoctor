@@ -124,12 +124,18 @@ class ProfileViewModel {
                     padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                     child: buttonWidget(context, AppStrings.strSignOut,
                         AppColors.mdDarkBlueColor, AppColors.mdWhiteColor, () {
-                      FirebaseAuth.instance.signOut().then((value) {
-                        Navigator.push(
+                      confirmAlert(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignIn()),
-                        );
+                          AppStrings.strSignOut,
+                          AppStrings.strSignOut,
+                          AppStrings.strLogOutMessage, () {
+                        FirebaseAuth.instance.signOut().then((value) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignIn()),
+                          );
+                        });
                       });
                     })),
               ])
@@ -331,7 +337,19 @@ class ProfileViewModel {
                     padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                     child: buttonWidget(context, AppStrings.strSignOut,
                         AppColors.mdDarkBlueColor, AppColors.mdWhiteColor, () {
-                      logOutDialog(context: context);
+                      confirmAlert(
+                          context,
+                          AppStrings.strSignOut,
+                          AppStrings.strSignOut,
+                          AppStrings.strLogOutMessage, () {
+                        FirebaseAuth.instance.signOut().then((value) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignIn()),
+                          );
+                        });
+                      });
                     })),
               ])
             ]);

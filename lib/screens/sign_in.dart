@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
         );
       });
     } on FirebaseException catch (error) {
-      errorDialog(subtitle: '${error.message}', context: context);
+      errorAlert(context, '${error.message}');
     }
   }
 

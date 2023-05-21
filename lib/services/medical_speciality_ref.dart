@@ -29,7 +29,7 @@ class MedSpecialitiesService {
     return medSpeciality;
   }
 
-  getMedicalSpecialityRef() {
+  CollectionReference<Map<String, dynamic>> getMedicalSpecialityRef() {
     return FirebaseFirestore.instance.collection('Medical_speciality_list');
   }
 }

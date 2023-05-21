@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_strings.dart';
-import '../view%20models/home_view_model.dart';
+import '../viewModels/home_view_model.dart';
 import '../constants/md_app_assets.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../widgets/widgets.dart';

@@ -83,7 +83,7 @@ class _NavigationState extends State<Navigation> {
         isDoctor = true;
       }
     } on FirebaseException catch (error) {
-      errorDialog(subtitle: '${error.message}', context: context);
+      errorAlert(context, '${error.message}');
     }
 
     return isDoctor;

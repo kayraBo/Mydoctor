@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../services/appointment_ref.dart';
 import '../constants/md_app_colors.dart';
@@ -39,6 +40,7 @@ class _AppointmentState extends State<Appointment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         title: const Text(
           AppStrings.strBookAppointment,
           style: TextStyle(
@@ -157,9 +159,7 @@ class _AppointmentState extends State<Appointment> {
                           appointmentsService.setAppointment(appDate, appTime,
                               _descriptionController.text, widget.doctorId);
                           Navigator.pop(context);
-                          alertDialog(
-                              subtitle: AppStrings.strSuccessMessage,
-                              context: context);
+                          successAlert(context);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.mdDarkBlueColor,

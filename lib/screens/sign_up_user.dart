@@ -45,7 +45,13 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future signUp() async {
-    if (passwordConfirmed()) {
+    final String valuePhoneNum = _phoneNumController.text.trim();
+
+    if (!passwordConfirmed()) {
+      errorAlert(context, AppStrings.strPasswords);
+    } else if (valuePhoneNum.length != 10) {
+      errorAlert(context, AppStrings.strPhoneNumInvalid);
+    } else {
       try {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
@@ -61,10 +67,8 @@ class _SignUpState extends State<SignUp> {
               isDoctor);
         });
       } on FirebaseException catch (error) {
-        errorDialog(subtitle: '${error.message}', context: context);
+        errorAlert(context, '${error.message}');
       }
-    } else {
-      errorDialog(subtitle: AppStrings.strPasswords, context: context);
     }
   }
 

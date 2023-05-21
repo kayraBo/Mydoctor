@@ -58,41 +58,37 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
   Future signUp() async {
     final String valueUIN = _uinController.text.trim();
     final String valuePhoneNum = _phoneNumController.text.trim();
-    String errorMessage = '';
-
-    try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _emailController.text, password: _passwordController.text)
-          .then((value) async {
-        await addUserInfo(
-            value.user!.uid,
-            _emailController.text,
-            _nameController.text,
-            _surnameController.text,
-            _uinController.text,
-            int.parse(_medicalSpecialityController.text),
-            _cityController.text,
-            _hospitalController.text,
-            _degreeController.text,
-            _descriptionController.text,
-            _phoneNumController.text,
-            isDoctor);
-      });
-    } on FirebaseException catch (error) {
-      errorDialog(subtitle: '${error.message}', context: context);
-    }
 
     if (!passwordConfirmed()) {
-      errorMessage = AppStrings.strPasswords;
+      errorAlert(context, AppStrings.strPasswords);
     } else if (valueUIN.length != 10) {
-      errorMessage = AppStrings.strUINInvalid;
+      errorAlert(context, AppStrings.strUINInvalid);
     } else if (valuePhoneNum.length != 10) {
-      errorMessage = AppStrings.strPhoneNumInvalid;
-    }
-
-    if (errorMessage.isNotEmpty) {
-      errorDialog(subtitle: errorMessage, context: context);
+      errorAlert(context, AppStrings.strPhoneNumInvalid);
+    } else {
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: _emailController.text,
+                password: _passwordController.text)
+            .then((value) async {
+          await addUserInfo(
+              value.user!.uid,
+              _emailController.text,
+              _nameController.text,
+              _surnameController.text,
+              _uinController.text,
+              int.parse(_medicalSpecialityController.text),
+              _cityController.text,
+              _hospitalController.text,
+              _degreeController.text,
+              _descriptionController.text,
+              _phoneNumController.text,
+              isDoctor);
+        });
+      } on FirebaseException catch (error) {
+        errorAlert(context, '${error.message}');
+      }
     }
   }
 
@@ -134,6 +130,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
     return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: appBar(context),
             body: Center(
               child: ListView(
@@ -172,12 +169,13 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                    child: numberFieldWidget(AppStrings.strUin, _uinController),
+                    child: numberFieldWidget(
+                        AppStrings.strUin, _uinController, 10),
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                     child: numberFieldWidget(AppStrings.strMedicalSpeciality,
-                        _medicalSpecialityController),
+                        _medicalSpecialityController, 2),
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
@@ -202,7 +200,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                     child: numberFieldWidget(
-                        AppStrings.strPhoneNumber, _phoneNumController),
+                        AppStrings.strPhoneNumber, _phoneNumController, 10),
                   ),
                   Container(
                       alignment: Alignment.center,

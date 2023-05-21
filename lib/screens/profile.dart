@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/md_app_assets.dart';
-import '../view%20models/profile_view_model.dart';
+import '../viewModels/profile_view_model.dart';
 import '../constants/md_app_colors.dart';
 import '../widgets/widgets.dart';
 

@@ -44,12 +44,17 @@ class AppStrings {
   static const String strAvailableHours = 'Свободни часове';
   static const String strCancel = 'Отмяна';
   static const String strMessageHome = 'Намерете точния\nспециалист';
-  static const String strSuccessMessage =
-      'Your appointment has been successfully booked';
-  static const String strIAmDoctor = 'Аз съм лекар';
-  static const String strPasswords = 'Passwords do not match';
-  static const String strUINInvalid =
-      'Invalid UIN. It should be 10 digits long';
-  static const String strPhoneNumInvalid =
-      'Invalid phone number. It should be 10 digits long';
+  static const String strSuccessMessage = 'Вие успешно записахте час';
+  static const String strPasswords = 'Паролите не съвпадат';
+  static const String strUINInvalid = 'Невалиден УИН';
+  static const String strPhoneNumInvalid = 'Невалиден телефонен номер';
+  static const String strBooked = 'Записан';
+  static const String strOkay = 'Добре';
+  static const String strError = 'Възникна грешка';
+  static const String strClose = 'Отказ';
+  static const String strLogOutMessage =
+      'Искате ли да излезете от приложението?';
+  static const String strCancelConfirm = 'Отмяна на час';
+  static const String strCancelMessage =
+      'Сигурни ли сте, че искате да отмените часа?';
 }
