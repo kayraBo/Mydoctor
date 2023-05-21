@@ -11,7 +11,7 @@ import '../widgets/widgets.dart';
 class HomeViewModel {
   AppointmentsService appointmentsService = AppointmentsService();
 
-  displayPatientsAppointments() {
+  displayPatientsAppointments(Function refresh) {
     return FutureBuilder(
         future: appointmentsService.getAppointments(),
         builder: (context, snapshot) {
@@ -136,8 +136,20 @@ class HomeViewModel {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        appointmentsService.deleteAppoinment(
-                                            doctorData[index].appointmentId);
+                                        confirmAlert(
+                                          context,
+                                          AppStrings.strCancelConfirm,
+                                          AppStrings.strCancel,
+                                          AppStrings.strCancelMessage,
+                                          () {
+                                            if (appointmentsService
+                                                .deleteAppoinment(
+                                                    doctorData[index]
+                                                        .appointmentId)) {
+                                              refresh();
+                                            } else {}
+                                          },
+                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:

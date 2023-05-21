@@ -3,21 +3,29 @@ import 'package:flutter/material.dart';
 import 'md_app_colors.dart';
 
 class AppFontStyles {
-  static const bold16DarkBlue = TextStyle(
-    color: AppColors.mdDarkBlueColor,
-    fontSize: 16,
-    fontWeight: FontWeight.w800,
-  );
-
-  static const text17Black = TextStyle(
+  static const normal15Black = TextStyle(
     color: AppColors.mdBlackColor,
-    fontSize: 17,
+    fontWeight: FontWeight.normal,
+    fontSize: 15,
   );
 
   static const semiBold15Black = TextStyle(
     color: AppColors.mdBlackColor,
     fontWeight: FontWeight.w500,
     fontSize: 15,
+  );
+
+  static const bold16DarkBlue = TextStyle(
+    color: AppColors.mdDarkBlueColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w800,
+  );
+
+  static const textSize17 = TextStyle(fontSize: 17);
+
+  static const text17Black = TextStyle(
+    color: AppColors.mdBlackColor,
+    fontSize: 17,
   );
 
   static const normal17Black = TextStyle(
@@ -91,8 +99,6 @@ class AppFontStyles {
     fontWeight: FontWeight.w600,
     fontSize: 22,
   );
-
-  static const textSize17 = TextStyle(fontSize: 17);
 
   static const bold35Black = TextStyle(
       color: AppColors.mdBlackColor, fontWeight: FontWeight.bold, fontSize: 35);

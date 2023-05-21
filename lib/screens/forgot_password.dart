@@ -59,6 +59,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: appBar(context),
             body: Center(
                 child: SingleChildScrollView(

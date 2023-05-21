@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../constants/md_app_strings.dart';
 
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../model/medical_speciality_model.dart';
 import '../screens/sign_in.dart';
+import 'package:quickalert/quickalert.dart';
 
 Image pictureWidget(String name) {
   return Image.asset(
@@ -66,10 +68,11 @@ TextFormField multiLineTextWidget(
   );
 }
 
-TextField numberFieldWidget(String text, TextEditingController controller) {
+TextField numberFieldWidget(
+    String text, TextEditingController controller, int length) {
   return TextField(
     controller: controller,
-    maxLength: 10,
+    maxLength: length,
     cursorColor: AppColors.mdBlackColor,
     style: const TextStyle(color: AppColors.mdBlackColor),
     decoration: InputDecoration(
@@ -139,6 +142,7 @@ RoundedRectangleBorder borderRadius() {
 
 AppBar appBar(BuildContext context) {
   return AppBar(
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: GestureDetector(
@@ -156,118 +160,157 @@ Text textWidget(String text) {
   );
 }
 
-Future<void> errorDialog({
-  required String subtitle,
-  required BuildContext context,
-}) async {
-  await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: borderRadius(),
-          title: const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'An Error occured',
-              style: AppFontStyles.bold18Red,
-            ),
-          ),
-          content: Text(subtitle),
-          actions: [
-            TextButton(
-              onPressed: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-              child: textWidget('OK'),
-            ),
-          ],
-        );
-      });
+// Future<void> errorDialog({
+//   required String subtitle,
+//   required BuildContext context,
+// }) async {
+//   await showDialog(
+//       context: context,
+//       builder: (context) {
+//         return AlertDialog(
+//           shape: borderRadius(),
+//           title: const Align(
+//             alignment: Alignment.topLeft,
+//             child: Text(
+//               'An Error occured',
+//               style: AppFontStyles.bold18Red,
+//             ),
+//           ),
+//           content: Text(subtitle),
+//           actions: [
+//             TextButton(
+//               onPressed: () {
+//                 if (Navigator.canPop(context)) {
+//                   Navigator.pop(context);
+//                 }
+//               },
+//               child: textWidget('OK'),
+//             ),
+//           ],
+//         );
+//       });
+// }
+
+// Future<void> alertDialog({
+//   required String subtitle,
+//   required BuildContext context,
+// }) async {
+//   await showDialog(
+//       context: context,
+//       builder: (context) {
+//         return AlertDialog(
+//           shape: borderRadius(),
+//           title: Align(
+//             alignment: Alignment.topCenter,
+//             child: Row(
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               children: const [
+//                 Icon(
+//                   Icons.check,
+//                   color: AppColors.mdGreenColor,
+//                   size: 40.0,
+//                 ),
+//                 SizedBox(
+//                   width: 8,
+//                 ),
+//                 Text(
+//                   'Success',
+//                   style: AppFontStyles.bold18DarkBlue,
+//                 ),
+//               ],
+//             ),
+//           ),
+//           content: Text(subtitle),
+//           actions: [
+//             TextButton(
+//               onPressed: () {
+//                 if (Navigator.canPop(context)) {
+//                   Navigator.pop(context);
+//                 }
+//               },
+//               child: textWidget('OK'),
+//             ),
+//           ],
+//         );
+//       });
+// }
+
+// Future<void> logOutDialog({
+//   required BuildContext context,
+// }) async {
+//   await showDialog(
+//       context: context,
+//       builder: (context) {
+//         return AlertDialog(
+//           shape: borderRadius(),
+//           title: const Align(
+//             alignment: Alignment.topCenter,
+//             child: Text(
+//               'Logout',
+//               style: AppFontStyles.bold18DarkBlue,
+//             ),
+//           ),
+//           content: const Text('Are you sure you want to Logout?'),
+//           actions: [
+//             TextButton(
+//               onPressed: () {
+//                 if (Navigator.canPop(context)) {
+//                   Navigator.pop(context);
+//                 }
+//               },
+//               child: textWidget('Cancel'),
+//             ),
+//             TextButton(
+//               onPressed: () {
+//                 FirebaseAuth.instance.signOut().then((value) {
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(builder: (context) => const SignIn()),
+//                   );
+//                 });
+//               },
+//               child: textWidget('Logout'),
+//             ),
+//           ],
+//         );
+//       });
+// }
+
+Future<dynamic> confirmAlert(BuildContext context, String title, String signOut,
+    String message, Function onTap) {
+  return QuickAlert.show(
+    context: context,
+    type: QuickAlertType.confirm,
+    title: title,
+    text: message,
+    confirmBtnText: signOut,
+    cancelBtnText: AppStrings.strClose,
+    confirmBtnColor: AppColors.mdDarkBlueColor,
+    onConfirmBtnTap: () {
+      onTap();
+      Navigator.pop(context);
+    },
+  );
 }
 
-Future<void> alertDialog({
-  required String subtitle,
-  required BuildContext context,
-}) async {
-  await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: borderRadius(),
-          title: Align(
-            alignment: Alignment.topCenter,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.check,
-                  color: AppColors.mdGreenColor,
-                  size: 40.0,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  'Success',
-                  style: AppFontStyles.bold18DarkBlue,
-                ),
-              ],
-            ),
-          ),
-          content: Text(subtitle),
-          actions: [
-            TextButton(
-              onPressed: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-              child: textWidget('OK'),
-            ),
-          ],
-        );
-      });
+Future<dynamic> errorAlert(BuildContext context, String error) {
+  return QuickAlert.show(
+    context: context,
+    type: QuickAlertType.error,
+    title: AppStrings.strError,
+    text: error,
+    confirmBtnText: AppStrings.strOkay,
+    confirmBtnColor: AppColors.mdDarkBlueColor,
+  );
 }
 
-Future<void> logOutDialog({
-  required BuildContext context,
-}) async {
-  await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: borderRadius(),
-          title: const Align(
-            alignment: Alignment.topCenter,
-            child: Text(
-              'Logout',
-              style: AppFontStyles.bold18DarkBlue,
-            ),
-          ),
-          content: const Text('Are you sure you want to Logout?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-              child: textWidget('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut().then((value) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SignIn()),
-                  );
-                });
-              },
-              child: textWidget('Logout'),
-            ),
-          ],
-        );
-      });
+Future<dynamic> successAlert(BuildContext context) {
+  return QuickAlert.show(
+    context: context,
+    type: QuickAlertType.success,
+    title: AppStrings.strBooked,
+    text: AppStrings.strSuccessMessage,
+    confirmBtnText: AppStrings.strOkay,
+    confirmBtnColor: AppColors.mdDarkBlueColor,
+  );
 }

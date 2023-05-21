@@ -6,8 +6,7 @@ class ProfileService {
   MedSpecialitiesService medSpecialitiesService = MedSpecialitiesService();
 
   Future<ProfileModel> getPatientData(String uid) async {
-    var snapshot =
-        await FirebaseFirestore.instance.collection('Patients').doc(uid).get();
+    var snapshot = await getProfileRef('Patients').doc(uid).get();
 
     if (snapshot.exists) {
       var profileModel = ProfileModel.fromJson(snapshot.data()!);
@@ -18,8 +17,7 @@ class ProfileService {
   }
 
   Future<ProfileModel> getDocInfo(String uid, int msCode) async {
-    var snapshot =
-        await FirebaseFirestore.instance.collection('Doctors').doc(uid).get();
+    var snapshot = await getProfileRef('Doctors').doc(uid).get();
 
     if (snapshot.exists) {
       var profileModel = ProfileModel.fromJson(snapshot.data()!);
@@ -46,6 +44,11 @@ class ProfileService {
     return doctorsList;
   }
 
+  Future<QuerySnapshot<Map<String, dynamic>>> _getFirebaseSnapshotByDoc(
+      String document) async {
+    return await FirebaseFirestore.instance.collection(document).get();
+  }
+
   Future<List<ProfileModel>> getDoctorsBySpectialityCode(int msCode) async {
     late List<ProfileModel> filteredDoctorsList = List.empty(growable: true);
     List<ProfileModel> doctorsList = await getAllDoctors();
@@ -64,8 +67,7 @@ class ProfileService {
   }
 
   Future<ProfileModel> getDocInfoById(String uid) async {
-    var snapshot =
-        await FirebaseFirestore.instance.collection('Doctors').doc(uid).get();
+    var snapshot = await getProfileRef('Doctors').doc(uid).get();
 
     if (snapshot.exists) {
       var profileModel = ProfileModel.fromJson(snapshot.data()!);
@@ -78,8 +80,7 @@ class ProfileService {
     }
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> _getFirebaseSnapshotByDoc(
-      String document) async {
-    return await FirebaseFirestore.instance.collection(document).get();
+  CollectionReference<Map<String, dynamic>> getProfileRef(String name) {
+    return FirebaseFirestore.instance.collection(name);
   }
 }

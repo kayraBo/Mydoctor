@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_strings.dart';
-import '../view%20models/home_view_model.dart';
+import '../viewModels/home_view_model.dart';
 import '../constants/md_app_assets.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../widgets/widgets.dart';
@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
             Container(
               child: widget.isDoctor
                   ? homeViewModel.displayDoctorsAppointments()
-                  : homeViewModel.displayPatientsAppointments(),
+                  : homeViewModel.displayPatientsAppointments(refreshHome),
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -97,5 +97,9 @@ class _HomeState extends State<Home> {
         ),
       ]),
     );
+  }
+
+  void refreshHome() {
+    setState(() {});
   }
 }

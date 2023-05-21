@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/md_app_fontstyle.dart';
-import '../view%20models/doctor_profile_view_model.dart';
+import '../viewModels/doctor_profile_view_model.dart';
 import '../constants/md_app_assets.dart';
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_strings.dart';

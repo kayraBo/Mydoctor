@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../services/appointment_ref.dart';
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_fontstyle.dart';
 
 import '../constants/md_app_strings.dart';
-import '../utils/utils.dart';
+import '../utils/utils.dart' as utils;
 import '../widgets/widgets.dart';
 
 class Appointment extends StatefulWidget {
@@ -22,6 +22,8 @@ class _AppointmentState extends State<Appointment> {
   late String appDate;
   late String appTime;
   late String appNote;
+  late Map<String, bool> timeSlots = <String, bool>{};
+  late List<String> takenHours = List<String>.empty(growable: true);
   int? isSelected;
 
   DateTime today = DateTime.now();
@@ -38,6 +40,7 @@ class _AppointmentState extends State<Appointment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         title: const Text(
           AppStrings.strBookAppointment,
           style: TextStyle(
@@ -113,20 +116,21 @@ class _AppointmentState extends State<Appointment> {
               (context, index) {
                 return GestureDetector(
                   onTap: (() {
-                    setState(() {
-                      isSelected = index;
-                    });
-                    appTime = timeSlot.elementAt(index);
+                    if (timeSlots[utils.timeSlotsSet[index]] == true) {
+                      setState(() {
+                        isSelected = index;
+                      });
+                      appTime = utils.timeSlotsSet.elementAt(index);
+                    }
                   }),
                   child: Card(
-                      color: isSelected == index
-                          ? AppColors.mdDarkBlueColor
-                          : AppColors.mdLightBlueColor,
+                      color: returnHourColor(
+                          isSelected == index, utils.timeSlotsSet[index]),
                       shape: borderRadius(),
                       margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                       child: GridTile(
                         child: Center(
-                          child: Text(timeSlot.elementAt(index),
+                          child: Text(utils.timeSlotsSet.elementAt(index),
                               style: isSelected == index
                                   ? AppFontStyles.normal17White
                                   : AppFontStyles.normal17Black),
@@ -134,7 +138,7 @@ class _AppointmentState extends State<Appointment> {
                       )),
                 );
               },
-              childCount: timeSlot.length,
+              childCount: utils.timeSlotsSet.length,
             ),
           ),
           SliverList(
@@ -155,9 +159,7 @@ class _AppointmentState extends State<Appointment> {
                           appointmentsService.setAppointment(appDate, appTime,
                               _descriptionController.text, widget.doctorId);
                           Navigator.pop(context);
-                          alertDialog(
-                              subtitle: AppStrings.strSuccessMessage,
-                              context: context);
+                          successAlert(context);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.mdDarkBlueColor,
@@ -178,10 +180,43 @@ class _AppointmentState extends State<Appointment> {
     );
   }
 
+  Color returnHourColor(bool isSelected, String time) {
+    if (isSelected) {
+      return AppColors.mdDarkBlueColor;
+    }
+
+    if (timeSlots[time] == false) {
+      return AppColors.mdGreyColor;
+    }
+
+    return AppColors.mdLightBlueColor;
+  }
+
+  void generateFreeHoursList(String date) async {
+    if (takenHours.isNotEmpty) {
+      takenHours.clear();
+    }
+
+    takenHours =
+        await appointmentsService.getTakenHoursByDocId(widget.doctorId, date);
+
+    for (var time in utils.timeSlotsSet) {
+      if (takenHours.contains(time)) {
+        timeSlots[time] = false;
+      } else {
+        timeSlots[time] = true;
+      }
+    }
+
+    // Redraw the hours buttons
+    setState(() {});
+  }
+
   void _onDaySelected(DateTime day, DateTime focusedDay) {
+    generateFreeHoursList(utils.getDateFormated(focusedDay));
     setState(() {
       today = day;
-      appDate = DateFormat('dd/MM/yyyy').format(day);
+      appDate = utils.getDateFormated(day);
     });
   }
 }
