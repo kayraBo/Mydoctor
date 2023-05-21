@@ -1,16 +1,11 @@
-# test_flutter_app
+# Дипломна работа
+Мобилно приложение за записване на час за медицински преглед
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Функционални изисквания към мобилното приложение 
+* Регистрация/Вход на лекарски или пациентски профил 
+* Списък с предстоящи прегледи
+* Възможност за отмяна на предстоящ преглед
+* Показване на всички категории лекарски специалности 
+* Показване на всички регистрирани лекари от дадена лекарска специалност 
+* Възможност за преглеждане на профила на избран специалист и записване на час за медицински преглед
+* Профил на потребителя 
