@@ -176,7 +176,7 @@ class HomeViewModel {
         });
   }
 
-  displayDoctorsAppointments() {
+  displayDoctorsAppointments(Function refresh) {
     return FutureBuilder(
         future: appointmentsService.getDoctorAppointments(),
         builder: (context, snapshot) {
@@ -287,8 +287,20 @@ class HomeViewModel {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        appointmentsService.deleteAppoinment(
-                                            patientData[index].appointmentId);
+                                        confirmAlert(
+                                          context,
+                                          AppStrings.strCancelConfirm,
+                                          AppStrings.strCancel,
+                                          AppStrings.strCancelMessage,
+                                          () {
+                                            if (appointmentsService
+                                                .deleteAppoinment(
+                                                    patientData[index]
+                                                        .appointmentId)) {
+                                              refresh();
+                                            } else {}
+                                          },
+                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
