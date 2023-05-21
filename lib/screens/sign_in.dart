@@ -51,75 +51,81 @@ class _SignInState extends State<SignIn> {
         child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Center(
-                child: Column(
-              children: <Widget>[
-                Container(
-                    padding: const EdgeInsets.fromLTRB(100, 125, 100, 40),
-                    child: const Text(
-                      AppStrings.strSignIn,
-                      style: AppFontStyles.bold35Black,
-                    )),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: textFieldWidget(
-                      AppStrings.strEmail, false, _emailController),
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: textFieldWidget(
-                      AppStrings.strPassword, true, _passwordController),
-                ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ForgotPassword()),
-                      );
-                    },
-                    child: const Text(
-                      AppStrings.strForgottenPassword,
-                      style: AppFontStyles.underlinedBold18DarkBlue,
-                    ),
+                child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      padding: const EdgeInsets.fromLTRB(100, 125, 100, 40),
+                      child: const Text(
+                        AppStrings.strSignIn,
+                        style: AppFontStyles.bold35Black,
+                      )),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: textFieldWidget(
+                        AppStrings.strEmail, false, _emailController),
                   ),
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 15),
-                    child: buttonWidget(context, AppStrings.strSignIn,
-                        AppColors.mdDarkBlueColor, AppColors.mdWhiteColor, () {
-                      signIn();
-                    })),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      AppStrings.strNoAccount,
-                      style: AppFontStyles.semiBold18Black,
-                    ),
-                    TextButton(
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: textFieldWidget(
+                        AppStrings.strPassword, true, _passwordController),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                    child: TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ProfileType()),
+                              builder: (context) => const ForgotPassword()),
                         );
                       },
                       child: const Text(
-                        AppStrings.strRegisterNow,
+                        AppStrings.strForgottenPassword,
                         style: AppFontStyles.underlinedBold18DarkBlue,
                       ),
                     ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(5, 60, 15, 0),
-                  child: pictureWidget(AppAssets.mdSignInDoctorPicture),
-                ),
-              ],
+                  ),
+                  Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 15),
+                      child: buttonWidget(
+                          context,
+                          AppStrings.strSignIn,
+                          AppColors.mdDarkBlueColor,
+                          AppColors.mdWhiteColor, () {
+                        signIn();
+                      })),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        AppStrings.strNoAccount,
+                        style: AppFontStyles.semiBold18Black,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ProfileType()),
+                          );
+                        },
+                        child: const Text(
+                          AppStrings.strRegisterNow,
+                          style: AppFontStyles.underlinedBold18DarkBlue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(5, 60, 15, 0),
+                    child: pictureWidget(AppAssets.mdSignInDoctorPicture),
+                  ),
+                ],
+              ),
             ))));
   }
 }
