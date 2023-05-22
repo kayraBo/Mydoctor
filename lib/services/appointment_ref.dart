@@ -12,7 +12,7 @@ class AppointmentsService {
   ProfileService profileService = ProfileService();
 
   Future<List<AppointmentModel>> getAppointments() async {
-    var appointmentsRef = getProfileRef();
+    var appointmentsRef = getProfileRefOrdered();
     String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
     late List<AppointmentModel> appointments =
         List<AppointmentModel>.empty(growable: true);
@@ -109,5 +109,11 @@ class AppointmentsService {
 
   CollectionReference<Map<String, dynamic>> getProfileRef() {
     return FirebaseFirestore.instance.collection('Appointments');
+  }
+
+  Query<Map<String, dynamic>> getProfileRefOrdered() {
+    return FirebaseFirestore.instance
+        .collection('Appointments')
+        .orderBy("AppointmentDate", descending: false);
   }
 }
