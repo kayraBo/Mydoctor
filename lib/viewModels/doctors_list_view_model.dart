@@ -66,7 +66,7 @@ class DoctorsListViewModel {
                               padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                               child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(

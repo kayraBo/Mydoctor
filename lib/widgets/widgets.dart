@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../constants/md_app_strings.dart';
@@ -6,7 +5,6 @@ import '../constants/md_app_strings.dart';
 import '../constants/md_app_colors.dart';
 import '../constants/md_app_fontstyle.dart';
 import '../model/medical_speciality_model.dart';
-import '../screens/sign_in.dart';
 import 'package:quickalert/quickalert.dart';
 
 Image pictureWidget(String name) {

@@ -4,7 +4,8 @@ import '../model/medical_speciality_model.dart';
 class MedSpecialitiesService {
   Future<List<MedicalSpecialityModel>> getSpecialities() async {
     var specialities = List<MedicalSpecialityModel>.empty(growable: true);
-    var specialityRef = getMedicalSpecialityRef();
+    var specialityRef = getMedicalSpecialityRef()
+        .orderBy("Medical_speciality", descending: false);
 
     var snapshot = await specialityRef.get();
     for (var element in snapshot.docs) {

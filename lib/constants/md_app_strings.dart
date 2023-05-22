@@ -57,4 +57,15 @@ class AppStrings {
   static const String strCancelConfirm = 'Отмяна на час';
   static const String strCancelMessage =
       'Сигурни ли сте, че искате да отмените часа?';
+  static const String strNameErrorMessage = 'Моля, попълнете полето за "Име"';
+  static const String strSurnameErrorMessage =
+      'Моля, попълнете полето за "Фамилия"';
+  static const String strMedSpecErrorMessage =
+      'Моля, попълнете полето за "Код на медицинска специалност"';
+  static const String strCityErrorMessage =
+      'Моля, попълнете полето за "Област"';
+  static const String strHospitalErrorMessage =
+      'Моля, попълнете полето за "Месторабота"';
+  static const String strDegreeErrorMessage =
+      'Моля, попълнете полето за "Титла"';
 }
