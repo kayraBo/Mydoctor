@@ -38,7 +38,7 @@ class AppointmentsService {
   }
 
   Future<List<AppointmentModel>> getDoctorAppointments() async {
-    var appointmentsRef = getProfileRef();
+    var appointmentsRef = getProfileRefOrdered();
     String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
     late List<AppointmentModel> appointments =
         List<AppointmentModel>.empty(growable: true);
