@@ -45,9 +45,7 @@ class AppFontStyles {
       color: AppColors.mdBlackColor, fontWeight: FontWeight.w500, fontSize: 18);
 
   static const bold18White = TextStyle(
-      color: AppColors.mdLightBlueColor,
-      fontWeight: FontWeight.bold,
-      fontSize: 18);
+      color: AppColors.mdWhiteColor, fontWeight: FontWeight.bold, fontSize: 18);
 
   static const bold18Red = TextStyle(
       color: AppColors.mdRedColor, fontWeight: FontWeight.bold, fontSize: 18);
