@@ -46,10 +46,16 @@ class _SignUpState extends State<SignUp> {
 
   Future signUp() async {
     final String valuePhoneNum = _phoneNumController.text.trim();
+    final String valueName = _nameController.text.trim();
+    final String valueSurname = _surnameController.text.trim();
 
     if (!passwordConfirmed()) {
       errorAlert(context, AppStrings.strPasswords);
-    } else if (valuePhoneNum.length != 10) {
+    } else if (valueName.isEmpty) {
+      errorAlert(context, AppStrings.strNameErrorMessage);
+    } else if (valueSurname.isEmpty) {
+      errorAlert(context, AppStrings.strSurnameErrorMessage);
+    } else if (valuePhoneNum.length != 10 || valuePhoneNum.isEmpty) {
       errorAlert(context, AppStrings.strPhoneNumInvalid);
     } else {
       try {

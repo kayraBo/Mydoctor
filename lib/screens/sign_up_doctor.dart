@@ -58,13 +58,31 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
   Future signUp() async {
     final String valueUIN = _uinController.text.trim();
     final String valuePhoneNum = _phoneNumController.text.trim();
+    final String valueName = _nameController.text.trim();
+    final String valueSurname = _surnameController.text.trim();
+    final String valueMedSpec = _medicalSpecialityController.text.trim();
+    final String valueCity = _cityController.text.trim();
+    final String valueHospital = _hospitalController.text.trim();
+    final String valueDegree = _degreeController.text.trim();
 
     if (!passwordConfirmed()) {
       errorAlert(context, AppStrings.strPasswords);
-    } else if (valueUIN.length != 10) {
+    } else if (valueUIN.length != 10 || valueUIN.isEmpty) {
       errorAlert(context, AppStrings.strUINInvalid);
-    } else if (valuePhoneNum.length != 10) {
+    } else if (valuePhoneNum.length != 10 || valuePhoneNum.isEmpty) {
       errorAlert(context, AppStrings.strPhoneNumInvalid);
+    } else if (valueName.isEmpty) {
+      errorAlert(context, AppStrings.strNameErrorMessage);
+    } else if (valueSurname.isEmpty) {
+      errorAlert(context, AppStrings.strSurnameErrorMessage);
+    } else if (valueMedSpec.isEmpty) {
+      errorAlert(context, AppStrings.strMedSpecErrorMessage);
+    } else if (valueCity.isEmpty) {
+      errorAlert(context, AppStrings.strCityErrorMessage);
+    } else if (valueHospital.isEmpty) {
+      errorAlert(context, AppStrings.strHospitalErrorMessage);
+    } else if (valueDegree.isEmpty) {
+      errorAlert(context, AppStrings.strDegreeErrorMessage);
     } else {
       try {
         await FirebaseAuth.instance
